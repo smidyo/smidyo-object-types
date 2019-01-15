@@ -47,7 +47,7 @@ export interface FormPipeline extends BasePipeline {
 export interface YieldPipeline extends BasePipeline {
   type: 'YIELD';
   inputs: PipelineInput[];
-  metadata: PipelineOutput[];
+  outputs: PipelineOutput[];
   steps: Array<
     SubProcessPipelineBlockPipelineStep | SourceBlockPipelineStep | PriceBlockPipelineStep
   >;
