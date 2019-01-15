@@ -80,7 +80,7 @@ type IfableBasePipelineStep = BasePipelineStep & {
   ifPipelineValue?: string;
 };
 
-type PipelineStepIn = PipelineStepInFromPipelineValue | PipelineStepInFromStatic;
+export type PipelineStepIn = PipelineStepInFromPipelineValue | PipelineStepInFromStatic;
 
 export interface PipelineStepInFromStatic {
   fromStaticValue: any;
@@ -92,7 +92,7 @@ export interface PipelineStepInFromPipelineValue {
   toStepInput: string;
 }
 
-type PipelineStepOut = PipelineStepOutToPipelineValue;
+export type PipelineStepOut = PipelineStepOutToPipelineValue;
 
 export interface PipelineStepOutToPipelineValue {
   fromStepOutput: string;
