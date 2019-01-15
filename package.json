@@ -1,0 +1,17 @@
+{
+  "name": "@smidyo/smidyo-types-pipeline",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "bump-publish": "npm version minor && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smidyo/smidyo-types-pipeline.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smidyo/smidyo-types-pipeline/issues"
+  }
+}
