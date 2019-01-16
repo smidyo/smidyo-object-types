@@ -24,7 +24,6 @@ export interface PipelineOutput {
 
 export interface BasePipeline {
   type: PipelineType;
-  steps: BasePipelineStep[];
 }
 
 export interface ProcessPipeline extends BasePipeline {
