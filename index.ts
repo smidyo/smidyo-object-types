@@ -137,6 +137,7 @@ export interface MetaDataBlockPipelineStep extends BasePipelineStep {
 
 export interface PriceBlockPipelineStep extends BasePipelineStep {
   block: 'PRICE';
+  price: string;
   fromPipelineValue: string;
 }
 
