@@ -112,7 +112,6 @@ export interface SourceBlockPipelineStep extends BasePipelineStep {
 export interface OperationBlockPipelineStep extends BasePipelineStep {
   block: 'OPERATION';
   operationBlock: string;
-  version: number;
   in: PipelineStepIn[];
   out: PipelineStepOut[];
 }
@@ -120,7 +119,6 @@ export interface OperationBlockPipelineStep extends BasePipelineStep {
 export interface ElementBlockPipelineStep extends BasePipelineStep {
   block: 'ELEMENT';
   elementBlock: string;
-  version: number;
   in: PipelineStepIn[];
   out: PipelineStepOut[];
 }
@@ -128,19 +126,18 @@ export interface ElementBlockPipelineStep extends BasePipelineStep {
 export interface EffectBlockPipelineStep extends BasePipelineStep {
   block: 'EFFECT';
   effectBlock: string;
-  version: number;
   in: PipelineStepIn[];
   out: PipelineStepOut[];
 }
 
 export interface MetaDataBlockPipelineStep extends BasePipelineStep {
   block: 'METADATA';
-  in: PipelineStepIn;
+  fromPipelineValue: string;
 }
 
 export interface PriceBlockPipelineStep extends BasePipelineStep {
   block: 'PRICE';
-  in: PipelineStepIn;
+  fromPipelineValue: string;
 }
 
 export interface SubProcessPipelineBlockPipelineStep extends IfableBasePipelineStep {
