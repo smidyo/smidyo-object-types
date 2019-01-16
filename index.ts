@@ -164,7 +164,11 @@ export interface DrySubYieldPipelineBlockPipelineStep extends IfableBasePipeline
   priceOut: PipelineStepOut[];
 }
 
-export interface WetSubYieldPipelineBlockPipelineStep extends DrySubYieldPipelineBlockPipelineStep {
+export interface WetSubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
+  block: 'WET_SUB_YIELD_PIPELINE';
+  subYieldPipeline: string;
+  in: PipelineStepIn[];
+  priceOut: PipelineStepOut[];
   out: PipelineStepOut[];
 }
 
