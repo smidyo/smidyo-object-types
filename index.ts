@@ -49,7 +49,10 @@ export interface YieldPipeline extends BasePipeline {
   inputs: PipelineInput[];
   outputs: PipelineOutput[];
   steps: Array<
-    SubProcessPipelineBlockPipelineStep | SourceBlockPipelineStep | PriceBlockPipelineStep
+    | SubProcessPipelineBlockPipelineStep
+    | SubYieldPipelineBlockPipelineStep
+    | SourceBlockPipelineStep
+    | PriceBlockPipelineStep
   >;
   postSteps: Array<
     | EffectBlockPipelineStep
@@ -80,7 +83,7 @@ type IfableBasePipelineStep = BasePipelineStep & {
   ifPipelineValue?: string;
 };
 
-export type PipelineStepIn = PipelineStepInFromPipelineValue | PipelineStepInFromStatic;
+export type PipelineStepIn = PipelineStepInFromPipelineValue | PipelineStepInFromStatic;
 
 export interface PipelineStepInFromStatic {
   fromStaticValue: any;
@@ -142,21 +145,21 @@ export interface PriceBlockPipelineStep extends BasePipelineStep {
 
 export interface SubProcessPipelineBlockPipelineStep extends IfableBasePipelineStep {
   block: 'SUB_PROCESS_PIPELINE';
-  processPipeline: string;
+  subProcessPipeline: string;
   in: PipelineStepIn[];
   out: PipelineStepOut[];
 }
 
 export interface SubFormPipelineBlockPipelineStep extends IfableBasePipelineStep {
   block: 'SUB_FORM_PIPELINE';
-  formPipeline: string;
+  subFormPipeline: string;
   in: PipelineStepIn[];
   out: PipelineStepOut[];
 }
 
 export interface SubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
   block: 'SUB_YIELD_PIPELINE';
-  yieldPipeline: string;
+  subYieldPipeline: string;
   in: PipelineStepIn[];
   out: PipelineStepOut[];
 }
