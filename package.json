@@ -1,6 +1,6 @@
 {
   "name": "@smidyo/smidyo-types-pipeline",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "",
   "scripts": {
     "bump-publish": "npm version patch && npm publish"
