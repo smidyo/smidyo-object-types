@@ -48,17 +48,17 @@ export interface YieldPipeline extends BasePipeline {
   type: 'YIELD';
   inputs: PipelineInput[];
   outputs: PipelineOutput[];
-  steps: Array<
+  drySteps: Array<
     | SubProcessPipelineBlockPipelineStep
-    | SubYieldPipelineBlockPipelineStep
+    | DrySubYieldPipelineBlockPipelineStep
     | SourceBlockPipelineStep
     | PriceBlockPipelineStep
   >;
-  postSteps: Array<
+  wetSteps: Array<
     | EffectBlockPipelineStep
-    | SubProcessPipelineBlockPipelineStep
-    | SubYieldPipelineBlockPipelineStep
     | SourceBlockPipelineStep
+    | SubProcessPipelineBlockPipelineStep
+    | WetSubYieldPipelineBlockPipelineStep
     | MetaDataBlockPipelineStep
   >;
 }
@@ -72,7 +72,8 @@ type BlockType =
   | 'PRICE'
   | 'SUB_PROCESS_PIPELINE'
   | 'SUB_FORM_PIPELINE'
-  | 'SUB_YIELD_PIPELINE'
+  | 'DRY_SUB_YIELD_PIPELINE'
+  | 'WET_SUB_YIELD_PIPELINE'
   | 'ASSERT';
 
 export interface BasePipelineStep {
@@ -156,10 +157,14 @@ export interface SubFormPipelineBlockPipelineStep extends IfableBasePipelineStep
   out: PipelineStepOut[];
 }
 
-export interface SubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
-  block: 'SUB_YIELD_PIPELINE';
+export interface DrySubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
+  block: 'DRY_SUB_YIELD_PIPELINE';
   subYieldPipeline: string;
   in: PipelineStepIn[];
+  priceOut: PipelineStepOut[];
+}
+
+export interface WetSubYieldPipelineBlockPipelineStep extends DrySubYieldPipelineBlockPipelineStep {
   out: PipelineStepOut[];
 }
 
