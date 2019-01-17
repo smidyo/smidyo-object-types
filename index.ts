@@ -13,6 +13,9 @@ export interface PartialDataShape {
 export type PipelineType = 'PROCESS' | 'FORM' | 'YIELD';
 
 export interface PipelineInput {
+  /**
+   * @pattern "^[a-z0-9-]*$/"
+   */
   name: string;
   dataShape: FullDataShape;
 }

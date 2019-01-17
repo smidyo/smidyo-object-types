@@ -129,6 +129,7 @@
                     "$ref": "#/definitions/FullDataShape"
                 },
                 "name": {
+                    "pattern": "^[a-z0-9-]*$/",
                     "type": "string"
                 }
             },
