@@ -156,10 +156,6 @@
         "PipelineStepInFromStatic": {
             "properties": {
                 "fromStaticValue": {
-                    "additionalProperties": true,
-                    "properties": {
-                    },
-                    "type": "object"
                 },
                 "toStepInput": {
                     "pattern": "^[a-z0-9-]*$",

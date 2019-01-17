@@ -95,7 +95,7 @@ type IfableBasePipelineStep = BasePipelineStep & {
 export type PipelineStepIn = PipelineStepInFromPipelineValue | PipelineStepInFromStatic;
 
 export interface PipelineStepInFromStatic {
-  fromStaticValue: object;
+  fromStaticValue: any;
   /** @pattern "^[a-z0-9-]*$" */
   toStepInput: string;
 }
