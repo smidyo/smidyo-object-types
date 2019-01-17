@@ -13,14 +13,13 @@ export interface PartialDataShape {
 export type PipelineType = 'PROCESS' | 'FORM' | 'YIELD';
 
 export interface PipelineInput {
-  /**
-   * @pattern "^[a-z0-9-]*$/"
-   */
+  /** @pattern "^[a-z0-9-]*$" */
   name: string;
   dataShape: FullDataShape;
 }
 
 export interface PipelineOutput {
+  /** @pattern "^[a-z0-9-]*$" */
   name: string;
   dataShape: FullDataShape;
 }
@@ -83,30 +82,37 @@ export interface BasePipelineStep {
 }
 
 type IfableBasePipelineStep = BasePipelineStep & {
+  /** @pattern "^[a-z0-9-]*$" */
   ifPipelineValue?: string;
 };
 
 export type PipelineStepIn = PipelineStepInFromPipelineValue | PipelineStepInFromStatic;
 
 export interface PipelineStepInFromStatic {
-  fromStaticValue: any;
+  fromStaticValue: object;
+  /** @pattern "^[a-z0-9-]*$" */
   toStepInput: string;
 }
 
 export interface PipelineStepInFromPipelineValue {
+  /** @pattern "^[a-z0-9-]*$" */
   fromPipelineValue: string;
+  /** @pattern "^[a-z0-9-]*$" */
   toStepInput: string;
 }
 
 export type PipelineStepOut = PipelineStepOutToPipelineValue;
 
 export interface PipelineStepOutToPipelineValue {
+  /** @pattern "^[a-z0-9-]*$" */
   fromStepOutput: string;
+  /** @pattern "^[a-z0-9-]*$" */
   toPipelineValue: string;
 }
 
 export interface SourceBlockPipelineStep extends BasePipelineStep {
   block: 'SOURCE';
+  /** @pattern "^[a-z0-9-]*$" */
   sourceBlock: string;
   in: PipelineStepIn[];
   out: PipelineStepOut[];
@@ -114,6 +120,7 @@ export interface SourceBlockPipelineStep extends BasePipelineStep {
 
 export interface OperationBlockPipelineStep extends BasePipelineStep {
   block: 'OPERATION';
+  /** @pattern "^[a-z0-9-]*$" */
   operationBlock: string;
   in: PipelineStepIn[];
   out: PipelineStepOut[];
@@ -121,6 +128,7 @@ export interface OperationBlockPipelineStep extends BasePipelineStep {
 
 export interface ElementBlockPipelineStep extends BasePipelineStep {
   block: 'ELEMENT';
+  /** @pattern "^[a-z0-9-]*$" */
   elementBlock: string;
   in: PipelineStepIn[];
   out: PipelineStepOut[];
@@ -128,6 +136,7 @@ export interface ElementBlockPipelineStep extends BasePipelineStep {
 
 export interface EffectBlockPipelineStep extends BasePipelineStep {
   block: 'EFFECT';
+  /** @pattern "^[a-z0-9-]*$" */
   effectBlock: string;
   in: PipelineStepIn[];
   out: PipelineStepOut[];
@@ -135,18 +144,23 @@ export interface EffectBlockPipelineStep extends BasePipelineStep {
 
 export interface MetaDataBlockPipelineStep extends BasePipelineStep {
   block: 'METADATA';
+  /** @pattern "^[a-z0-9-]*$" */
   metadataName: string;
+  /** @pattern "^[a-z0-9-]*$" */
   fromPipelineValue: string;
 }
 
 export interface PriceBlockPipelineStep extends BasePipelineStep {
   block: 'PRICE';
+  /** @pattern "^[a-z0-9-]*$" */
   priceName: string;
+  /** @pattern "^[a-z0-9-]*$" */
   fromPipelineValue: string;
 }
 
 export interface SubProcessPipelineBlockPipelineStep extends IfableBasePipelineStep {
   block: 'SUB_PROCESS_PIPELINE';
+  /** @pattern "^[a-z0-9-.]*$" */
   subProcessPipeline: string;
   in: PipelineStepIn[];
   out: PipelineStepOut[];
@@ -154,6 +168,7 @@ export interface SubProcessPipelineBlockPipelineStep extends IfableBasePipelineS
 
 export interface SubFormPipelineBlockPipelineStep extends IfableBasePipelineStep {
   block: 'SUB_FORM_PIPELINE';
+  /** @pattern "^[a-z0-9-.]*$" */
   subFormPipeline: string;
   in: PipelineStepIn[];
   out: PipelineStepOut[];
@@ -161,6 +176,7 @@ export interface SubFormPipelineBlockPipelineStep extends IfableBasePipelineStep
 
 export interface DrySubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
   block: 'DRY_SUB_YIELD_PIPELINE';
+  /** @pattern "^[a-z0-9-.]*$" */
   subYieldPipeline: string;
   in: PipelineStepIn[];
   priceOut: PipelineStepOut[];
@@ -168,6 +184,7 @@ export interface DrySubYieldPipelineBlockPipelineStep extends IfableBasePipeline
 
 export interface WetSubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
   block: 'WET_SUB_YIELD_PIPELINE';
+  /** @pattern "^[a-z0-9-.]*$" */
   subYieldPipeline: string;
   in: PipelineStepIn[];
   priceOut: PipelineStepOut[];

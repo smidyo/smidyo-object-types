@@ -10,6 +10,7 @@
                     "type": "string"
                 },
                 "ifPipelineValue": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
                 "in": {
@@ -32,6 +33,7 @@
                     "type": "array"
                 },
                 "subYieldPipeline": {
+                    "pattern": "^[a-z0-9-.]*$",
                     "type": "string"
                 }
             },
@@ -52,6 +54,7 @@
                     "type": "string"
                 },
                 "effectBlock": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
                 "in": {
@@ -110,9 +113,11 @@
                     "type": "string"
                 },
                 "fromPipelineValue": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
                 "metadataName": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -129,7 +134,7 @@
                     "$ref": "#/definitions/FullDataShape"
                 },
                 "name": {
-                    "pattern": "^[a-z0-9-]*$/",
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -145,6 +150,7 @@
                     "$ref": "#/definitions/FullDataShape"
                 },
                 "name": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -157,9 +163,11 @@
         "PipelineStepInFromPipelineValue": {
             "properties": {
                 "fromPipelineValue": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
                 "toStepInput": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -172,8 +180,13 @@
         "PipelineStepInFromStatic": {
             "properties": {
                 "fromStaticValue": {
+                    "additionalProperties": true,
+                    "properties": {
+                    },
+                    "type": "object"
                 },
                 "toStepInput": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -186,9 +199,11 @@
         "PipelineStepOutToPipelineValue": {
             "properties": {
                 "fromStepOutput": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
                 "toPipelineValue": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -207,9 +222,11 @@
                     "type": "string"
                 },
                 "fromPipelineValue": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
                 "priceName": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -248,6 +265,7 @@
                     "type": "array"
                 },
                 "sourceBlock": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -268,6 +286,7 @@
                     "type": "string"
                 },
                 "ifPipelineValue": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
                 "in": {
@@ -290,6 +309,7 @@
                     "type": "array"
                 },
                 "subProcessPipeline": {
+                    "pattern": "^[a-z0-9-.]*$",
                     "type": "string"
                 }
             },
@@ -310,6 +330,7 @@
                     "type": "string"
                 },
                 "ifPipelineValue": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
                 "in": {
@@ -338,6 +359,7 @@
                     "type": "array"
                 },
                 "subYieldPipeline": {
+                    "pattern": "^[a-z0-9-.]*$",
                     "type": "string"
                 }
             },
