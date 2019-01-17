@@ -49,19 +49,27 @@ export interface YieldPipeline extends BasePipeline {
   type: 'YIELD';
   inputs: PipelineInput[];
   outputs: PipelineOutput[];
+  priceOutputs: YieldPipelinePriceOutput[];
+  metadataOutputs: YieldPipelineMetadataOutput[];
   drySteps: Array<
     | SubProcessPipelineBlockPipelineStep
     | DrySubYieldPipelineBlockPipelineStep
     | SourceBlockPipelineStep
-    | PriceBlockPipelineStep
   >;
   wetSteps: Array<
     | EffectBlockPipelineStep
     | SourceBlockPipelineStep
     | SubProcessPipelineBlockPipelineStep
     | WetSubYieldPipelineBlockPipelineStep
-    | MetaDataBlockPipelineStep
   >;
+}
+
+export interface YieldPipelinePriceOutput {
+  name: string;
+}
+
+export interface YieldPipelineMetadataOutput {
+  name: string;
 }
 
 type BlockType =
@@ -69,8 +77,6 @@ type BlockType =
   | 'OPERATION'
   | 'ELEMENT'
   | 'EFFECT'
-  | 'METADATA'
-  | 'PRICE'
   | 'SUB_PROCESS_PIPELINE'
   | 'SUB_FORM_PIPELINE'
   | 'DRY_SUB_YIELD_PIPELINE'
@@ -140,22 +146,6 @@ export interface EffectBlockPipelineStep extends BasePipelineStep {
   effectBlock: string;
   in: PipelineStepIn[];
   out: PipelineStepOut[];
-}
-
-export interface MetaDataBlockPipelineStep extends BasePipelineStep {
-  block: 'METADATA';
-  /** @pattern "^[a-z0-9-]*$" */
-  metadataName: string;
-  /** @pattern "^[a-z0-9-]*$" */
-  fromPipelineValue: string;
-}
-
-export interface PriceBlockPipelineStep extends BasePipelineStep {
-  block: 'PRICE';
-  /** @pattern "^[a-z0-9-]*$" */
-  priceName: string;
-  /** @pattern "^[a-z0-9-]*$" */
-  fromPipelineValue: string;
 }
 
 export interface SubProcessPipelineBlockPipelineStep extends IfableBasePipelineStep {

@@ -104,30 +104,6 @@
             ],
             "type": "object"
         },
-        "MetaDataBlockPipelineStep": {
-            "properties": {
-                "block": {
-                    "enum": [
-                        "METADATA"
-                    ],
-                    "type": "string"
-                },
-                "fromPipelineValue": {
-                    "pattern": "^[a-z0-9-]*$",
-                    "type": "string"
-                },
-                "metadataName": {
-                    "pattern": "^[a-z0-9-]*$",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "block",
-                "fromPipelineValue",
-                "metadataName"
-            ],
-            "type": "object"
-        },
         "PipelineInput": {
             "properties": {
                 "dataShape": {
@@ -210,30 +186,6 @@
             "required": [
                 "fromStepOutput",
                 "toPipelineValue"
-            ],
-            "type": "object"
-        },
-        "PriceBlockPipelineStep": {
-            "properties": {
-                "block": {
-                    "enum": [
-                        "PRICE"
-                    ],
-                    "type": "string"
-                },
-                "fromPipelineValue": {
-                    "pattern": "^[a-z0-9-]*$",
-                    "type": "string"
-                },
-                "priceName": {
-                    "pattern": "^[a-z0-9-]*$",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "block",
-                "fromPipelineValue",
-                "priceName"
             ],
             "type": "object"
         },
@@ -371,6 +323,28 @@
                 "subYieldPipeline"
             ],
             "type": "object"
+        },
+        "YieldPipelineMetadataOutput": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "type": "object"
+        },
+        "YieldPipelinePriceOutput": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "type": "object"
         }
     },
     "properties": {
@@ -379,9 +353,6 @@
                 "anyOf": [
                     {
                         "$ref": "#/definitions/SourceBlockPipelineStep"
-                    },
-                    {
-                        "$ref": "#/definitions/PriceBlockPipelineStep"
                     },
                     {
                         "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
@@ -399,9 +370,21 @@
             },
             "type": "array"
         },
+        "metadataOutputs": {
+            "items": {
+                "$ref": "#/definitions/YieldPipelineMetadataOutput"
+            },
+            "type": "array"
+        },
         "outputs": {
             "items": {
                 "$ref": "#/definitions/PipelineOutput"
+            },
+            "type": "array"
+        },
+        "priceOutputs": {
+            "items": {
+                "$ref": "#/definitions/YieldPipelinePriceOutput"
             },
             "type": "array"
         },
@@ -421,9 +404,6 @@
                         "$ref": "#/definitions/EffectBlockPipelineStep"
                     },
                     {
-                        "$ref": "#/definitions/MetaDataBlockPipelineStep"
-                    },
-                    {
                         "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
                     },
                     {
@@ -437,7 +417,9 @@
     "required": [
         "drySteps",
         "inputs",
+        "metadataOutputs",
         "outputs",
+        "priceOutputs",
         "type",
         "wetSteps"
     ],
