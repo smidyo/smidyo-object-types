@@ -177,36 +177,3 @@ export interface AssertBlockPipelineStep extends BasePipelineStep {
   out: PipelineStepOut;
   errorMessage: string;
 }
-
-const test: YieldPipeline = {
-  type: 'YIELD',
-  inputs: [
-    {
-      name: 'a',
-      dataShape: {
-        type: 'number',
-        nullable: false,
-        list: false
-      }
-    }
-  ],
-  steps: [
-    {
-      block: 'SUB_PROCESS_PIPELINE',
-      processPipeline: 'math-basic',
-      in: [
-        {
-          fromPipelineValue: 'a',
-          toStepInput: 'a'
-        }
-      ],
-      out: [
-        {
-          fromStepOutput: 'b',
-          toPipelineValue: 'b'
-        }
-      ]
-    }
-  ],
-  postSteps: []
-};

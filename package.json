@@ -13,5 +13,6 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/smidyo/smidyo-types-pipeline/issues"
-  }
+  },
+  "devDependencies": {}
 }

@@ -1,0 +1,350 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "DrySubYieldPipelineBlockPipelineStep": {
+            "properties": {
+                "block": {
+                    "enum": [
+                        "DRY_SUB_YIELD_PIPELINE"
+                    ],
+                    "type": "string"
+                },
+                "ifPipelineValue": {
+                    "type": "string"
+                },
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepInFromStatic"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "priceOut": {
+                    "items": {
+                        "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                    },
+                    "type": "array"
+                },
+                "subYieldPipeline": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "EffectBlockPipelineStep": {
+            "properties": {
+                "block": {
+                    "enum": [
+                        "EFFECT"
+                    ],
+                    "type": "string"
+                },
+                "effectBlock": {
+                    "type": "string"
+                },
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepInFromStatic"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "out": {
+                    "items": {
+                        "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "FullDataShape": {
+            "properties": {
+                "list": {
+                    "type": "boolean"
+                },
+                "nullable": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "MetaDataBlockPipelineStep": {
+            "properties": {
+                "block": {
+                    "enum": [
+                        "METADATA"
+                    ],
+                    "type": "string"
+                },
+                "fromPipelineValue": {
+                    "type": "string"
+                },
+                "metadataName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PipelineInput": {
+            "properties": {
+                "dataShape": {
+                    "$ref": "#/definitions/FullDataShape"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PipelineOutput": {
+            "properties": {
+                "dataShape": {
+                    "$ref": "#/definitions/FullDataShape"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PipelineStepInFromPipelineValue": {
+            "properties": {
+                "fromPipelineValue": {
+                    "type": "string"
+                },
+                "toStepInput": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PipelineStepInFromStatic": {
+            "properties": {
+                "fromStaticValue": {
+                },
+                "toStepInput": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PipelineStepOutToPipelineValue": {
+            "properties": {
+                "fromStepOutput": {
+                    "type": "string"
+                },
+                "toPipelineValue": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PriceBlockPipelineStep": {
+            "properties": {
+                "block": {
+                    "enum": [
+                        "PRICE"
+                    ],
+                    "type": "string"
+                },
+                "fromPipelineValue": {
+                    "type": "string"
+                },
+                "priceName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "SourceBlockPipelineStep": {
+            "properties": {
+                "block": {
+                    "enum": [
+                        "SOURCE"
+                    ],
+                    "type": "string"
+                },
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepInFromStatic"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "out": {
+                    "items": {
+                        "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                    },
+                    "type": "array"
+                },
+                "sourceBlock": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "SubProcessPipelineBlockPipelineStep": {
+            "properties": {
+                "block": {
+                    "enum": [
+                        "SUB_PROCESS_PIPELINE"
+                    ],
+                    "type": "string"
+                },
+                "ifPipelineValue": {
+                    "type": "string"
+                },
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepInFromStatic"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "out": {
+                    "items": {
+                        "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                    },
+                    "type": "array"
+                },
+                "subProcessPipeline": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "WetSubYieldPipelineBlockPipelineStep": {
+            "properties": {
+                "block": {
+                    "enum": [
+                        "WET_SUB_YIELD_PIPELINE"
+                    ],
+                    "type": "string"
+                },
+                "ifPipelineValue": {
+                    "type": "string"
+                },
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepInFromStatic"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "out": {
+                    "items": {
+                        "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                    },
+                    "type": "array"
+                },
+                "priceOut": {
+                    "items": {
+                        "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                    },
+                    "type": "array"
+                },
+                "subYieldPipeline": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "properties": {
+        "drySteps": {
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/SourceBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/PriceBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/DrySubYieldPipelineBlockPipelineStep"
+                    }
+                ]
+            },
+            "type": "array"
+        },
+        "inputs": {
+            "items": {
+                "$ref": "#/definitions/PipelineInput"
+            },
+            "type": "array"
+        },
+        "outputs": {
+            "items": {
+                "$ref": "#/definitions/PipelineOutput"
+            },
+            "type": "array"
+        },
+        "type": {
+            "enum": [
+                "YIELD"
+            ],
+            "type": "string"
+        },
+        "wetSteps": {
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/SourceBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/EffectBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/MetaDataBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/WetSubYieldPipelineBlockPipelineStep"
+                    }
+                ]
+            },
+            "type": "array"
+        }
+    },
+    "type": "object"
+}
+
