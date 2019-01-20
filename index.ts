@@ -84,7 +84,7 @@ type BlockType =
   | 'ASSERT';
 
 export interface BasePipelineStep {
-  block: BlockType;
+  blockType: BlockType;
 }
 
 type IfableBasePipelineStep = BasePipelineStep & {
@@ -92,22 +92,27 @@ type IfableBasePipelineStep = BasePipelineStep & {
   ifPipelineValue?: string;
 };
 
-export type PipelineStepIn = PipelineStepInFromPipelineValue | PipelineStepInFromStatic;
+type PipelineStepInType =
+ | 'INLINE_VALUE'
+ | 'PIPELINE_VALUE'
 
-export interface PipelineStepInFromStatic {
-  fromStaticValue: any;
+interface BasePipelineStepIn {
+  inType: PipelineStepInType,
   /** @pattern "^[a-z0-9-]*$" */
   toStepInput: string;
+}
+
+export interface PipelineStepInFromInlineValue extends BasePipelineStepIn  {
+  inType: 'INLINE_VALUE';
+  fromInlineValue: any;
 }
 
 export interface PipelineStepInFromPipelineValue {
+  inType: 'PIPELINE_VALUE';
   /** @pattern "^[a-z0-9-]*$" */
   fromPipelineValue: string;
-  /** @pattern "^[a-z0-9-]*$" */
-  toStepInput: string;
 }
 
-export type PipelineStepOut = PipelineStepOutToPipelineValue;
 
 export interface PipelineStepOutToPipelineValue {
   /** @pattern "^[a-z0-9-]*$" */
@@ -117,73 +122,73 @@ export interface PipelineStepOutToPipelineValue {
 }
 
 export interface SourceBlockPipelineStep extends BasePipelineStep {
-  block: 'SOURCE';
+  blockType: 'SOURCE';
   /** @pattern "^[a-z0-9-]*$" */
   sourceBlock: string;
-  in: PipelineStepIn[];
-  out: PipelineStepOut[];
+  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  out: PipelineStepOutToPipelineValue[];
 }
 
 export interface OperationBlockPipelineStep extends BasePipelineStep {
-  block: 'OPERATION';
+  blockType: 'OPERATION';
   /** @pattern "^[a-z0-9-]*$" */
   operationBlock: string;
-  in: PipelineStepIn[];
-  out: PipelineStepOut[];
+  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  out: PipelineStepOutToPipelineValue[];
 }
 
 export interface ElementBlockPipelineStep extends BasePipelineStep {
-  block: 'ELEMENT';
+  blockType: 'ELEMENT';
   /** @pattern "^[a-z0-9-]*$" */
   elementBlock: string;
-  in: PipelineStepIn[];
-  out: PipelineStepOut[];
+  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  out: PipelineStepOutToPipelineValue[];
 }
 
 export interface EffectBlockPipelineStep extends BasePipelineStep {
-  block: 'EFFECT';
+  blockType: 'EFFECT';
   /** @pattern "^[a-z0-9-]*$" */
   effectBlock: string;
-  in: PipelineStepIn[];
-  out: PipelineStepOut[];
+  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  out: PipelineStepOutToPipelineValue[];
 }
 
 export interface SubProcessPipelineBlockPipelineStep extends IfableBasePipelineStep {
-  block: 'SUB_PROCESS_PIPELINE';
+  blockType: 'SUB_PROCESS_PIPELINE';
   /** @pattern "^[a-z0-9-.]*$" */
   subProcessPipeline: string;
-  in: PipelineStepIn[];
-  out: PipelineStepOut[];
+  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  out: PipelineStepOutToPipelineValue[];
 }
 
 export interface SubFormPipelineBlockPipelineStep extends IfableBasePipelineStep {
-  block: 'SUB_FORM_PIPELINE';
+  blockType: 'SUB_FORM_PIPELINE';
   /** @pattern "^[a-z0-9-.]*$" */
   subFormPipeline: string;
-  in: PipelineStepIn[];
-  out: PipelineStepOut[];
+  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  out: PipelineStepOutToPipelineValue[];
 }
 
 export interface DrySubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
-  block: 'DRY_SUB_YIELD_PIPELINE';
+  blockType: 'DRY_SUB_YIELD_PIPELINE';
   /** @pattern "^[a-z0-9-.]*$" */
   subYieldPipeline: string;
-  in: PipelineStepIn[];
-  priceOut: PipelineStepOut[];
+  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  priceOut: PipelineStepOutToPipelineValue[];
 }
 
 export interface WetSubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
-  block: 'WET_SUB_YIELD_PIPELINE';
+  blockType: 'WET_SUB_YIELD_PIPELINE';
   /** @pattern "^[a-z0-9-.]*$" */
   subYieldPipeline: string;
-  in: PipelineStepIn[];
-  priceOut: PipelineStepOut[];
-  out: PipelineStepOut[];
+  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  priceOut: PipelineStepOutToPipelineValue[];
+  out: PipelineStepOutToPipelineValue[];
 }
 
 export interface AssertBlockPipelineStep extends BasePipelineStep {
-  block: 'ASSERT';
-  in: PipelineStepIn[];
-  out: PipelineStepOut;
+  blockType: 'ASSERT';
+  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  out: PipelineStepOutToPipelineValue;
   errorMessage: string;
 }

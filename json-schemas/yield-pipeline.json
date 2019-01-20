@@ -3,7 +3,7 @@
     "definitions": {
         "DrySubYieldPipelineBlockPipelineStep": {
             "properties": {
-                "block": {
+                "blockType": {
                     "enum": [
                         "DRY_SUB_YIELD_PIPELINE"
                     ],
@@ -14,17 +14,17 @@
                     "type": "string"
                 },
                 "in": {
-                    "items": {
-                        "anyOf": [
-                            {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                        },
+                        {
+                            "items": {
                                 "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                             },
-                            {
-                                "$ref": "#/definitions/PipelineStepInFromStatic"
-                            }
-                        ]
-                    },
-                    "type": "array"
+                            "type": "array"
+                        }
+                    ]
                 },
                 "priceOut": {
                     "items": {
@@ -38,7 +38,7 @@
                 }
             },
             "required": [
-                "block",
+                "blockType",
                 "in",
                 "priceOut",
                 "subYieldPipeline"
@@ -47,7 +47,7 @@
         },
         "EffectBlockPipelineStep": {
             "properties": {
-                "block": {
+                "blockType": {
                     "enum": [
                         "EFFECT"
                     ],
@@ -58,17 +58,17 @@
                     "type": "string"
                 },
                 "in": {
-                    "items": {
-                        "anyOf": [
-                            {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                        },
+                        {
+                            "items": {
                                 "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                             },
-                            {
-                                "$ref": "#/definitions/PipelineStepInFromStatic"
-                            }
-                        ]
-                    },
-                    "type": "array"
+                            "type": "array"
+                        }
+                    ]
                 },
                 "out": {
                     "items": {
@@ -78,7 +78,7 @@
                 }
             },
             "required": [
-                "block",
+                "blockType",
                 "effectBlock",
                 "in",
                 "out"
@@ -136,35 +136,44 @@
             ],
             "type": "object"
         },
+        "PipelineStepInFromInlineValue": {
+            "properties": {
+                "fromInlineValue": {
+                },
+                "inType": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                },
+                "toStepInput": {
+                    "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "fromInlineValue",
+                "inType",
+                "toStepInput"
+            ],
+            "type": "object"
+        },
         "PipelineStepInFromPipelineValue": {
             "properties": {
                 "fromPipelineValue": {
                     "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
-                "toStepInput": {
-                    "pattern": "^[a-z0-9-]*$",
+                "inType": {
+                    "enum": [
+                        "PIPELINE_VALUE"
+                    ],
                     "type": "string"
                 }
             },
             "required": [
                 "fromPipelineValue",
-                "toStepInput"
-            ],
-            "type": "object"
-        },
-        "PipelineStepInFromStatic": {
-            "properties": {
-                "fromStaticValue": {
-                },
-                "toStepInput": {
-                    "pattern": "^[a-z0-9-]*$",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "fromStaticValue",
-                "toStepInput"
+                "inType"
             ],
             "type": "object"
         },
@@ -187,24 +196,24 @@
         },
         "SourceBlockPipelineStep": {
             "properties": {
-                "block": {
+                "blockType": {
                     "enum": [
                         "SOURCE"
                     ],
                     "type": "string"
                 },
                 "in": {
-                    "items": {
-                        "anyOf": [
-                            {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                        },
+                        {
+                            "items": {
                                 "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                             },
-                            {
-                                "$ref": "#/definitions/PipelineStepInFromStatic"
-                            }
-                        ]
-                    },
-                    "type": "array"
+                            "type": "array"
+                        }
+                    ]
                 },
                 "out": {
                     "items": {
@@ -218,7 +227,7 @@
                 }
             },
             "required": [
-                "block",
+                "blockType",
                 "in",
                 "out",
                 "sourceBlock"
@@ -227,7 +236,7 @@
         },
         "SubProcessPipelineBlockPipelineStep": {
             "properties": {
-                "block": {
+                "blockType": {
                     "enum": [
                         "SUB_PROCESS_PIPELINE"
                     ],
@@ -238,17 +247,17 @@
                     "type": "string"
                 },
                 "in": {
-                    "items": {
-                        "anyOf": [
-                            {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                        },
+                        {
+                            "items": {
                                 "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                             },
-                            {
-                                "$ref": "#/definitions/PipelineStepInFromStatic"
-                            }
-                        ]
-                    },
-                    "type": "array"
+                            "type": "array"
+                        }
+                    ]
                 },
                 "out": {
                     "items": {
@@ -262,7 +271,7 @@
                 }
             },
             "required": [
-                "block",
+                "blockType",
                 "in",
                 "out",
                 "subProcessPipeline"
@@ -271,7 +280,7 @@
         },
         "WetSubYieldPipelineBlockPipelineStep": {
             "properties": {
-                "block": {
+                "blockType": {
                     "enum": [
                         "WET_SUB_YIELD_PIPELINE"
                     ],
@@ -282,17 +291,17 @@
                     "type": "string"
                 },
                 "in": {
-                    "items": {
-                        "anyOf": [
-                            {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                        },
+                        {
+                            "items": {
                                 "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                             },
-                            {
-                                "$ref": "#/definitions/PipelineStepInFromStatic"
-                            }
-                        ]
-                    },
-                    "type": "array"
+                            "type": "array"
+                        }
+                    ]
                 },
                 "out": {
                     "items": {
@@ -312,7 +321,7 @@
                 }
             },
             "required": [
-                "block",
+                "blockType",
                 "in",
                 "out",
                 "priceOut",
