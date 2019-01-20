@@ -14,20 +14,17 @@
                     "type": "string"
                 },
                 "in": {
-                    "anyOf": [
-                        {
-                            "items": {
+                    "items": {
+                        "anyOf": [
+                            {
                                 "$ref": "#/definitions/PipelineStepInFromInlineValue"
                             },
-                            "type": "array"
-                        },
-                        {
-                            "items": {
+                            {
                                 "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                            },
-                            "type": "array"
-                        }
-                    ]
+                            }
+                        ]
+                    },
+                    "type": "array"
                 },
                 "priceOut": {
                     "items": {
@@ -61,20 +58,17 @@
                     "type": "string"
                 },
                 "in": {
-                    "anyOf": [
-                        {
-                            "items": {
+                    "items": {
+                        "anyOf": [
+                            {
                                 "$ref": "#/definitions/PipelineStepInFromInlineValue"
                             },
-                            "type": "array"
-                        },
-                        {
-                            "items": {
+                            {
                                 "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                            },
-                            "type": "array"
-                        }
-                    ]
+                            }
+                        ]
+                    },
+                    "type": "array"
                 },
                 "out": {
                     "items": {
@@ -209,20 +203,17 @@
                     "type": "string"
                 },
                 "in": {
-                    "anyOf": [
-                        {
-                            "items": {
+                    "items": {
+                        "anyOf": [
+                            {
                                 "$ref": "#/definitions/PipelineStepInFromInlineValue"
                             },
-                            "type": "array"
-                        },
-                        {
-                            "items": {
+                            {
                                 "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                            },
-                            "type": "array"
-                        }
-                    ]
+                            }
+                        ]
+                    },
+                    "type": "array"
                 },
                 "out": {
                     "items": {
@@ -256,20 +247,17 @@
                     "type": "string"
                 },
                 "in": {
-                    "anyOf": [
-                        {
-                            "items": {
+                    "items": {
+                        "anyOf": [
+                            {
                                 "$ref": "#/definitions/PipelineStepInFromInlineValue"
                             },
-                            "type": "array"
-                        },
-                        {
-                            "items": {
+                            {
                                 "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                            },
-                            "type": "array"
-                        }
-                    ]
+                            }
+                        ]
+                    },
+                    "type": "array"
                 },
                 "out": {
                     "items": {
@@ -303,20 +291,17 @@
                     "type": "string"
                 },
                 "in": {
-                    "anyOf": [
-                        {
-                            "items": {
+                    "items": {
+                        "anyOf": [
+                            {
                                 "$ref": "#/definitions/PipelineStepInFromInlineValue"
                             },
-                            "type": "array"
-                        },
-                        {
-                            "items": {
+                            {
                                 "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                            },
-                            "type": "array"
-                        }
-                    ]
+                            }
+                        ]
+                    },
+                    "type": "array"
                 },
                 "out": {
                     "items": {
