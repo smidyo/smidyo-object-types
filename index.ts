@@ -92,17 +92,15 @@ type IfableBasePipelineStep = BasePipelineStep & {
   ifPipelineValue?: string;
 };
 
-type PipelineStepInType =
- | 'INLINE_VALUE'
- | 'PIPELINE_VALUE'
+type PipelineStepInType = 'INLINE_VALUE' | 'PIPELINE_VALUE';
 
 interface BasePipelineStepIn {
-  inType: PipelineStepInType,
+  inType: PipelineStepInType;
   /** @pattern "^[a-z0-9-]*$" */
   toStepInput: string;
 }
 
-export interface PipelineStepInFromInlineValue extends BasePipelineStepIn  {
+export interface PipelineStepInFromInlineValue extends BasePipelineStepIn {
   inType: 'INLINE_VALUE';
   fromInlineValue: any;
 }
@@ -112,7 +110,6 @@ export interface PipelineStepInFromPipelineValue {
   /** @pattern "^[a-z0-9-]*$" */
   fromPipelineValue: string;
 }
-
 
 export interface PipelineStepOutToPipelineValue {
   /** @pattern "^[a-z0-9-]*$" */
@@ -125,7 +122,7 @@ export interface SourceBlockPipelineStep extends BasePipelineStep {
   blockType: 'SOURCE';
   /** @pattern "^[a-z0-9-]*$" */
   sourceBlock: string;
-  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  in: PipelineStepInFromInlineValue[] | PipelineStepInFromPipelineValue[];
   out: PipelineStepOutToPipelineValue[];
 }
 
@@ -133,7 +130,7 @@ export interface OperationBlockPipelineStep extends BasePipelineStep {
   blockType: 'OPERATION';
   /** @pattern "^[a-z0-9-]*$" */
   operationBlock: string;
-  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  in: PipelineStepInFromInlineValue[] | PipelineStepInFromPipelineValue[];
   out: PipelineStepOutToPipelineValue[];
 }
 
@@ -141,7 +138,7 @@ export interface ElementBlockPipelineStep extends BasePipelineStep {
   blockType: 'ELEMENT';
   /** @pattern "^[a-z0-9-]*$" */
   elementBlock: string;
-  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  in: PipelineStepInFromInlineValue[] | PipelineStepInFromPipelineValue[];
   out: PipelineStepOutToPipelineValue[];
 }
 
@@ -149,7 +146,7 @@ export interface EffectBlockPipelineStep extends BasePipelineStep {
   blockType: 'EFFECT';
   /** @pattern "^[a-z0-9-]*$" */
   effectBlock: string;
-  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  in: PipelineStepInFromInlineValue[] | PipelineStepInFromPipelineValue[];
   out: PipelineStepOutToPipelineValue[];
 }
 
@@ -157,7 +154,7 @@ export interface SubProcessPipelineBlockPipelineStep extends IfableBasePipelineS
   blockType: 'SUB_PROCESS_PIPELINE';
   /** @pattern "^[a-z0-9-.]*$" */
   subProcessPipeline: string;
-  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  in: PipelineStepInFromInlineValue[] | PipelineStepInFromPipelineValue[];
   out: PipelineStepOutToPipelineValue[];
 }
 
@@ -165,7 +162,7 @@ export interface SubFormPipelineBlockPipelineStep extends IfableBasePipelineStep
   blockType: 'SUB_FORM_PIPELINE';
   /** @pattern "^[a-z0-9-.]*$" */
   subFormPipeline: string;
-  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  in: PipelineStepInFromInlineValue[] | PipelineStepInFromPipelineValue[];
   out: PipelineStepOutToPipelineValue[];
 }
 
@@ -173,7 +170,7 @@ export interface DrySubYieldPipelineBlockPipelineStep extends IfableBasePipeline
   blockType: 'DRY_SUB_YIELD_PIPELINE';
   /** @pattern "^[a-z0-9-.]*$" */
   subYieldPipeline: string;
-  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  in: PipelineStepInFromInlineValue[] | PipelineStepInFromPipelineValue[];
   priceOut: PipelineStepOutToPipelineValue[];
 }
 
@@ -181,14 +178,14 @@ export interface WetSubYieldPipelineBlockPipelineStep extends IfableBasePipeline
   blockType: 'WET_SUB_YIELD_PIPELINE';
   /** @pattern "^[a-z0-9-.]*$" */
   subYieldPipeline: string;
-  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  in: PipelineStepInFromInlineValue[] | PipelineStepInFromPipelineValue[];
   priceOut: PipelineStepOutToPipelineValue[];
   out: PipelineStepOutToPipelineValue[];
 }
 
 export interface AssertBlockPipelineStep extends BasePipelineStep {
   blockType: 'ASSERT';
-  in: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue[];
+  in: PipelineStepInFromInlineValue[] | PipelineStepInFromPipelineValue[];
   out: PipelineStepOutToPipelineValue;
   errorMessage: string;
 }
