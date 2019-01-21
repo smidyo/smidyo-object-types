@@ -182,36 +182,20 @@
             ],
             "type": "object"
         },
-        "PipelineStepInType": {
-            "enum": [
-                "INLINE_VALUE",
-                "PIPELINE_VALUE"
-            ],
-            "type": "string"
-        },
         "PipelineStepOutToPipelineValue": {
             "properties": {
                 "fromStepOutput": {
                     "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
-                "inType": {
-                    "$ref": "#/definitions/PipelineStepInType"
-                },
                 "toPipelineValue": {
-                    "pattern": "^[a-z0-9-]*$",
-                    "type": "string"
-                },
-                "toStepInput": {
                     "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
             "required": [
                 "fromStepOutput",
-                "inType",
-                "toPipelineValue",
-                "toStepInput"
+                "toPipelineValue"
             ],
             "type": "object"
         },

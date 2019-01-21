@@ -111,7 +111,7 @@ export interface PipelineStepInFromPipelineValue extends BasePipelineStepIn {
   fromPipelineValue: string;
 }
 
-export interface PipelineStepOutToPipelineValue extends BasePipelineStepIn {
+export interface PipelineStepOutToPipelineValue {
   /** @pattern "^[a-z0-9-]*$" */
   fromStepOutput: string;
   /** @pattern "^[a-z0-9-]*$" */
