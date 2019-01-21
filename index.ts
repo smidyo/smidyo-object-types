@@ -105,13 +105,13 @@ export interface PipelineStepInFromInlineValue extends BasePipelineStepIn {
   fromInlineValue: any;
 }
 
-export interface PipelineStepInFromPipelineValue {
+export interface PipelineStepInFromPipelineValue extends BasePipelineStepIn {
   inType: 'PIPELINE_VALUE';
   /** @pattern "^[a-z0-9-]*$" */
   fromPipelineValue: string;
 }
 
-export interface PipelineStepOutToPipelineValue {
+export interface PipelineStepOutToPipelineValue extends BasePipelineStepIn {
   /** @pattern "^[a-z0-9-]*$" */
   fromStepOutput: string;
   /** @pattern "^[a-z0-9-]*$" */
