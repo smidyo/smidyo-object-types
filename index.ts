@@ -100,9 +100,14 @@ interface BasePipelineStepIn {
   toStepInput: string;
 }
 
+export interface InlineValue {
+  dataShape: FullDataShape;
+  data: any;
+}
+
 export interface PipelineStepInFromInlineValue extends BasePipelineStepIn {
   inType: 'INLINE_VALUE';
-  fromInlineValue: any;
+  fromInlineValue: InlineValue;
 }
 
 export interface PipelineStepInFromPipelineValue extends BasePipelineStepIn {

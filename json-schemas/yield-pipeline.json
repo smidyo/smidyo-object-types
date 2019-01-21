@@ -104,6 +104,20 @@
             ],
             "type": "object"
         },
+        "InlineValue": {
+            "properties": {
+                "data": {
+                },
+                "dataShape": {
+                    "$ref": "#/definitions/FullDataShape"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
         "PipelineInput": {
             "properties": {
                 "dataShape": {
@@ -139,6 +153,7 @@
         "PipelineStepInFromInlineValue": {
             "properties": {
                 "fromInlineValue": {
+                    "$ref": "#/definitions/InlineValue"
                 },
                 "inType": {
                     "enum": [
