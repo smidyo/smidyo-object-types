@@ -21,14 +21,7 @@
                 },
                 "inPriority": {
                     "items": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                            },
-                            {
-                                "type": "string"
-                            }
-                        ]
+                        "type": "string"
                     },
                     "type": "array"
                 },
