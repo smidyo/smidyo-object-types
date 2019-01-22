@@ -196,7 +196,7 @@ export interface WetSubYieldPipelineBlockPipelineStep extends IfableBasePipeline
 
 export interface AssertBlockPipelineStep extends BasePipelineStep {
   blockType: 'ASSERT';
-  inFallback: PipelineStepInFromInlineValue | string; //must be non-nullable datashape
+  inFallback: InlineValue | string; //must be non-nullable datashape
   inPriority: string[]; // must be nullable datashapes
   out: string[];
 }

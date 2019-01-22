@@ -12,7 +12,7 @@
                 "inFallback": {
                     "anyOf": [
                         {
-                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                            "$ref": "#/definitions/InlineValue"
                         },
                         {
                             "type": "string"
