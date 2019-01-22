@@ -9,30 +9,37 @@
                     ],
                     "type": "string"
                 },
-                "errorMessage": {
-                    "type": "string"
+                "inFallback": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
                 },
-                "in": {
+                "inPriority": {
                     "items": {
                         "anyOf": [
                             {
                                 "$ref": "#/definitions/PipelineStepInFromInlineValue"
                             },
                             {
-                                "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                "type": "string"
                             }
                         ]
                     },
                     "type": "array"
                 },
                 "out": {
-                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                    "type": "string"
                 }
             },
             "required": [
                 "blockType",
-                "errorMessage",
-                "in",
+                "inFallback",
+                "inPriority",
                 "out"
             ],
             "type": "object"
