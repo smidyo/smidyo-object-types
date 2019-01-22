@@ -20,7 +20,10 @@
                     "type": "array"
                 },
                 "out": {
-                    "$ref": "#/definitions/PipelineStepInTo"
+                    "items": {
+                        "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                    },
+                    "type": "array"
                 },
                 "type": {
                     "enum": [
@@ -77,7 +80,7 @@
                                 "$ref": "#/definitions/PipelineStepOutFrom"
                             },
                             {
-                                "$ref": "#/definitions/PipelineStepInTo"
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
                             }
                         ]
                     },
@@ -142,7 +145,7 @@
                                 "$ref": "#/definitions/PipelineStepOutFrom"
                             },
                             {
-                                "$ref": "#/definitions/PipelineStepInTo"
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
                             }
                         ]
                     },
@@ -289,6 +292,18 @@
             ],
             "type": "object"
         },
+        "PipelineStepOutToPipelineValue": {
+            "properties": {
+                "outTo": {
+                    "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "outTo"
+            ],
+            "type": "object"
+        },
         "SourceBlockPipelineStep": {
             "properties": {
                 "in": {
@@ -325,7 +340,7 @@
                                 "$ref": "#/definitions/PipelineStepOutFrom"
                             },
                             {
-                                "$ref": "#/definitions/PipelineStepInTo"
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
                             }
                         ]
                     },
@@ -390,7 +405,7 @@
                                 "$ref": "#/definitions/PipelineStepOutFrom"
                             },
                             {
-                                "$ref": "#/definitions/PipelineStepInTo"
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
                             }
                         ]
                     },
@@ -455,7 +470,7 @@
                                 "$ref": "#/definitions/PipelineStepOutFrom"
                             },
                             {
-                                "$ref": "#/definitions/PipelineStepInTo"
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
                             }
                         ]
                     },

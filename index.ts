@@ -141,7 +141,7 @@ export interface SourceBlockPipelineStep extends BasePipelineStep {
   /** @pattern "^[a-z0-9-]*$" */
   sourceBlock: string;
   in: Array<(PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue) & PipelineStepInTo>;
-  out: Array<PipelineStepOutFrom & PipelineStepInTo>;
+  out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
 export interface OperationBlockPipelineStep extends BasePipelineStep {
@@ -149,7 +149,7 @@ export interface OperationBlockPipelineStep extends BasePipelineStep {
   /** @pattern "^[a-z0-9-]*$" */
   operationBlock: string;
   in: Array<(PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue) & PipelineStepInTo>;
-  out: Array<PipelineStepOutFrom & PipelineStepInTo>;
+  out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
 export interface ElementBlockPipelineStep extends BasePipelineStep {
@@ -157,7 +157,7 @@ export interface ElementBlockPipelineStep extends BasePipelineStep {
   /** @pattern "^[a-z0-9-]*$" */
   elementBlock: string;
   in: Array<(PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue) & PipelineStepInTo>;
-  out: Array<PipelineStepOutFrom & PipelineStepInTo>;
+  out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
 export interface EffectBlockPipelineStep extends BasePipelineStep {
@@ -165,7 +165,7 @@ export interface EffectBlockPipelineStep extends BasePipelineStep {
   /** @pattern "^[a-z0-9-]*$" */
   effectBlock: string;
   in: Array<(PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue) & PipelineStepInTo>;
-  out: Array<PipelineStepOutFrom & PipelineStepInTo>;
+  out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
 export interface SubProcessPipelineBlockPipelineStep extends IfableBasePipelineStep {
@@ -173,7 +173,7 @@ export interface SubProcessPipelineBlockPipelineStep extends IfableBasePipelineS
   /** @pattern "^[a-z0-9-.]*$" */
   subProcessPipeline: string;
   in: Array<(PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue) & PipelineStepInTo>;
-  out: Array<PipelineStepOutFrom & PipelineStepInTo>;
+  out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
 export interface SubFormPipelineBlockPipelineStep extends IfableBasePipelineStep {
@@ -181,7 +181,7 @@ export interface SubFormPipelineBlockPipelineStep extends IfableBasePipelineStep
   /** @pattern "^[a-z0-9-.]*$" */
   subFormPipeline: string;
   in: Array<(PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue) & PipelineStepInTo>;
-  out: Array<PipelineStepOutFrom & PipelineStepInTo>;
+  out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
 export interface DrySubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
@@ -189,7 +189,7 @@ export interface DrySubYieldPipelineBlockPipelineStep extends IfableBasePipeline
   /** @pattern "^[a-z0-9-.]*$" */
   subYieldPipeline: string;
   in: Array<(PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue) & PipelineStepInTo>;
-  out: Array<PipelineStepOutFrom & PipelineStepInTo>;
+  out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
 export interface WetSubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
@@ -198,12 +198,12 @@ export interface WetSubYieldPipelineBlockPipelineStep extends IfableBasePipeline
   subYieldPipeline: string;
   in: Array<(PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue) & PipelineStepInTo>;
   priceOut: Array<PipelineStepOutFrom & PipelineStepInTo>;
-  out: Array<PipelineStepOutFrom & PipelineStepInTo>;
+  out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
 export interface AssertBlockPipelineStep extends BasePipelineStep {
   type: 'ASSERT';
   inFallback: PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue; //must be non-nullable datashape
   inPriority: PipelineStepInFromPipelineValue[]; // must be nullable datashapes
-  out: PipelineStepInTo;
+  out: PipelineStepOutToPipelineValue[];
 }
