@@ -73,14 +73,14 @@
                     },
                     "type": "array"
                 },
-                "out": {
+                "priceOut": {
                     "items": {
                         "allOf": [
                             {
                                 "$ref": "#/definitions/PipelineStepOutFrom"
                             },
                             {
-                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                                "$ref": "#/definitions/PipelineStepInTo"
                             }
                         ]
                     },
@@ -99,7 +99,7 @@
             },
             "required": [
                 "in",
-                "out",
+                "priceOut",
                 "subYieldPipeline",
                 "type"
             ],
