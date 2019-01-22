@@ -189,7 +189,7 @@ export interface DrySubYieldPipelineBlockPipelineStep extends IfableBasePipeline
   /** @pattern "^[a-z0-9-.]*$" */
   subYieldPipeline: string;
   in: Array<(PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue) & PipelineStepInTo>;
-  priceOut: Array<PipelineStepOutFrom & PipelineStepInTo>;
+  priceOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
 export interface WetSubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
@@ -197,7 +197,7 @@ export interface WetSubYieldPipelineBlockPipelineStep extends IfableBasePipeline
   /** @pattern "^[a-z0-9-.]*$" */
   subYieldPipeline: string;
   in: Array<(PipelineStepInFromInlineValue | PipelineStepInFromPipelineValue) & PipelineStepInTo>;
-  priceOut: Array<PipelineStepOutFrom & PipelineStepInTo>;
+  priceOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
   out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
