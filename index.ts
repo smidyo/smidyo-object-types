@@ -32,7 +32,9 @@ export interface ProcessPipeline extends BasePipeline {
   type: 'PROCESS';
   inputs: PipelineInput[];
   outputs: PipelineOutput[];
-  steps: Array<OperationBlockPipelineStep | SubProcessPipelineBlockPipelineStep>;
+  steps: Array<
+    OperationBlockPipelineStep | SubProcessPipelineBlockPipelineStep | AssertBlockPipelineStep
+  >;
 }
 
 export interface FormPipeline extends BasePipeline {
@@ -55,20 +57,24 @@ export interface YieldPipeline extends BasePipeline {
     | SubProcessPipelineBlockPipelineStep
     | DrySubYieldPipelineBlockPipelineStep
     | SourceBlockPipelineStep
+    | AssertBlockPipelineStep
   >;
   wetSteps: Array<
     | EffectBlockPipelineStep
     | SourceBlockPipelineStep
     | SubProcessPipelineBlockPipelineStep
     | WetSubYieldPipelineBlockPipelineStep
+    | AssertBlockPipelineStep
   >;
 }
 
 export interface YieldPipelinePriceOutput {
+  /** @pattern "^[a-z0-9-]*$" */
   name: string;
 }
 
 export interface YieldPipelineMetadataOutput {
+  /** @pattern "^[a-z0-9-]*$" */
   name: string;
 }
 

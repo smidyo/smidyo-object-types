@@ -1,6 +1,42 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
+        "AssertBlockPipelineStep": {
+            "properties": {
+                "blockType": {
+                    "enum": [
+                        "ASSERT"
+                    ],
+                    "type": "string"
+                },
+                "errorMessage": {
+                    "type": "string"
+                },
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "out": {
+                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                }
+            },
+            "required": [
+                "blockType",
+                "errorMessage",
+                "in",
+                "out"
+            ],
+            "type": "object"
+        },
         "DrySubYieldPipelineBlockPipelineStep": {
             "properties": {
                 "blockType": {
@@ -352,6 +388,7 @@
         "YieldPipelineMetadataOutput": {
             "properties": {
                 "name": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -363,6 +400,7 @@
         "YieldPipelinePriceOutput": {
             "properties": {
                 "name": {
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -384,6 +422,9 @@
                     },
                     {
                         "$ref": "#/definitions/DrySubYieldPipelineBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/AssertBlockPipelineStep"
                     }
                 ]
             },
@@ -433,6 +474,9 @@
                     },
                     {
                         "$ref": "#/definitions/WetSubYieldPipelineBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/AssertBlockPipelineStep"
                     }
                 ]
             },
