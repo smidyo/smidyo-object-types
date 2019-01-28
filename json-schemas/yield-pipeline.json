@@ -40,6 +40,35 @@
             ],
             "type": "object"
         },
+        "ConstantInternalSourceBlock": {
+            "properties": {
+                "constantSlug": {
+                    "type": "string"
+                },
+                "out": {
+                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                },
+                "sourceBlock": {
+                    "enum": [
+                        "CONSTANT"
+                    ],
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_SOURCE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "constantSlug",
+                "out",
+                "sourceBlock",
+                "type"
+            ],
+            "type": "object"
+        },
         "DrySubYieldPipelineBlockPipelineStep": {
             "properties": {
                 "ifPipelineValue": {
@@ -86,7 +115,7 @@
                     },
                     "type": "array"
                 },
-                "subYieldPipeline": {
+                "subYieldPipelineSlug": {
                     "pattern": "^[a-z0-9-.]*$",
                     "type": "string"
                 },
@@ -100,15 +129,14 @@
             "required": [
                 "in",
                 "priceOut",
-                "subYieldPipeline",
+                "subYieldPipelineSlug",
                 "type"
             ],
             "type": "object"
         },
-        "EffectBlockPipelineStep": {
+        "ExternalSystemEffectBlockPipelineStep": {
             "properties": {
                 "effectBlock": {
-                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
                 "in": {
@@ -136,6 +164,7 @@
                             }
                         ]
                     },
+                    "pattern": "^[a-z0-9-]*$",
                     "type": "array"
                 },
                 "out": {
@@ -153,7 +182,7 @@
                 },
                 "type": {
                     "enum": [
-                        "EFFECT"
+                        "EXTERNAL_SYSTEM_EFFECT"
                     ],
                     "type": "string"
                 }
@@ -162,6 +191,67 @@
                 "effectBlock",
                 "in",
                 "out",
+                "type"
+            ],
+            "type": "object"
+        },
+        "ExternalSystemSourceBlockPipelineStep": {
+            "properties": {
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "pattern": "^[a-z0-9-]*$",
+                    "type": "array"
+                },
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "sourceBlock": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "EXTERNAL_SYSTEM_SOURCE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "in",
+                "out",
+                "sourceBlock",
                 "type"
             ],
             "type": "object"
@@ -199,6 +289,36 @@
             ],
             "type": "object"
         },
+        "InternalEffectBlock": {
+            "enum": [
+                "TABLE_DELETE_ROW",
+                "TABLE_UPDATE_CELL"
+            ],
+            "type": "string"
+        },
+        "InternalEffectBlockPipelineStep": {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/TableDeleteRowInternalEffectBlock"
+                },
+                {
+                    "$ref": "#/definitions/TableUpdateCellInternalEffectBlock"
+                }
+            ]
+        },
+        "InternalSourceBlockPipelineStep": {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/ConstantInternalSourceBlock"
+                },
+                {
+                    "$ref": "#/definitions/TableColumnsInternalSourceBlock"
+                },
+                {
+                    "$ref": "#/definitions/TableCellsInternalSourceBlock"
+                }
+            ]
+        },
         "PipelineInput": {
             "properties": {
                 "dataShape": {
@@ -228,6 +348,28 @@
             "required": [
                 "dataShape",
                 "name"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFrom": {
+            "properties": {
+                "inFrom": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/InlineValue"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "type": {
+                    "$ref": "#/definitions/PipelineStepInType"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
             ],
             "type": "object"
         },
@@ -280,6 +422,13 @@
             ],
             "type": "object"
         },
+        "PipelineStepInType": {
+            "enum": [
+                "INLINE_VALUE",
+                "PIPELINE_VALUE"
+            ],
+            "type": "string"
+        },
         "PipelineStepOutFrom": {
             "properties": {
                 "outFrom": {
@@ -301,67 +450,6 @@
             },
             "required": [
                 "outTo"
-            ],
-            "type": "object"
-        },
-        "SourceBlockPipelineStep": {
-            "properties": {
-                "in": {
-                    "items": {
-                        "anyOf": [
-                            {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInTo"
-                                    }
-                                ]
-                            },
-                            {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInTo"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "out": {
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/PipelineStepOutFrom"
-                            },
-                            {
-                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "sourceBlock": {
-                    "pattern": "^[a-z0-9-]*$",
-                    "type": "string"
-                },
-                "type": {
-                    "enum": [
-                        "SOURCE"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "in",
-                "out",
-                "sourceBlock",
-                "type"
             ],
             "type": "object"
         },
@@ -411,7 +499,7 @@
                     },
                     "type": "array"
                 },
-                "subProcessPipeline": {
+                "subProcessPipelineSlug": {
                     "pattern": "^[a-z0-9-.]*$",
                     "type": "string"
                 },
@@ -425,8 +513,178 @@
             "required": [
                 "in",
                 "out",
-                "subProcessPipeline",
+                "subProcessPipelineSlug",
                 "type"
+            ],
+            "type": "object"
+        },
+        "TableCellsInternalSourceBlock": {
+            "properties": {
+                "outFromTableColumnsSubSlug": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "sourceBlock": {
+                    "enum": [
+                        "TABLE_CELLS"
+                    ],
+                    "type": "string"
+                },
+                "tableColumnsSubSlug": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "tableRowSubSlug": {
+                    "type": "string"
+                },
+                "tableSlug": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_SOURCE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "outFromTableColumnsSubSlug",
+                "sourceBlock",
+                "tableColumnsSubSlug",
+                "tableRowSubSlug",
+                "tableSlug",
+                "type"
+            ],
+            "type": "object"
+        },
+        "TableColumnsInternalSourceBlock": {
+            "properties": {
+                "outFromTableColumnsSubSlug": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "sourceBlock": {
+                    "enum": [
+                        "TABLE_COLUMNS"
+                    ],
+                    "type": "string"
+                },
+                "tableColumnsSubSlug": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "tableSlug": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_SOURCE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "outFromTableColumnsSubSlug",
+                "sourceBlock",
+                "tableColumnsSubSlug",
+                "tableSlug",
+                "type"
+            ],
+            "type": "object"
+        },
+        "TableDeleteRowInternalEffectBlock": {
+            "properties": {
+                "deleteTableRowSubSlug": {
+                    "$ref": "#/definitions/PipelineStepInFrom"
+                },
+                "effectBlock": {
+                    "enum": [
+                        "TABLE_DELETE_ROW"
+                    ],
+                    "type": "string"
+                },
+                "sourceBlock": {
+                    "$ref": "#/definitions/InternalEffectBlock"
+                },
+                "tableSlug": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_EFFECT"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "deleteTableRowSubSlug",
+                "effectBlock",
+                "sourceBlock",
+                "tableSlug",
+                "type"
+            ],
+            "type": "object"
+        },
+        "TableUpdateCellInternalEffectBlock": {
+            "properties": {
+                "effectBlock": {
+                    "enum": [
+                        "TABLE_UPDATE_CELL"
+                    ],
+                    "type": "string"
+                },
+                "inTableRowSubSlug": {
+                    "$ref": "#/definitions/PipelineStepInFrom"
+                },
+                "sourceBlock": {
+                    "$ref": "#/definitions/InternalEffectBlock"
+                },
+                "tableColumnSubSlug": {
+                    "type": "string"
+                },
+                "tableSlug": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_EFFECT"
+                    ],
+                    "type": "string"
+                },
+                "updateTableCellData": {
+                    "$ref": "#/definitions/PipelineStepInFrom"
+                }
+            },
+            "required": [
+                "effectBlock",
+                "inTableRowSubSlug",
+                "sourceBlock",
+                "tableColumnSubSlug",
+                "tableSlug",
+                "type",
+                "updateTableCellData"
             ],
             "type": "object"
         },
@@ -489,7 +747,7 @@
                     },
                     "type": "array"
                 },
-                "subYieldPipeline": {
+                "subYieldPipelineSlug": {
                     "pattern": "^[a-z0-9-.]*$",
                     "type": "string"
                 },
@@ -504,7 +762,7 @@
                 "in",
                 "out",
                 "priceOut",
-                "subYieldPipeline",
+                "subYieldPipelineSlug",
                 "type"
             ],
             "type": "object"
@@ -539,7 +797,10 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/SourceBlockPipelineStep"
+                        "$ref": "#/definitions/InternalSourceBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/ExternalSystemSourceBlockPipelineStep"
                     },
                     {
                         "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
@@ -588,10 +849,16 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/SourceBlockPipelineStep"
+                        "$ref": "#/definitions/InternalSourceBlockPipelineStep"
                     },
                     {
-                        "$ref": "#/definitions/EffectBlockPipelineStep"
+                        "$ref": "#/definitions/ExternalSystemSourceBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/InternalEffectBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/ExternalSystemEffectBlockPipelineStep"
                     },
                     {
                         "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
