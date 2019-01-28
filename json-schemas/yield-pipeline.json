@@ -854,8 +854,11 @@
             ],
             "type": "object"
         },
-        "YieldPipelinePriceOutput": {
+        "YieldPipelinePriceOutputSequenceStep": {
             "properties": {
+                "description": {
+                    "type": "string"
+                },
                 "name": {
                     "pattern": "^[a-z0-9-]*$",
                     "type": "string"
@@ -870,6 +873,7 @@
                 }
             },
             "required": [
+                "description",
                 "name",
                 "type"
             ],
@@ -923,9 +927,9 @@
             },
             "type": "array"
         },
-        "priceOutputs": {
+        "priceOutputSequence": {
             "items": {
-                "$ref": "#/definitions/YieldPipelinePriceOutput"
+                "$ref": "#/definitions/YieldPipelinePriceOutputSequenceStep"
             },
             "type": "array"
         },
@@ -978,7 +982,7 @@
         "inputs",
         "metadataOutputs",
         "outputs",
-        "priceOutputs",
+        "priceOutputSequence",
         "type",
         "wetSteps"
     ],
