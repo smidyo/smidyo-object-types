@@ -235,7 +235,7 @@ export interface InternalEffectBlockTableDeleteRow extends InternalEffectBlockPi
   in: PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'delete-table-row-sub-slug'>;
 }
 
-type InternalEffectBlockInOptionTableUpdateCell =
+type InternalEffectBlockTableUpdateCellOptionIn =
   | PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'data'>
   | PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'table-column-sub-slug'>;
 
@@ -245,10 +245,7 @@ export interface InternalEffectBlockTableUpdateCell extends InternalEffectBlockP
   effectBlock: 'TABLE_UPDATE_CELL';
   tableSlug: string;
   tableColumnSubSlug: string;
-  in: {
-    0: InternalEffectBlockInOptionTableUpdateCell;
-    1: InternalEffectBlockInOptionTableUpdateCell;
-  };
+  in: Array<InternalEffectBlockTableUpdateCellOptionIn>;
 }
 
 //
