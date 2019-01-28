@@ -76,6 +76,7 @@ export interface YieldPipelinePriceOutputSequenceStep {
 }
 
 export interface YieldPipelineMetadataOutput {
+  description: string;
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
 }
