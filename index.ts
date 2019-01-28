@@ -149,11 +149,14 @@ export interface PipelineStepOutToPipelineValue {
 export type SourceOrEffectBlockPipelineStep = SourceBlockPipelineStep | EffectBlockPipelineStep;
 
 export type SourceBlockPipelineStep =
-  | InternalSourceBlockPipelineStep
+  | InternalSourceBlockConstant
+  | InternalSourceBlockTableColumns
+  | InternalSourceBlockTableCells
   | ExternalSystemSourceBlockPipelineStep;
 
 export type EffectBlockPipelineStep =
-  | InternalEffectBlockPipelineStep
+  | InternalEffectBlockTableDeleteRow
+  | InternalEffectBlockTableUpdateCell
   | ExternalSystemEffectBlockPipelineStep;
 
 abstract class ExternalSystemSourceOrEffectBlockPipelineStep extends BasePipelineStep {
@@ -183,12 +186,12 @@ abstract class InternalSourceOrEffectBlockPipelineStep extends BasePipelineStep 
 
 abstract class InternalSourceBlockPipelineStep extends InternalSourceOrEffectBlockPipelineStep {
   type: 'INTERNAL_SOURCE';
-  sourceBlock: InternalSourceBlock;
+  sourceBlock: InternalSourceBlockName;
 }
 
-type InternalSourceBlock = 'CONSTANT' | 'TABLE_COLUMNS' | 'TABLE_CELLS';
+type InternalSourceBlockName = 'CONSTANT' | 'TABLE_COLUMNS' | 'TABLE_CELLS';
 
-export interface ConstantInternalSourceBlock extends InternalSourceBlockPipelineStep {
+export interface InternalSourceBlockConstant extends InternalSourceBlockPipelineStep {
   type: 'INTERNAL_SOURCE';
 
   sourceBlock: 'CONSTANT';
@@ -196,7 +199,7 @@ export interface ConstantInternalSourceBlock extends InternalSourceBlockPipeline
   out: PipelineStepOutToPipelineValue;
 }
 
-export interface TableColumnsInternalSourceBlock extends InternalSourceBlockPipelineStep {
+export interface InternalSourceBlockTableColumns extends InternalSourceBlockPipelineStep {
   type: 'INTERNAL_SOURCE';
 
   sourceBlock: 'TABLE_COLUMNS';
@@ -205,7 +208,7 @@ export interface TableColumnsInternalSourceBlock extends InternalSourceBlockPipe
   out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
-export interface TableCellsInternalSourceBlock extends InternalSourceBlockPipelineStep {
+export interface InternalSourceBlockTableCells extends InternalSourceBlockPipelineStep {
   type: 'INTERNAL_SOURCE';
 
   sourceBlock: 'TABLE_CELLS';
@@ -219,12 +222,12 @@ export interface TableCellsInternalSourceBlock extends InternalSourceBlockPipeli
 
 abstract class InternalEffectBlockPipelineStep extends InternalSourceOrEffectBlockPipelineStep {
   type: 'INTERNAL_EFFECT';
-  effectBlock: InternalEffectBlock;
+  effectBlock: InternalEffectBlockName;
 }
 
-type InternalEffectBlock = 'TABLE_DELETE_ROW' | 'TABLE_UPDATE_CELL';
+type InternalEffectBlockName = 'TABLE_DELETE_ROW' | 'TABLE_UPDATE_CELL';
 
-export interface TableDeleteRowInternalEffectBlock extends InternalEffectBlockPipelineStep {
+export interface InternalEffectBlockTableDeleteRow extends InternalEffectBlockPipelineStep {
   type: 'INTERNAL_EFFECT';
 
   effectBlock: 'TABLE_DELETE_ROW';
@@ -232,19 +235,19 @@ export interface TableDeleteRowInternalEffectBlock extends InternalEffectBlockPi
   in: PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'delete-table-row-sub-slug'>;
 }
 
-type TableUpdateCellInternalEffectBlockInOption =
+type InternalEffectBlockInOptionTableUpdateCell =
   | PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'data'>
   | PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'table-column-sub-slug'>;
 
-export interface TableUpdateCellInternalEffectBlock extends InternalEffectBlockPipelineStep {
+export interface InternalEffectBlockTableUpdateCell extends InternalEffectBlockPipelineStep {
   type: 'INTERNAL_EFFECT';
 
   effectBlock: 'TABLE_UPDATE_CELL';
   tableSlug: string;
   tableColumnSubSlug: string;
   in: {
-    0: TableUpdateCellInternalEffectBlockInOption;
-    1: TableUpdateCellInternalEffectBlockInOption;
+    0: InternalEffectBlockInOptionTableUpdateCell;
+    1: InternalEffectBlockInOptionTableUpdateCell;
   };
 }
 

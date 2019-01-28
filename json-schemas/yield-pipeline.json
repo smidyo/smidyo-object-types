@@ -40,35 +40,6 @@
             ],
             "type": "object"
         },
-        "ConstantInternalSourceBlock": {
-            "properties": {
-                "constantSlug": {
-                    "type": "string"
-                },
-                "out": {
-                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
-                },
-                "sourceBlock": {
-                    "enum": [
-                        "CONSTANT"
-                    ],
-                    "type": "string"
-                },
-                "type": {
-                    "enum": [
-                        "INTERNAL_SOURCE"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "constantSlug",
-                "out",
-                "sourceBlock",
-                "type"
-            ],
-            "type": "object"
-        },
         "DrySubYieldPipelineBlockPipelineStep": {
             "properties": {
                 "ifPipelineValue": {
@@ -289,28 +260,328 @@
             ],
             "type": "object"
         },
-        "InternalEffectBlockPipelineStep": {
-            "oneOf": [
-                {
-                    "$ref": "#/definitions/TableDeleteRowInternalEffectBlock"
+        "InternalEffectBlockTableDeleteRow": {
+            "properties": {
+                "effectBlock": {
+                    "enum": [
+                        "TABLE_DELETE_ROW"
+                    ],
+                    "type": "string"
                 },
-                {
-                    "$ref": "#/definitions/TableUpdateCellInternalEffectBlock"
+                "in": {
+                    "anyOf": [
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                },
+                                {
+                                    "$ref": "#/definitions/PipelineStepInTo<\"delete-table-row-sub-slug\">"
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                },
+                                {
+                                    "$ref": "#/definitions/PipelineStepInTo<\"delete-table-row-sub-slug\">"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "tableSlug": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_EFFECT"
+                    ],
+                    "type": "string"
                 }
-            ]
+            },
+            "required": [
+                "effectBlock",
+                "in",
+                "tableSlug",
+                "type"
+            ],
+            "type": "object"
         },
-        "InternalSourceBlockPipelineStep": {
-            "oneOf": [
-                {
-                    "$ref": "#/definitions/ConstantInternalSourceBlock"
+        "InternalEffectBlockTableUpdateCell": {
+            "properties": {
+                "effectBlock": {
+                    "enum": [
+                        "TABLE_UPDATE_CELL"
+                    ],
+                    "type": "string"
                 },
-                {
-                    "$ref": "#/definitions/TableColumnsInternalSourceBlock"
+                "in": {
+                    "properties": {
+                        "0": {
+                            "anyOf": [
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"data\">"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"data\">"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "1": {
+                            "anyOf": [
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"data\">"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"data\">"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "required": [
+                        "0",
+                        "1"
+                    ],
+                    "type": "object"
                 },
-                {
-                    "$ref": "#/definitions/TableCellsInternalSourceBlock"
+                "tableColumnSubSlug": {
+                    "type": "string"
+                },
+                "tableSlug": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_EFFECT"
+                    ],
+                    "type": "string"
                 }
-            ]
+            },
+            "required": [
+                "effectBlock",
+                "in",
+                "tableColumnSubSlug",
+                "tableSlug",
+                "type"
+            ],
+            "type": "object"
+        },
+        "InternalSourceBlockConstant": {
+            "properties": {
+                "constantSlug": {
+                    "type": "string"
+                },
+                "out": {
+                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                },
+                "sourceBlock": {
+                    "enum": [
+                        "CONSTANT"
+                    ],
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_SOURCE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "constantSlug",
+                "out",
+                "sourceBlock",
+                "type"
+            ],
+            "type": "object"
+        },
+        "InternalSourceBlockTableCells": {
+            "properties": {
+                "in": {
+                    "anyOf": [
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                },
+                                {
+                                    "$ref": "#/definitions/PipelineStepInTo<\"table-row-sub-slug\">"
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                },
+                                {
+                                    "$ref": "#/definitions/PipelineStepInTo<\"table-row-sub-slug\">"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "sourceBlock": {
+                    "enum": [
+                        "TABLE_CELLS"
+                    ],
+                    "type": "string"
+                },
+                "tableColumnsSubSlug": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "tableSlug": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_SOURCE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "in",
+                "out",
+                "sourceBlock",
+                "tableColumnsSubSlug",
+                "tableSlug",
+                "type"
+            ],
+            "type": "object"
+        },
+        "InternalSourceBlockTableColumns": {
+            "properties": {
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "sourceBlock": {
+                    "enum": [
+                        "TABLE_COLUMNS"
+                    ],
+                    "type": "string"
+                },
+                "tableColumnsSubSlug": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "tableSlug": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_SOURCE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "out",
+                "sourceBlock",
+                "tableColumnsSubSlug",
+                "tableSlug",
+                "type"
+            ],
+            "type": "object"
         },
         "PipelineInput": {
             "properties": {
@@ -542,300 +813,6 @@
             ],
             "type": "object"
         },
-        "TableCellsInternalSourceBlock": {
-            "properties": {
-                "in": {
-                    "anyOf": [
-                        {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                                },
-                                {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"table-row-sub-slug\">"
-                                }
-                            ]
-                        },
-                        {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                },
-                                {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"table-row-sub-slug\">"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                "out": {
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
-                            },
-                            {
-                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "sourceBlock": {
-                    "enum": [
-                        "TABLE_CELLS"
-                    ],
-                    "type": "string"
-                },
-                "tableColumnsSubSlug": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "tableSlug": {
-                    "type": "string"
-                },
-                "type": {
-                    "enum": [
-                        "INTERNAL_SOURCE"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "in",
-                "out",
-                "sourceBlock",
-                "tableColumnsSubSlug",
-                "tableSlug",
-                "type"
-            ],
-            "type": "object"
-        },
-        "TableColumnsInternalSourceBlock": {
-            "properties": {
-                "out": {
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
-                            },
-                            {
-                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "sourceBlock": {
-                    "enum": [
-                        "TABLE_COLUMNS"
-                    ],
-                    "type": "string"
-                },
-                "tableColumnsSubSlug": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "tableSlug": {
-                    "type": "string"
-                },
-                "type": {
-                    "enum": [
-                        "INTERNAL_SOURCE"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "out",
-                "sourceBlock",
-                "tableColumnsSubSlug",
-                "tableSlug",
-                "type"
-            ],
-            "type": "object"
-        },
-        "TableDeleteRowInternalEffectBlock": {
-            "properties": {
-                "effectBlock": {
-                    "enum": [
-                        "TABLE_DELETE_ROW"
-                    ],
-                    "type": "string"
-                },
-                "in": {
-                    "anyOf": [
-                        {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                                },
-                                {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"delete-table-row-sub-slug\">"
-                                }
-                            ]
-                        },
-                        {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                },
-                                {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"delete-table-row-sub-slug\">"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                "tableSlug": {
-                    "type": "string"
-                },
-                "type": {
-                    "enum": [
-                        "INTERNAL_EFFECT"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "effectBlock",
-                "in",
-                "tableSlug",
-                "type"
-            ],
-            "type": "object"
-        },
-        "TableUpdateCellInternalEffectBlock": {
-            "properties": {
-                "effectBlock": {
-                    "enum": [
-                        "TABLE_UPDATE_CELL"
-                    ],
-                    "type": "string"
-                },
-                "in": {
-                    "properties": {
-                        "0": {
-                            "anyOf": [
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"data\">"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"data\">"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        "1": {
-                            "anyOf": [
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"data\">"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"data\">"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    },
-                    "required": [
-                        "0",
-                        "1"
-                    ],
-                    "type": "object"
-                },
-                "tableColumnSubSlug": {
-                    "type": "string"
-                },
-                "tableSlug": {
-                    "type": "string"
-                },
-                "type": {
-                    "enum": [
-                        "INTERNAL_EFFECT"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "effectBlock",
-                "in",
-                "tableColumnSubSlug",
-                "tableSlug",
-                "type"
-            ],
-            "type": "object"
-        },
         "WetSubYieldPipelineBlockPipelineStep": {
             "properties": {
                 "ifPipelineValue": {
@@ -945,7 +922,13 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/InternalSourceBlockPipelineStep"
+                        "$ref": "#/definitions/InternalSourceBlockConstant"
+                    },
+                    {
+                        "$ref": "#/definitions/InternalSourceBlockTableColumns"
+                    },
+                    {
+                        "$ref": "#/definitions/InternalSourceBlockTableCells"
                     },
                     {
                         "$ref": "#/definitions/ExternalSystemSourceBlockPipelineStep"
@@ -997,13 +980,22 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/InternalSourceBlockPipelineStep"
+                        "$ref": "#/definitions/InternalSourceBlockConstant"
+                    },
+                    {
+                        "$ref": "#/definitions/InternalSourceBlockTableColumns"
+                    },
+                    {
+                        "$ref": "#/definitions/InternalSourceBlockTableCells"
                     },
                     {
                         "$ref": "#/definitions/ExternalSystemSourceBlockPipelineStep"
                     },
                     {
-                        "$ref": "#/definitions/InternalEffectBlockPipelineStep"
+                        "$ref": "#/definitions/InternalEffectBlockTableDeleteRow"
+                    },
+                    {
+                        "$ref": "#/definitions/InternalEffectBlockTableUpdateCell"
                     },
                     {
                         "$ref": "#/definitions/ExternalSystemEffectBlockPipelineStep"
