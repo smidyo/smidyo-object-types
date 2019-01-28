@@ -1,6 +1,6 @@
 {
   "name": "@smidyo/smidyo-types-pipeline",
-  "version": "0.1.35",
+  "version": "0.1.36",
   "description": "",
   "scripts": {
     "json": "typescript-json-schema \"index.ts\" YieldPipeline -o \"./json-schemas/yield-pipeline.json\" --required",
