@@ -862,8 +862,8 @@
                 },
                 "type": {
                     "enum": [
-                        "COST",
-                        "DISCOUNT"
+                        "ADD",
+                        "SUBTRACT"
                     ],
                     "type": "string"
                 }
