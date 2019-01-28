@@ -3,19 +3,30 @@
     "definitions": {
         "AssertBlockPipelineStep": {
             "properties": {
-                "inFallback": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                        },
-                        {
-                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                        }
-                    ]
-                },
-                "inPriority": {
+                "in": {
                     "items": {
-                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<number|\"fallback\">"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<number|\"fallback\">"
+                                    }
+                                ]
+                            }
+                        ]
                     },
                     "type": "array"
                 },
@@ -33,8 +44,7 @@
                 }
             },
             "required": [
-                "inFallback",
-                "inPriority",
+                "in",
                 "out",
                 "type"
             ],
@@ -55,7 +65,7 @@
                                         "$ref": "#/definitions/PipelineStepInFromInlineValue"
                                     },
                                     {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                        "$ref": "#/definitions/PipelineStepInTo<string|number>"
                                     }
                                 ]
                             },
@@ -65,7 +75,7 @@
                                         "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                                     },
                                     {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                        "$ref": "#/definitions/PipelineStepInTo<string|number>"
                                     }
                                 ]
                             }
@@ -119,7 +129,7 @@
                                         "$ref": "#/definitions/PipelineStepInFromInlineValue"
                                     },
                                     {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                        "$ref": "#/definitions/PipelineStepInTo<string|number>"
                                     }
                                 ]
                             },
@@ -129,7 +139,7 @@
                                         "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                                     },
                                     {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                        "$ref": "#/definitions/PipelineStepInTo<string|number>"
                                     }
                                 ]
                             }
@@ -177,7 +187,7 @@
                                         "$ref": "#/definitions/PipelineStepInFromInlineValue"
                                     },
                                     {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                        "$ref": "#/definitions/PipelineStepInTo<string|number>"
                                     }
                                 ]
                             },
@@ -187,7 +197,7 @@
                                         "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                                     },
                                     {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                        "$ref": "#/definitions/PipelineStepInTo<string|number>"
                                     }
                                 ]
                             }
@@ -319,101 +329,51 @@
                     "type": "string"
                 },
                 "in": {
-                    "properties": {
-                        "0": {
-                            "anyOf": [
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"data\">"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"data\">"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        "1": {
-                            "anyOf": [
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"data\">"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"data\">"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<\"data\">"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<\"data\">"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
+                                    }
+                                ]
+                            }
+                        ]
                     },
-                    "required": [
-                        "0",
-                        "1"
-                    ],
-                    "type": "object"
+                    "type": "array"
                 },
                 "tableColumnSubSlug": {
                     "type": "string"
@@ -441,6 +401,57 @@
             "properties": {
                 "constantSlug": {
                     "type": "string"
+                },
+                "in": {
+                    "anyOf": [
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                },
+                                {
+                                    "$ref": "#/definitions/PipelineStepInTo<string|number>"
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                },
+                                {
+                                    "$ref": "#/definitions/PipelineStepInTo<string|number>"
+                                }
+                            ]
+                        },
+                        {
+                            "items": {
+                                "anyOf": [
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<string|number>"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<string|number>"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "type": "array"
+                        }
+                    ]
                 },
                 "out": {
                     "$ref": "#/definitions/PipelineStepOutToPipelineValue"
@@ -539,6 +550,57 @@
         },
         "InternalSourceBlockTableColumns": {
             "properties": {
+                "in": {
+                    "anyOf": [
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                },
+                                {
+                                    "$ref": "#/definitions/PipelineStepInTo<string|number>"
+                                }
+                            ]
+                        },
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                },
+                                {
+                                    "$ref": "#/definitions/PipelineStepInTo<string|number>"
+                                }
+                            ]
+                        },
+                        {
+                            "items": {
+                                "anyOf": [
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<string|number>"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<string|number>"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "type": "array"
+                        }
+                    ]
+                },
                 "out": {
                     "items": {
                         "allOf": [
@@ -712,11 +774,36 @@
             ],
             "type": "object"
         },
-        "PipelineStepInTo<string>": {
+        "PipelineStepInTo<number|\"fallback\">": {
+            "properties": {
+                "inTo": {
+                    "anyOf": [
+                        {
+                            "enum": [
+                                "fallback"
+                            ],
+                            "type": "string"
+                        },
+                        {
+                            "type": "number"
+                        }
+                    ],
+                    "pattern": "^[a-z0-9-]*$"
+                }
+            },
+            "required": [
+                "inTo"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInTo<string|number>": {
             "properties": {
                 "inTo": {
                     "pattern": "^[a-z0-9-]*$",
-                    "type": "string"
+                    "type": [
+                        "string",
+                        "number"
+                    ]
                 }
             },
             "required": [
@@ -763,7 +850,7 @@
                                         "$ref": "#/definitions/PipelineStepInFromInlineValue"
                                     },
                                     {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                        "$ref": "#/definitions/PipelineStepInTo<string|number>"
                                     }
                                 ]
                             },
@@ -773,7 +860,7 @@
                                         "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                                     },
                                     {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                        "$ref": "#/definitions/PipelineStepInTo<string|number>"
                                     }
                                 ]
                             }
@@ -828,7 +915,7 @@
                                         "$ref": "#/definitions/PipelineStepInFromInlineValue"
                                     },
                                     {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                        "$ref": "#/definitions/PipelineStepInTo<string|number>"
                                     }
                                 ]
                             },
@@ -838,7 +925,7 @@
                                         "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                                     },
                                     {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                        "$ref": "#/definitions/PipelineStepInTo<string|number>"
                                     }
                                 ]
                             }
