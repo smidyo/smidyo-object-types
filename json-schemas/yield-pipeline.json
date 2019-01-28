@@ -859,10 +859,18 @@
                 "name": {
                     "pattern": "^[a-z0-9-]*$",
                     "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "COST",
+                        "DISCOUNT"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
-                "name"
+                "name",
+                "type"
             ],
             "type": "object"
         }
