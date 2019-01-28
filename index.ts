@@ -93,10 +93,6 @@ type BlockType =
 
 export abstract class BasePipelineStep {
   type: BlockType;
-
-  in?:
-    | (PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo)
-    | Array<PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo>;
 }
 
 interface IfableBasePipelineStep extends BasePipelineStep {
@@ -111,7 +107,7 @@ interface PipelineStepInFrom {
   inFrom: InlineValue | string;
 }
 
-interface PipelineStepInTo<T = string | number> {
+interface PipelineStepInTo<T = string> {
   /** @pattern "^[a-z0-9-]*$" */
   inTo: T;
 }
@@ -239,16 +235,20 @@ export interface InternalEffectBlockTableDeleteRow extends InternalEffectBlockPi
   in: PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'delete-table-row-sub-slug'>;
 }
 
+type InternalEffectBlockInOptionTableUpdateCell =
+  | PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'data'>
+  | PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'table-column-sub-slug'>;
+
 export interface InternalEffectBlockTableUpdateCell extends InternalEffectBlockPipelineStep {
   type: 'INTERNAL_EFFECT';
 
   effectBlock: 'TABLE_UPDATE_CELL';
   tableSlug: string;
   tableColumnSubSlug: string;
-  in: Array<
-    | PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'data'>
-    | PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'table-column-sub-slug'>
-  >;
+  in: {
+    0: InternalEffectBlockInOptionTableUpdateCell;
+    1: InternalEffectBlockInOptionTableUpdateCell;
+  };
 }
 
 //
@@ -303,9 +303,10 @@ export interface WetSubYieldPipelineBlockPipelineStep extends IfableBasePipeline
   priceOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
   out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
-  
+
 export interface AssertBlockPipelineStep extends BasePipelineStep {
   type: 'ASSERT';
-  in: Array<PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'fallback' | number>>;
+  inFallback: PipelineStepInFromInlineValueOrPipelineValue; //must be non-nullable datashape
+  inPriority: PipelineStepInFromPipelineValue[]; // must be nullable datashapes
   out: PipelineStepOutToPipelineValue[];
 }
