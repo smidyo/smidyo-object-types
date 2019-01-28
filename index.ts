@@ -69,7 +69,7 @@ export interface YieldPipeline extends BasePipeline {
 }
 
 export interface YieldPipelinePriceOutput {
-  type: 'ADD' | 'SUBTRACT';
+  type: 'ADD' | 'SUBTRACT' | 'MULTIPLIER';
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
 }

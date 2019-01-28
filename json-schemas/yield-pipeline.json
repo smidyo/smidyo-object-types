@@ -863,6 +863,7 @@
                 "type": {
                     "enum": [
                         "ADD",
+                        "MULTIPLIER",
                         "SUBTRACT"
                     ],
                     "type": "string"
