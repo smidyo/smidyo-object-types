@@ -844,27 +844,27 @@
         },
         "YieldPipelineMetadataOutput": {
             "properties": {
-                "description": {
-                    "type": "string"
-                },
                 "name": {
                     "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                },
+                "title": {
                     "type": "string"
                 }
             },
             "required": [
-                "description",
-                "name"
+                "name",
+                "title"
             ],
             "type": "object"
         },
         "YieldPipelinePriceOutputSequenceStep": {
             "properties": {
-                "description": {
-                    "type": "string"
-                },
                 "name": {
                     "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                },
+                "title": {
                     "type": "string"
                 },
                 "type": {
@@ -877,8 +877,8 @@
                 }
             },
             "required": [
-                "description",
                 "name",
+                "title",
                 "type"
             ],
             "type": "object"
@@ -936,6 +936,9 @@
                 "$ref": "#/definitions/YieldPipelinePriceOutputSequenceStep"
             },
             "type": "array"
+        },
+        "quoteTitleFrom": {
+            "type": "string"
         },
         "type": {
             "enum": [

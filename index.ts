@@ -51,6 +51,7 @@ export interface YieldPipeline extends BasePipeline {
   type: 'YIELD';
   inputs: PipelineInput[];
   outputs: PipelineOutput[];
+  quoteTitleFrom?: string;
   priceOutputSequence: YieldPipelinePriceOutputSequenceStep[];
   metadataOutputs: YieldPipelineMetadataOutput[];
   drySteps: Array<
@@ -70,13 +71,13 @@ export interface YieldPipeline extends BasePipeline {
 
 export interface YieldPipelinePriceOutputSequenceStep {
   type: 'ADD' | 'SUBTRACT' | 'MULTIPLY';
-  description: string;
+  title: string;
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
 }
 
 export interface YieldPipelineMetadataOutput {
-  description: string;
+  title: string;
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
 }
