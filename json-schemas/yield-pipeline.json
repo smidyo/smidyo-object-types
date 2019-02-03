@@ -40,71 +40,6 @@
             ],
             "type": "object"
         },
-        "DrySubYieldPipelineBlockPipelineStep": {
-            "properties": {
-                "ifPipelineValue": {
-                    "pattern": "^[a-z0-9-]*$",
-                    "type": "string"
-                },
-                "in": {
-                    "items": {
-                        "anyOf": [
-                            {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
-                                    }
-                                ]
-                            },
-                            {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "priceOut": {
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
-                            },
-                            {
-                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "subYieldPipelineSlug": {
-                    "pattern": "^[a-z0-9-.]*$",
-                    "type": "string"
-                },
-                "type": {
-                    "enum": [
-                        "DRY_SUB_YIELD_PIPELINE"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "in",
-                "priceOut",
-                "subYieldPipelineSlug",
-                "type"
-            ],
-            "type": "object"
-        },
         "ExternalSystemEffectBlockPipelineStep": {
             "properties": {
                 "effectBlock": {
@@ -533,6 +468,71 @@
             ],
             "type": "object"
         },
+        "OrderingSubYieldPipelineBlockPipelineStep": {
+            "properties": {
+                "ifPipelineValue": {
+                    "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                },
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "subYieldPipelineSlug": {
+                    "pattern": "^[a-z0-9-.]*$",
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "ORDERING_SUB_YIELD_PIPELINE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "in",
+                "out",
+                "subYieldPipelineSlug",
+                "type"
+            ],
+            "type": "object"
+        },
         "PipelineInput": {
             "properties": {
                 "dataShape": {
@@ -698,6 +698,88 @@
             ],
             "type": "object"
         },
+        "QuotingSubYieldPipelineBlockPipelineStep": {
+            "properties": {
+                "ifPipelineValue": {
+                    "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                },
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "infoOut": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "priceSequenceOut": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "subYieldPipelineSlug": {
+                    "pattern": "^[a-z0-9-.]*$",
+                    "type": "string"
+                },
+                "totalPriceOut": {
+                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                },
+                "type": {
+                    "enum": [
+                        "QUOTING_SUB_YIELD_PIPELINE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "in",
+                "infoOut",
+                "priceSequenceOut",
+                "subYieldPipelineSlug",
+                "type"
+            ],
+            "type": "object"
+        },
         "SubProcessPipelineBlockPipelineStep": {
             "properties": {
                 "ifPipelineValue": {
@@ -763,87 +845,27 @@
             ],
             "type": "object"
         },
-        "WetSubYieldPipelineBlockPipelineStep": {
+        "YieldPipelineInfoOutput": {
             "properties": {
-                "ifPipelineValue": {
-                    "pattern": "^[a-z0-9-]*$",
+                "elementBlock": {
                     "type": "string"
                 },
-                "in": {
-                    "items": {
-                        "anyOf": [
-                            {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
-                                    }
-                                ]
-                            },
-                            {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "out": {
+                "elementBlockConfiguration": {
                     "items": {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                                "$ref": "#/definitions/PipelineStepInFromInlineValue"
                             },
                             {
-                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                                "$ref": "#/definitions/PipelineStepInTo<string>"
                             }
                         ]
                     },
                     "type": "array"
                 },
-                "priceOut": {
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
-                            },
-                            {
-                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "subYieldPipelineSlug": {
-                    "pattern": "^[a-z0-9-.]*$",
+                "elementBlockInput": {
                     "type": "string"
                 },
-                "type": {
-                    "enum": [
-                        "WET_SUB_YIELD_PIPELINE"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "in",
-                "out",
-                "priceOut",
-                "subYieldPipelineSlug",
-                "type"
-            ],
-            "type": "object"
-        },
-        "YieldPipelineMetadataOutput": {
-            "properties": {
                 "name": {
                     "pattern": "^[a-z0-9-]*$",
                     "type": "string"
@@ -853,12 +875,15 @@
                 }
             },
             "required": [
+                "elementBlock",
+                "elementBlockConfiguration",
+                "elementBlockInput",
                 "name",
                 "title"
             ],
             "type": "object"
         },
-        "YieldPipelinePriceOutputSequenceStep": {
+        "YieldPipelineQuotingPriceSequenceStep": {
             "properties": {
                 "name": {
                     "pattern": "^[a-z0-9-]*$",
@@ -871,7 +896,8 @@
                     "enum": [
                         "ADD",
                         "MULTIPLY",
-                        "SUBTRACT"
+                        "SUBTRACT",
+                        "SUM"
                     ],
                     "type": "string"
                 }
@@ -885,68 +911,19 @@
         }
     },
     "properties": {
-        "drySteps": {
-            "items": {
-                "anyOf": [
-                    {
-                        "$ref": "#/definitions/InternalSourceBlockConstant"
-                    },
-                    {
-                        "$ref": "#/definitions/InternalSourceBlockTableColumns"
-                    },
-                    {
-                        "$ref": "#/definitions/InternalSourceBlockTableCells"
-                    },
-                    {
-                        "$ref": "#/definitions/ExternalSystemSourceBlockPipelineStep"
-                    },
-                    {
-                        "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
-                    },
-                    {
-                        "$ref": "#/definitions/DrySubYieldPipelineBlockPipelineStep"
-                    },
-                    {
-                        "$ref": "#/definitions/AssertBlockPipelineStep"
-                    }
-                ]
-            },
-            "type": "array"
-        },
         "inputs": {
             "items": {
                 "$ref": "#/definitions/PipelineInput"
             },
             "type": "array"
         },
-        "metadataOutputs": {
+        "orderingInfoOutputs": {
             "items": {
-                "$ref": "#/definitions/YieldPipelineMetadataOutput"
+                "$ref": "#/definitions/YieldPipelineInfoOutput"
             },
             "type": "array"
         },
-        "outputs": {
-            "items": {
-                "$ref": "#/definitions/PipelineOutput"
-            },
-            "type": "array"
-        },
-        "priceOutputSequence": {
-            "items": {
-                "$ref": "#/definitions/YieldPipelinePriceOutputSequenceStep"
-            },
-            "type": "array"
-        },
-        "quoteTitleFrom": {
-            "type": "string"
-        },
-        "type": {
-            "enum": [
-                "YIELD"
-            ],
-            "type": "string"
-        },
-        "wetSteps": {
+        "orderingSteps": {
             "items": {
                 "anyOf": [
                     {
@@ -974,7 +951,7 @@
                         "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
                     },
                     {
-                        "$ref": "#/definitions/WetSubYieldPipelineBlockPipelineStep"
+                        "$ref": "#/definitions/OrderingSubYieldPipelineBlockPipelineStep"
                     },
                     {
                         "$ref": "#/definitions/AssertBlockPipelineStep"
@@ -982,16 +959,72 @@
                 ]
             },
             "type": "array"
+        },
+        "outputs": {
+            "items": {
+                "$ref": "#/definitions/PipelineOutput"
+            },
+            "type": "array"
+        },
+        "quotingInfoOutputs": {
+            "items": {
+                "$ref": "#/definitions/YieldPipelineInfoOutput"
+            },
+            "type": "array"
+        },
+        "quotingPriceSequence": {
+            "items": {
+                "$ref": "#/definitions/YieldPipelineQuotingPriceSequenceStep"
+            },
+            "type": "array"
+        },
+        "quotingSteps": {
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/InternalSourceBlockConstant"
+                    },
+                    {
+                        "$ref": "#/definitions/InternalSourceBlockTableColumns"
+                    },
+                    {
+                        "$ref": "#/definitions/InternalSourceBlockTableCells"
+                    },
+                    {
+                        "$ref": "#/definitions/ExternalSystemSourceBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/QuotingSubYieldPipelineBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/AssertBlockPipelineStep"
+                    }
+                ]
+            },
+            "type": "array"
+        },
+        "titleFrom": {
+            "type": "string"
+        },
+        "type": {
+            "enum": [
+                "YIELD"
+            ],
+            "type": "string"
         }
     },
     "required": [
-        "drySteps",
         "inputs",
-        "metadataOutputs",
+        "orderingInfoOutputs",
+        "orderingSteps",
         "outputs",
-        "priceOutputSequence",
-        "type",
-        "wetSteps"
+        "quotingInfoOutputs",
+        "quotingPriceSequence",
+        "quotingSteps",
+        "type"
     ],
     "type": "object"
 }
