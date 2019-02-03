@@ -70,7 +70,6 @@
                             }
                         ]
                     },
-                    "pattern": "^[a-z0-9-]*$",
                     "type": "array"
                 },
                 "out": {
@@ -128,7 +127,6 @@
                             }
                         ]
                     },
-                    "pattern": "^[a-z0-9-]*$",
                     "type": "array"
                 },
                 "out": {
@@ -501,7 +499,43 @@
                     },
                     "type": "array"
                 },
-                "out": {
+                "priceSequenceOut": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "proposalNameIn": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                        },
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                        }
+                    ]
+                },
+                "proposalSlugOut": {
+                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                },
+                "proposalTitleIn": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                        },
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                        }
+                    ]
+                },
+                "quoteInfoPointsOut": {
                     "items": {
                         "allOf": [
                             {
@@ -518,6 +552,9 @@
                     "pattern": "^[a-z0-9-.]*$",
                     "type": "string"
                 },
+                "totalPriceOut": {
+                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                },
                 "type": {
                     "enum": [
                         "ORDERING_SUB_YIELD_PIPELINE"
@@ -527,29 +564,14 @@
             },
             "required": [
                 "in",
-                "out",
+                "priceSequenceOut",
+                "quoteInfoPointsOut",
                 "subYieldPipelineSlug",
                 "type"
             ],
             "type": "object"
         },
         "PipelineInput": {
-            "properties": {
-                "dataShape": {
-                    "$ref": "#/definitions/FullDataShape"
-                },
-                "name": {
-                    "pattern": "^[a-z0-9-]*$",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "dataShape",
-                "name"
-            ],
-            "type": "object"
-        },
-        "PipelineOutput": {
             "properties": {
                 "dataShape": {
                     "$ref": "#/definitions/FullDataShape"
@@ -586,7 +608,6 @@
         "PipelineStepInFromPipelineValue": {
             "properties": {
                 "inFrom": {
-                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
                 "type": {
@@ -608,7 +629,6 @@
                     "enum": [
                         "data"
                     ],
-                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -623,7 +643,6 @@
                     "enum": [
                         "delete-table-row-sub-slug"
                     ],
-                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -638,7 +657,6 @@
                     "enum": [
                         "table-column-sub-slug"
                     ],
-                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -653,7 +671,6 @@
                     "enum": [
                         "table-row-sub-slug"
                     ],
-                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -665,7 +682,6 @@
         "PipelineStepInTo<string>": {
             "properties": {
                 "inTo": {
-                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -677,7 +693,6 @@
         "PipelineStepOutFrom<string>": {
             "properties": {
                 "outFrom": {
-                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 }
             },
@@ -731,7 +746,7 @@
                     },
                     "type": "array"
                 },
-                "infoOut": {
+                "priceSequenceOut": {
                     "items": {
                         "allOf": [
                             {
@@ -744,7 +759,7 @@
                     },
                     "type": "array"
                 },
-                "priceSequenceOut": {
+                "quoteInfoPointsOut": {
                     "items": {
                         "allOf": [
                             {
@@ -773,8 +788,8 @@
             },
             "required": [
                 "in",
-                "infoOut",
                 "priceSequenceOut",
+                "quoteInfoPointsOut",
                 "subYieldPipelineSlug",
                 "type"
             ],
@@ -783,7 +798,6 @@
         "SubProcessPipelineBlockPipelineStep": {
             "properties": {
                 "ifPipelineValue": {
-                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
                 "in": {
@@ -845,7 +859,7 @@
             ],
             "type": "object"
         },
-        "YieldPipelineInfoOutput": {
+        "YieldPipelineInfoPoint": {
             "properties": {
                 "elementBlock": {
                     "type": "string"
@@ -917,9 +931,9 @@
             },
             "type": "array"
         },
-        "orderingInfoOutputs": {
+        "orderInfoPoints": {
             "items": {
-                "$ref": "#/definitions/YieldPipelineInfoOutput"
+                "$ref": "#/definitions/YieldPipelineInfoPoint"
             },
             "type": "array"
         },
@@ -960,15 +974,9 @@
             },
             "type": "array"
         },
-        "outputs": {
+        "quoteInfoPoints": {
             "items": {
-                "$ref": "#/definitions/PipelineOutput"
-            },
-            "type": "array"
-        },
-        "quotingInfoOutputs": {
-            "items": {
-                "$ref": "#/definitions/YieldPipelineInfoOutput"
+                "$ref": "#/definitions/YieldPipelineInfoPoint"
             },
             "type": "array"
         },
@@ -1018,10 +1026,9 @@
     },
     "required": [
         "inputs",
-        "orderingInfoOutputs",
+        "orderInfoPoints",
         "orderingSteps",
-        "outputs",
-        "quotingInfoOutputs",
+        "quoteInfoPoints",
         "quotingPriceSequence",
         "quotingSteps",
         "type"

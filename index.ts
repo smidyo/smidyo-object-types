@@ -50,9 +50,8 @@ export interface FormPipeline extends BasePipeline {
 export interface YieldPipeline extends BasePipeline {
   type: 'YIELD';
   inputs: PipelineInput[];
-  outputs: PipelineOutput[];
   titleFrom?: string;
-  quotingInfoOutputs: YieldPipelineInfoOutput[];
+  quoteInfoPoints: YieldPipelineInfoPoint[];
   quotingPriceSequence: YieldPipelineQuotingPriceSequenceStep[];
   quotingSteps: Array<
     | SubProcessPipelineBlockPipelineStep
@@ -60,7 +59,7 @@ export interface YieldPipeline extends BasePipeline {
     | SourceBlockPipelineStep
     | AssertBlockPipelineStep
   >;
-  orderingInfoOutputs: YieldPipelineInfoOutput[];
+  orderInfoPoints: YieldPipelineInfoPoint[];
   orderingSteps: Array<
     | EffectBlockPipelineStep
     | SourceBlockPipelineStep
@@ -77,7 +76,7 @@ export interface YieldPipelineQuotingPriceSequenceStep {
   name: string;
 }
 
-export interface YieldPipelineInfoOutput {
+export interface YieldPipelineInfoPoint {
   title: string;
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
@@ -105,7 +104,6 @@ export abstract class BasePipelineStep {
 }
 
 interface IfableBasePipelineStep extends BasePipelineStep {
-  /** @pattern "^[a-z0-9-]*$" */
   ifPipelineValue?: string;
 }
 
@@ -117,7 +115,6 @@ interface PipelineStepInFrom {
 }
 
 interface PipelineStepInTo<T = string> {
-  /** @pattern "^[a-z0-9-]*$" */
   inTo: T;
 }
 
@@ -133,7 +130,6 @@ export interface PipelineStepInFromInlineValue extends PipelineStepInFrom {
 
 export interface PipelineStepInFromPipelineValue extends PipelineStepInFrom {
   type: 'PIPELINE_VALUE';
-  /** @pattern "^[a-z0-9-]*$" */
   inFrom: string;
 }
 
@@ -142,7 +138,6 @@ export type PipelineStepInFromInlineValueOrPipelineValue =
   | PipelineStepInFromPipelineValue;
 
 export interface PipelineStepOutFrom<T = string> {
-  /** @pattern "^[a-z0-9-]*$" */
   outFrom: T;
 }
 
@@ -170,7 +165,6 @@ export type EffectBlockPipelineStep =
 
 abstract class ExternalSystemSourceOrEffectBlockPipelineStep extends BasePipelineStep {
   type: 'EXTERNAL_SYSTEM_SOURCE' | 'EXTERNAL_SYSTEM_EFFECT';
-  /** @pattern "^[a-z0-9-]*$" */
   in: Array<(PipelineStepInFromInlineValueOrPipelineValue) & PipelineStepInTo>;
   out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
@@ -293,27 +287,37 @@ export interface SubFormPipelineBlockPipelineStep extends IfableBasePipelineStep
   out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
-export interface QuotingSubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
-  type: 'QUOTING_SUB_YIELD_PIPELINE';
+abstract class SubYieldPipelineBlockPipelineStep implements IfableBasePipelineStep {
+  type: 'QUOTING_SUB_YIELD_PIPELINE' | 'ORDERING_SUB_YIELD_PIPELINE';
+  /** @pattern "^[a-z0-9-]*$" */
+  ifPipelineValue?: string;
+
   /** @pattern "^[a-z0-9-.]*$" */
   subYieldPipelineSlug: string;
   in: Array<(PipelineStepInFromInlineValueOrPipelineValue) & PipelineStepInTo>;
   priceSequenceOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
   totalPriceOut?: PipelineStepOutToPipelineValue;
-  infoOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
+  quoteInfoPointsOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
-export interface OrderingSubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
+export interface QuotingSubYieldPipelineBlockPipelineStep
+  extends SubYieldPipelineBlockPipelineStep {
+  type: 'QUOTING_SUB_YIELD_PIPELINE';
+}
+
+export interface OrderingSubYieldPipelineBlockPipelineStep
+  extends SubYieldPipelineBlockPipelineStep {
   type: 'ORDERING_SUB_YIELD_PIPELINE';
-  /** @pattern "^[a-z0-9-.]*$" */
-  subYieldPipelineSlug: string;
-  in: Array<(PipelineStepInFromInlineValueOrPipelineValue) & PipelineStepInTo>;
-  out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
+
+  proposalNameIn?: PipelineStepInFromInlineValueOrPipelineValue;
+  proposalTitleIn?: PipelineStepInFromInlineValueOrPipelineValue;
+
+  proposalSlugOut?: PipelineStepOutToPipelineValue;
 }
 
 export interface AssertBlockPipelineStep extends BasePipelineStep {
   type: 'ASSERT';
-  inFallback: PipelineStepInFromInlineValueOrPipelineValue; //must be non-nullable datashape
-  inPriority: PipelineStepInFromPipelineValue[]; // must be nullable datashapes
+  inFallback: PipelineStepInFromInlineValueOrPipelineValue;
+  inPriority: PipelineStepInFromPipelineValue[];
   out: PipelineStepOutToPipelineValue[];
 }
