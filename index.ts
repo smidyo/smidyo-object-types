@@ -51,35 +51,40 @@ export interface YieldPipeline extends BasePipeline {
   type: 'YIELD';
   inputs: PipelineInput[];
   outputs: PipelineOutput[];
-  quoteTitleFrom?: string;
-  priceOutputSequence: YieldPipelinePriceOutputSequenceStep[];
-  metadataOutputs: YieldPipelineMetadataOutput[];
-  drySteps: Array<
+  titleFrom?: string;
+  quotingInfoOutputs: YieldPipelineInfoOutput[];
+  quotingPriceSequence: YieldPipelineQuotingPriceSequenceStep[];
+  quotingSteps: Array<
     | SubProcessPipelineBlockPipelineStep
-    | DrySubYieldPipelineBlockPipelineStep
+    | QuotingSubYieldPipelineBlockPipelineStep
     | SourceBlockPipelineStep
     | AssertBlockPipelineStep
   >;
-  wetSteps: Array<
+  orderingInfoOutputs: YieldPipelineInfoOutput[];
+  orderingSteps: Array<
     | EffectBlockPipelineStep
     | SourceBlockPipelineStep
     | SubProcessPipelineBlockPipelineStep
-    | WetSubYieldPipelineBlockPipelineStep
+    | OrderingSubYieldPipelineBlockPipelineStep
     | AssertBlockPipelineStep
   >;
 }
 
-export interface YieldPipelinePriceOutputSequenceStep {
-  type: 'ADD' | 'SUBTRACT' | 'MULTIPLY';
+export interface YieldPipelineQuotingPriceSequenceStep {
+  type: 'SUM' | 'ADD' | 'SUBTRACT' | 'MULTIPLY';
   title: string;
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
 }
 
-export interface YieldPipelineMetadataOutput {
+export interface YieldPipelineInfoOutput {
   title: string;
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
+
+  elementBlock: string;
+  elementBlockInput: string;
+  elementBlockConfiguration: Array<PipelineStepInFromInlineValue & PipelineStepInTo>;
 }
 
 type BlockType =
@@ -91,8 +96,8 @@ type BlockType =
   | 'INTERNAL_EFFECT'
   | 'SUB_PROCESS_PIPELINE'
   | 'SUB_FORM_PIPELINE'
-  | 'DRY_SUB_YIELD_PIPELINE'
-  | 'WET_SUB_YIELD_PIPELINE'
+  | 'QUOTING_SUB_YIELD_PIPELINE'
+  | 'ORDERING_SUB_YIELD_PIPELINE'
   | 'ASSERT';
 
 export abstract class BasePipelineStep {
@@ -288,20 +293,21 @@ export interface SubFormPipelineBlockPipelineStep extends IfableBasePipelineStep
   out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
-export interface DrySubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
-  type: 'DRY_SUB_YIELD_PIPELINE';
+export interface QuotingSubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
+  type: 'QUOTING_SUB_YIELD_PIPELINE';
   /** @pattern "^[a-z0-9-.]*$" */
   subYieldPipelineSlug: string;
   in: Array<(PipelineStepInFromInlineValueOrPipelineValue) & PipelineStepInTo>;
-  priceOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
+  priceSequenceOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
+  totalPriceOut?: PipelineStepOutToPipelineValue;
+  infoOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
-export interface WetSubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
-  type: 'WET_SUB_YIELD_PIPELINE';
+export interface OrderingSubYieldPipelineBlockPipelineStep extends IfableBasePipelineStep {
+  type: 'ORDERING_SUB_YIELD_PIPELINE';
   /** @pattern "^[a-z0-9-.]*$" */
   subYieldPipelineSlug: string;
   in: Array<(PipelineStepInFromInlineValueOrPipelineValue) & PipelineStepInTo>;
-  priceOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
   out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
