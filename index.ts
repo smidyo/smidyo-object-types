@@ -81,6 +81,8 @@ export interface YieldPipelineInfoPoint {
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
 
+  dataShape: FullDataShape;
+
   elementBlock: string;
   elementBlockInput: string;
   elementBlockConfiguration: Array<PipelineStepInFromInlineValue & PipelineStepInTo>;

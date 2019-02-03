@@ -861,6 +861,9 @@
         },
         "YieldPipelineInfoPoint": {
             "properties": {
+                "dataShape": {
+                    "$ref": "#/definitions/FullDataShape"
+                },
                 "elementBlock": {
                     "type": "string"
                 },
@@ -889,6 +892,7 @@
                 }
             },
             "required": [
+                "dataShape",
                 "elementBlock",
                 "elementBlockConfiguration",
                 "elementBlockInput",
