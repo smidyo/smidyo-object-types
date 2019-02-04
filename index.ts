@@ -323,3 +323,26 @@ export interface AssertBlockPipelineStep extends BasePipelineStep {
   inPriority: PipelineStepInFromPipelineValue[];
   out: PipelineStepOutToPipelineValue[];
 }
+
+//
+//
+//
+//
+//
+
+export interface QuoteRunYieldPipelineResult {
+  title?: string;
+  infoPoints: GeneratedInfoPoint[];
+  priceSequence: PriceSequenceStepResult[];
+  totalPrice: number;
+}
+
+export interface PriceSequenceStepResult {
+  meta: YieldPipelineQuotePriceSequenceStep,
+  data: number;
+}
+
+export interface GeneratedInfoPoint {
+  meta: YieldPipelineInfoPoint;
+  data: any;
+}
