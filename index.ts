@@ -52,25 +52,25 @@ export interface YieldPipeline extends BasePipeline {
   inputs: PipelineInput[];
   titleFrom?: string;
   quoteInfoPoints: YieldPipelineInfoPoint[];
-  quotingPriceSequence: YieldPipelineQuotingPriceSequenceStep[];
-  quotingSteps: Array<
+  quotePriceSequence: YieldPipelineQuotePriceSequenceStep[];
+  quoteSteps: Array<
     | SubProcessPipelineBlockPipelineStep
-    | QuotingSubYieldPipelineBlockPipelineStep
+    | QuoteSubYieldPipelineBlockPipelineStep
     | SourceBlockPipelineStep
     | AssertBlockPipelineStep
   >;
   orderInfoPoints: YieldPipelineInfoPoint[];
-  orderingSteps: Array<
+  orderSteps: Array<
     | EffectBlockPipelineStep
     | SourceBlockPipelineStep
     | SubProcessPipelineBlockPipelineStep
-    | OrderingSubYieldPipelineBlockPipelineStep
+    | OrderSubYieldPipelineBlockPipelineStep
     | AssertBlockPipelineStep
   >;
 }
 
-export interface YieldPipelineQuotingPriceSequenceStep {
-  type: 'SUM' | 'ADD' | 'SUBTRACT' | 'MULTIPLY';
+export interface YieldPipelineQuotePriceSequenceStep {
+  type: 'ADD' | 'SUBTRACT' | 'MULTIPLY';
   title: string;
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
@@ -302,12 +302,12 @@ abstract class SubYieldPipelineBlockPipelineStep implements IfableBasePipelineSt
   quoteInfoPointsOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
-export interface QuotingSubYieldPipelineBlockPipelineStep
+export interface QuoteSubYieldPipelineBlockPipelineStep
   extends SubYieldPipelineBlockPipelineStep {
   type: 'QUOTING_SUB_YIELD_PIPELINE';
 }
 
-export interface OrderingSubYieldPipelineBlockPipelineStep
+export interface OrderSubYieldPipelineBlockPipelineStep
   extends SubYieldPipelineBlockPipelineStep {
   type: 'ORDERING_SUB_YIELD_PIPELINE';
 

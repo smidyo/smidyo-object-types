@@ -466,7 +466,7 @@
             ],
             "type": "object"
         },
-        "OrderingSubYieldPipelineBlockPipelineStep": {
+        "OrderSubYieldPipelineBlockPipelineStep": {
             "properties": {
                 "ifPipelineValue": {
                     "pattern": "^[a-z0-9-]*$",
@@ -713,7 +713,7 @@
             ],
             "type": "object"
         },
-        "QuotingSubYieldPipelineBlockPipelineStep": {
+        "QuoteSubYieldPipelineBlockPipelineStep": {
             "properties": {
                 "ifPipelineValue": {
                     "pattern": "^[a-z0-9-]*$",
@@ -901,7 +901,7 @@
             ],
             "type": "object"
         },
-        "YieldPipelineQuotingPriceSequenceStep": {
+        "YieldPipelineQuotePriceSequenceStep": {
             "properties": {
                 "name": {
                     "pattern": "^[a-z0-9-]*$",
@@ -914,8 +914,7 @@
                     "enum": [
                         "ADD",
                         "MULTIPLY",
-                        "SUBTRACT",
-                        "SUM"
+                        "SUBTRACT"
                     ],
                     "type": "string"
                 }
@@ -941,7 +940,7 @@
             },
             "type": "array"
         },
-        "orderingSteps": {
+        "orderSteps": {
             "items": {
                 "anyOf": [
                     {
@@ -969,7 +968,7 @@
                         "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
                     },
                     {
-                        "$ref": "#/definitions/OrderingSubYieldPipelineBlockPipelineStep"
+                        "$ref": "#/definitions/OrderSubYieldPipelineBlockPipelineStep"
                     },
                     {
                         "$ref": "#/definitions/AssertBlockPipelineStep"
@@ -984,13 +983,13 @@
             },
             "type": "array"
         },
-        "quotingPriceSequence": {
+        "quotePriceSequence": {
             "items": {
-                "$ref": "#/definitions/YieldPipelineQuotingPriceSequenceStep"
+                "$ref": "#/definitions/YieldPipelineQuotePriceSequenceStep"
             },
             "type": "array"
         },
-        "quotingSteps": {
+        "quoteSteps": {
             "items": {
                 "anyOf": [
                     {
@@ -1009,7 +1008,7 @@
                         "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
                     },
                     {
-                        "$ref": "#/definitions/QuotingSubYieldPipelineBlockPipelineStep"
+                        "$ref": "#/definitions/QuoteSubYieldPipelineBlockPipelineStep"
                     },
                     {
                         "$ref": "#/definitions/AssertBlockPipelineStep"
@@ -1031,10 +1030,10 @@
     "required": [
         "inputs",
         "orderInfoPoints",
-        "orderingSteps",
+        "orderSteps",
         "quoteInfoPoints",
-        "quotingPriceSequence",
-        "quotingSteps",
+        "quotePriceSequence",
+        "quoteSteps",
         "type"
     ],
     "type": "object"
