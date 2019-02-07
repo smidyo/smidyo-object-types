@@ -376,7 +376,13 @@ export interface AssertBlockPipelineStepFallbackDataFallback
 //
 //
 
+export interface RejectionResult {
+  type: 'REJECTION_RESULT';
+  message: string;
+}
+
 export interface QuoteRunYieldPipelineResult {
+  type: 'QUOTE_RUN_YIELD_PIPELINE_RESULT';
   title: string;
   infoPoints: InfoPointResult[];
   priceSequence: PriceSequenceStepResult[];
