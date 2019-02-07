@@ -329,7 +329,7 @@ export interface AssertBlockPipelineStep extends BasePipelineStep {
 //
 
 export interface QuoteRunYieldPipelineResult {
-  title?: string;
+  title: string;
   infoPoints: InfoPointResult[];
   priceSequence: PriceSequenceStepResult[];
   totalPrice: number;
@@ -343,7 +343,6 @@ export interface PriceSequenceStepResult {
 }
 
 export interface InfoPointResult {
-  type: 'ADD' | 'SUBTRACT' | 'MULTIPLY';
   name: string;
   title: string;
   data: any;
