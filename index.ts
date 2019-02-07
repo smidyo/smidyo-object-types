@@ -71,7 +71,7 @@ export interface YieldPipeline extends BasePipeline {
 
 export interface YieldPipelineQuotePriceSequenceStep {
   type: 'ADD' | 'SUBTRACT' | 'MULTIPLY';
-  titleFrom: PipelineStepInFromInlineValueOrPipelineValue
+  titleFrom: PipelineStepInFromInlineValueOrPipelineValue;
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
 }
@@ -302,13 +302,11 @@ abstract class SubYieldPipelineBlockPipelineStep implements IfableBasePipelineSt
   quoteInfoPointsOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
-export interface QuoteSubYieldPipelineBlockPipelineStep
-  extends SubYieldPipelineBlockPipelineStep {
+export interface QuoteSubYieldPipelineBlockPipelineStep extends SubYieldPipelineBlockPipelineStep {
   type: 'QUOTING_SUB_YIELD_PIPELINE';
 }
 
-export interface OrderSubYieldPipelineBlockPipelineStep
-  extends SubYieldPipelineBlockPipelineStep {
+export interface OrderSubYieldPipelineBlockPipelineStep extends SubYieldPipelineBlockPipelineStep {
   type: 'ORDERING_SUB_YIELD_PIPELINE';
 
   proposalNameIn?: PipelineStepInFromInlineValueOrPipelineValue;
@@ -332,17 +330,21 @@ export interface AssertBlockPipelineStep extends BasePipelineStep {
 
 export interface QuoteRunYieldPipelineResult {
   title?: string;
-  infoPoints: GeneratedInfoPoint[];
+  infoPoints: InfoPointResult[];
   priceSequence: PriceSequenceStepResult[];
   totalPrice: number;
 }
 
 export interface PriceSequenceStepResult {
-  meta: YieldPipelineQuotePriceSequenceStep,
+  type: 'ADD' | 'SUBTRACT' | 'MULTIPLY';
+  name: string;
+  title: string;
   data: number;
 }
 
-export interface GeneratedInfoPoint {
-  meta: YieldPipelineInfoPoint;
+export interface InfoPointResult {
+  type: 'ADD' | 'SUBTRACT' | 'MULTIPLY';
+  name: string;
+  title: string;
   data: any;
 }
