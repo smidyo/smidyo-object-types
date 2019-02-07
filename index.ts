@@ -376,7 +376,7 @@ export interface AssertBlockPipelineStepFallbackDataFallback
 //
 //
 
-export interface RejectionResult {
+export interface PipelineRejectionResult {
   type: 'REJECTION_RESULT';
   message: string;
 }
