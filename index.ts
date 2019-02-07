@@ -71,7 +71,7 @@ export interface YieldPipeline extends BasePipeline {
 
 export interface YieldPipelineQuotePriceSequenceStep {
   type: 'ADD' | 'SUBTRACT' | 'MULTIPLY';
-  title: string;
+  titleFrom: PipelineStepInFromInlineValueOrPipelineValue
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
 }

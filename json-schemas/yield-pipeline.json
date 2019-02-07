@@ -907,8 +907,15 @@
                     "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
-                "title": {
-                    "type": "string"
+                "titleFrom": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                        },
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                        }
+                    ]
                 },
                 "type": {
                     "enum": [
@@ -921,7 +928,7 @@
             },
             "required": [
                 "name",
-                "title",
+                "titleFrom",
                 "type"
             ],
             "type": "object"
