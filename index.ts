@@ -363,7 +363,7 @@ export interface AssertBlockPipelineStepRejectFallback extends AssertBlockPipeli
 export interface AssertBlockPipelineStepFallbackDataFallback
   extends AssertBlockPipelineStepFallback {
   type: 'FALLBACK_DATA';
-  data: InlineValue<{
+  data: PipelineStepInFromInlineValueOrPipelineValue<{
     type: string;
     nullable: false;
     list: boolean;

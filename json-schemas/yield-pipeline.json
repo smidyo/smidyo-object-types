@@ -43,7 +43,14 @@
         "AssertBlockPipelineStepFallbackDataFallback": {
             "properties": {
                 "data": {
-                    "$ref": "#/definitions/InlineValue<{type:string;nullable:false;list:boolean;}>"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                        },
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:false;list:boolean;}>"
+                        }
+                    ]
                 },
                 "type": {
                     "enum": [
@@ -1003,6 +1010,24 @@
             "properties": {
                 "inFrom": {
                     "$ref": "#/definitions/InlineValue<{type:\"text\";nullable:false;list:false;}>_3"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromInlineValue<{type:string;nullable:false;list:boolean;}>": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<{type:string;nullable:false;list:boolean;}>"
                 },
                 "type": {
                     "enum": [
