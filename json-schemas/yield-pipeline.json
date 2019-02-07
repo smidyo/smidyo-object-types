@@ -3,15 +3,8 @@
     "definitions": {
         "AssertBlockPipelineStep": {
             "properties": {
-                "inFallback": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                        },
-                        {
-                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                        }
-                    ]
+                "fallback": {
+                    "$ref": "#/definitions/AssertBlockPipelineStepRejectFallback"
                 },
                 "inPriority": {
                     "items": {
@@ -33,9 +26,34 @@
                 }
             },
             "required": [
-                "inFallback",
+                "fallback",
                 "inPriority",
                 "out",
+                "type"
+            ],
+            "type": "object"
+        },
+        "AssertBlockPipelineStepRejectFallback": {
+            "properties": {
+                "message": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                        },
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>_1"
+                        }
+                    ]
+                },
+                "type": {
+                    "enum": [
+                        "REJECT"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "message",
                 "type"
             ],
             "type": "object"
@@ -51,7 +69,7 @@
                             {
                                 "allOf": [
                                     {
-                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
                                     },
                                     {
                                         "$ref": "#/definitions/PipelineStepInTo<string>"
@@ -108,7 +126,7 @@
                             {
                                 "allOf": [
                                     {
-                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
                                     },
                                     {
                                         "$ref": "#/definitions/PipelineStepInTo<string>"
@@ -179,12 +197,276 @@
             ],
             "type": "object"
         },
-        "InlineValue": {
+        "InlineValue<FullDataShape>": {
             "properties": {
                 "data": {
                 },
                 "dataShape": {
                     "$ref": "#/definitions/FullDataShape"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "InlineValue<{type:\"text\";nullable:false;list:false;}>": {
+            "properties": {
+                "data": {
+                },
+                "dataShape": {
+                    "properties": {
+                        "list": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "nullable": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "enum": [
+                                "text"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "list",
+                        "nullable",
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "InlineValue<{type:\"text\";nullable:false;list:false;}>_1": {
+            "properties": {
+                "data": {
+                },
+                "dataShape": {
+                    "properties": {
+                        "list": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "nullable": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "enum": [
+                                "text"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "list",
+                        "nullable",
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "InlineValue<{type:\"text\";nullable:false;list:false;}>_2": {
+            "properties": {
+                "data": {
+                },
+                "dataShape": {
+                    "properties": {
+                        "list": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "nullable": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "enum": [
+                                "text"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "list",
+                        "nullable",
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "InlineValue<{type:\"text\";nullable:false;list:false;}>_3": {
+            "properties": {
+                "data": {
+                },
+                "dataShape": {
+                    "properties": {
+                        "list": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "nullable": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "enum": [
+                                "text"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "list",
+                        "nullable",
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "InlineValue<{type:string;nullable:false;list:false;}>": {
+            "properties": {
+                "data": {
+                },
+                "dataShape": {
+                    "properties": {
+                        "list": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "nullable": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "list",
+                        "nullable",
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "InlineValue<{type:string;nullable:false;list:false;}>_1": {
+            "properties": {
+                "data": {
+                },
+                "dataShape": {
+                    "properties": {
+                        "list": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "nullable": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "list",
+                        "nullable",
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "InlineValue<{type:string;nullable:false;list:false;}>_2": {
+            "properties": {
+                "data": {
+                },
+                "dataShape": {
+                    "properties": {
+                        "list": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "nullable": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "list",
+                        "nullable",
+                        "type"
+                    ],
+                    "type": "object"
                 }
             },
             "required": [
@@ -206,7 +488,7 @@
                         {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                                 },
                                 {
                                     "$ref": "#/definitions/PipelineStepInTo<\"delete-table-row-sub-slug\">"
@@ -216,7 +498,7 @@
                         {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>"
                                 },
                                 {
                                     "$ref": "#/definitions/PipelineStepInTo<\"delete-table-row-sub-slug\">"
@@ -257,16 +539,6 @@
                             {
                                 "allOf": [
                                     {
-                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInTo<\"data\">"
-                                    }
-                                ]
-                            },
-                            {
-                                "allOf": [
-                                    {
                                         "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                                     },
                                     {
@@ -277,7 +549,17 @@
                             {
                                 "allOf": [
                                     {
-                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>_1"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<\"data\">"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                                     },
                                     {
                                         "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
@@ -287,7 +569,7 @@
                             {
                                 "allOf": [
                                     {
-                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>_2"
                                     },
                                     {
                                         "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
@@ -356,7 +638,7 @@
                         {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                                 },
                                 {
                                     "$ref": "#/definitions/PipelineStepInTo<\"table-row-sub-slug\">"
@@ -366,7 +648,7 @@
                         {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
                                 },
                                 {
                                     "$ref": "#/definitions/PipelineStepInTo<\"table-row-sub-slug\">"
@@ -478,7 +760,7 @@
                             {
                                 "allOf": [
                                     {
-                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
                                     },
                                     {
                                         "$ref": "#/definitions/PipelineStepInTo<string>"
@@ -515,10 +797,10 @@
                 "proposalNameIn": {
                     "anyOf": [
                         {
-                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                         },
                         {
-                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>_2"
                         }
                     ]
                 },
@@ -528,10 +810,10 @@
                 "proposalTitleIn": {
                     "anyOf": [
                         {
-                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                         },
                         {
-                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>_3"
                         }
                     ]
                 },
@@ -587,10 +869,136 @@
             ],
             "type": "object"
         },
-        "PipelineStepInFromInlineValue": {
+        "PipelineStepInFromInlineValue<FullDataShape>": {
             "properties": {
                 "inFrom": {
-                    "$ref": "#/definitions/InlineValue"
+                    "$ref": "#/definitions/InlineValue<FullDataShape>"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<{type:\"text\";nullable:false;list:false;}>"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>_1": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<{type:\"text\";nullable:false;list:false;}>_1"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>_2": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<{type:\"text\";nullable:false;list:false;}>_2"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>_3": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<{type:\"text\";nullable:false;list:false;}>_3"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<{type:string;nullable:false;list:false;}>"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>_1": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<{type:string;nullable:false;list:false;}>_1"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>_2": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<{type:string;nullable:false;list:false;}>_2"
                 },
                 "type": {
                     "enum": [
@@ -725,7 +1133,7 @@
                             {
                                 "allOf": [
                                     {
-                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
                                     },
                                     {
                                         "$ref": "#/definitions/PipelineStepInTo<string>"
@@ -806,7 +1214,7 @@
                             {
                                 "allOf": [
                                     {
-                                        "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
                                     },
                                     {
                                         "$ref": "#/definitions/PipelineStepInTo<string>"
@@ -871,7 +1279,7 @@
                     "items": {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                                "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
                             },
                             {
                                 "$ref": "#/definitions/PipelineStepInTo<string>"
@@ -910,10 +1318,10 @@
                 "titleFrom": {
                     "anyOf": [
                         {
-                            "$ref": "#/definitions/PipelineStepInFromInlineValue"
+                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                         },
                         {
-                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>"
                         }
                     ]
                 },

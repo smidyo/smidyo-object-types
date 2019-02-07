@@ -71,7 +71,11 @@ export interface YieldPipeline extends BasePipeline {
 
 export interface YieldPipelineQuotePriceSequenceStep {
   type: 'ADD' | 'SUBTRACT' | 'MULTIPLY';
-  titleFrom: PipelineStepInFromInlineValueOrPipelineValue;
+  titleFrom: PipelineStepInFromInlineValueOrPipelineValue<{
+    type: 'text';
+    nullable: false;
+    list: false;
+  }>;
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
 }
@@ -109,25 +113,23 @@ interface IfableBasePipelineStep extends BasePipelineStep {
   ifPipelineValue?: string;
 }
 
-type PipelineStepInType = 'INLINE_VALUE' | 'PIPELINE_VALUE';
-
-interface PipelineStepInFrom {
-  type: PipelineStepInType;
-  inFrom: InlineValue | string;
+abstract class PipelineStepInFrom<DS = FullDataShape> {
+  type: 'INLINE_VALUE' | 'PIPELINE_VALUE';
+  inFrom: InlineValue<DS> | string;
 }
 
 interface PipelineStepInTo<T = string> {
   inTo: T;
 }
 
-export interface InlineValue {
-  dataShape: FullDataShape;
+export interface InlineValue<DS = FullDataShape> {
+  dataShape: DS;
   data: any;
 }
 
-export interface PipelineStepInFromInlineValue extends PipelineStepInFrom {
+export interface PipelineStepInFromInlineValue<DS = FullDataShape> extends PipelineStepInFrom<DS> {
   type: 'INLINE_VALUE';
-  inFrom: InlineValue;
+  inFrom: InlineValue<DS>;
 }
 
 export interface PipelineStepInFromPipelineValue extends PipelineStepInFrom {
@@ -135,8 +137,8 @@ export interface PipelineStepInFromPipelineValue extends PipelineStepInFrom {
   inFrom: string;
 }
 
-export type PipelineStepInFromInlineValueOrPipelineValue =
-  | PipelineStepInFromInlineValue
+export type PipelineStepInFromInlineValueOrPipelineValue<DS = FullDataShape> =
+  | PipelineStepInFromInlineValue<DS>
   | PipelineStepInFromPipelineValue;
 
 export interface PipelineStepOutFrom<T = string> {
@@ -237,12 +239,27 @@ export interface InternalEffectBlockTableDeleteRow extends InternalEffectBlockPi
 
   effectBlock: 'TABLE_DELETE_ROW';
   tableSlug: string;
-  in: PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'delete-table-row-sub-slug'>;
+  in: PipelineStepInFromInlineValueOrPipelineValue<{
+    type: string;
+    nullable: false;
+    list: false;
+  }> &
+    PipelineStepInTo<'delete-table-row-sub-slug'>;
 }
 
 type InternalEffectBlockTableUpdateCellOptionIn =
-  | PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'data'>
-  | PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'table-column-sub-slug'>;
+  | PipelineStepInFromInlineValueOrPipelineValue<{
+      type: string;
+      nullable: false;
+      list: false;
+    }> &
+      PipelineStepInTo<'data'>
+  | PipelineStepInFromInlineValueOrPipelineValue<{
+      type: string;
+      nullable: false;
+      list: false;
+    }> &
+      PipelineStepInTo<'table-column-sub-slug'>;
 
 export interface InternalEffectBlockTableUpdateCell extends InternalEffectBlockPipelineStep {
   type: 'INTERNAL_EFFECT';
@@ -309,17 +326,48 @@ export interface QuoteSubYieldPipelineBlockPipelineStep extends SubYieldPipeline
 export interface OrderSubYieldPipelineBlockPipelineStep extends SubYieldPipelineBlockPipelineStep {
   type: 'ORDERING_SUB_YIELD_PIPELINE';
 
-  proposalNameIn?: PipelineStepInFromInlineValueOrPipelineValue;
-  proposalTitleIn?: PipelineStepInFromInlineValueOrPipelineValue;
+  proposalNameIn?: PipelineStepInFromInlineValueOrPipelineValue<{
+    type: 'text';
+    nullable: false;
+    list: false;
+  }>;
+  proposalTitleIn?: PipelineStepInFromInlineValueOrPipelineValue<{
+    type: 'text';
+    nullable: false;
+    list: false;
+  }>;
 
   proposalSlugOut?: PipelineStepOutToPipelineValue;
 }
 
 export interface AssertBlockPipelineStep extends BasePipelineStep {
   type: 'ASSERT';
-  inFallback: PipelineStepInFromInlineValueOrPipelineValue;
   inPriority: PipelineStepInFromPipelineValue[];
+  fallback: AssertBlockPipelineStepRejectFallback;
   out: PipelineStepOutToPipelineValue[];
+}
+
+abstract class AssertBlockPipelineStepFallback {
+  type: 'REJECT' | 'FALLBACK_DATA';
+}
+
+export interface AssertBlockPipelineStepRejectFallback extends AssertBlockPipelineStepFallback {
+  type: 'REJECT';
+  message: PipelineStepInFromInlineValueOrPipelineValue<{
+    type: 'text';
+    nullable: false;
+    list: false;
+  }>;
+}
+
+export interface AssertBlockPipelineStepFallbackDataFallback
+  extends AssertBlockPipelineStepFallback {
+  type: 'FALLBACK_DATA';
+  data: InlineValue<{
+    type: string;
+    nullable: false;
+    list: boolean;
+  }>;
 }
 
 //
