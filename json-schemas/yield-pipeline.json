@@ -4,7 +4,14 @@
         "AssertBlockPipelineStep": {
             "properties": {
                 "fallback": {
-                    "$ref": "#/definitions/AssertBlockPipelineStepRejectFallback"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/AssertBlockPipelineStepRejectFallback"
+                        },
+                        {
+                            "$ref": "#/definitions/AssertBlockPipelineStepFallbackDataFallback"
+                        }
+                    ]
                 },
                 "inPriority": {
                     "items": {
@@ -29,6 +36,24 @@
                 "fallback",
                 "inPriority",
                 "out",
+                "type"
+            ],
+            "type": "object"
+        },
+        "AssertBlockPipelineStepFallbackDataFallback": {
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/InlineValue<{type:string;nullable:false;list:boolean;}>"
+                },
+                "type": {
+                    "enum": [
+                        "FALLBACK_DATA"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "data",
                 "type"
             ],
             "type": "object"
@@ -350,6 +375,39 @@
                             "enum": [
                                 "text"
                             ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "list",
+                        "nullable",
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "InlineValue<{type:string;nullable:false;list:boolean;}>": {
+            "properties": {
+                "data": {
+                },
+                "dataShape": {
+                    "properties": {
+                        "list": {
+                            "type": "boolean"
+                        },
+                        "nullable": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "type": {
                             "type": "string"
                         }
                     },

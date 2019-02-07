@@ -343,7 +343,7 @@ export interface OrderSubYieldPipelineBlockPipelineStep extends SubYieldPipeline
 export interface AssertBlockPipelineStep extends BasePipelineStep {
   type: 'ASSERT';
   inPriority: PipelineStepInFromPipelineValue[];
-  fallback: AssertBlockPipelineStepRejectFallback;
+  fallback: AssertBlockPipelineStepRejectFallback | AssertBlockPipelineStepFallbackDataFallback;
   out: PipelineStepOutToPipelineValue[];
 }
 
