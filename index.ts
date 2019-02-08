@@ -70,8 +70,9 @@ export interface YieldPipeline extends BasePipeline {
 }
 
 export interface YieldPipelineQuotePriceSequenceStep {
-  type: 'ADD' | 'SUBTRACT' | 'MULTIPLY';
-  titleFrom: PipelineStepInFromInlineValueOrPipelineValue<{
+  type: 'ADD' | 'SUBTRACT' | 'MINIMUM' | 'PERCENTAGE-OFF' | 'PERCENTAGE-ON' | 'MULTIPLY';
+  title: string;
+  specification?: PipelineStepInFromInlineValueOrPipelineValue<{
     type: 'text';
     nullable: false;
     list: false;
@@ -390,9 +391,10 @@ export interface QuoteRunYieldPipelineResult {
 }
 
 export interface PriceSequenceStepResult {
-  type: 'ADD' | 'SUBTRACT' | 'MULTIPLY';
+  type: 'ADD' | 'SUBTRACT' | 'MINIMUM' | 'PERCENTAGE-OFF' | 'PERCENTAGE-ON' | 'MULTIPLY';
   name: string;
   title: string;
+  specification?: string;
   data: number;
 }
 

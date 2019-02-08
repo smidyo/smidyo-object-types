@@ -1398,7 +1398,7 @@
                     "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
-                "titleFrom": {
+                "specification": {
                     "anyOf": [
                         {
                             "$ref": "#/definitions/PipelineStepInFromPipelineValue"
@@ -1408,10 +1408,16 @@
                         }
                     ]
                 },
+                "title": {
+                    "type": "string"
+                },
                 "type": {
                     "enum": [
                         "ADD",
+                        "MINIMUM",
                         "MULTIPLY",
+                        "PERCENTAGE-OFF",
+                        "PERCENTAGE-ON",
                         "SUBTRACT"
                     ],
                     "type": "string"
@@ -1419,7 +1425,7 @@
             },
             "required": [
                 "name",
-                "titleFrom",
+                "title",
                 "type"
             ],
             "type": "object"
