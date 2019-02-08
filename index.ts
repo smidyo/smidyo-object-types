@@ -50,7 +50,7 @@ export interface FormPipeline extends BasePipeline {
 export interface YieldPipeline extends BasePipeline {
   type: 'YIELD';
   inputs: PipelineInput[];
-  titleFrom?: string;
+  titleFrom?: PipelineStepInFromInlineValueOrPipelineValue;
   quoteInfoPoints: YieldPipelineInfoPoint[];
   quotePriceSequence: YieldPipelineQuotePriceSequenceStep[];
   quoteSteps: Array<
