@@ -111,7 +111,7 @@ export abstract class BasePipelineStep {
 }
 
 interface IfableBasePipelineStep extends BasePipelineStep {
-  ifPipelineValue?: string;
+  onlyIfTruthy?: PipelineStepInFromPipelineValue;
 }
 
 abstract class PipelineStepInFrom<DS = FullDataShape> {
@@ -309,8 +309,7 @@ export interface SubFormPipelineBlockPipelineStep extends IfableBasePipelineStep
 
 abstract class SubYieldPipelineBlockPipelineStep implements IfableBasePipelineStep {
   type: 'QUOTING_SUB_YIELD_PIPELINE' | 'ORDERING_SUB_YIELD_PIPELINE';
-  /** @pattern "^[a-z0-9-]*$" */
-  ifPipelineValue?: string;
+  onlyIfTruthy?: PipelineStepInFromPipelineValue;
 
   /** @pattern "^[a-z0-9-.]*$" */
   subYieldPipelineSlug: string;
@@ -343,7 +342,7 @@ export interface OrderSubYieldPipelineBlockPipelineStep extends SubYieldPipeline
 
 export interface AssertBlockPipelineStep extends BasePipelineStep {
   type: 'ASSERT';
-  inPriority: string[];
+  inPriority: PipelineStepInFromPipelineValue[];
   fallback: AssertBlockPipelineStepRejectFallback | AssertBlockPipelineStepFallbackDataFallback;
   out: PipelineStepOutToPipelineValue[];
 }

@@ -15,7 +15,7 @@
                 },
                 "inPriority": {
                     "items": {
-                        "type": "string"
+                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                     },
                     "type": "array"
                 },
@@ -815,10 +815,6 @@
         },
         "OrderSubYieldPipelineBlockPipelineStep": {
             "properties": {
-                "ifPipelineValue": {
-                    "pattern": "^[a-z0-9-]*$",
-                    "type": "string"
-                },
                 "in": {
                     "items": {
                         "anyOf": [
@@ -845,6 +841,9 @@
                         ]
                     },
                     "type": "array"
+                },
+                "onlyIfTruthy": {
+                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                 },
                 "priceSequenceOut": {
                     "items": {
@@ -1206,10 +1205,6 @@
         },
         "QuoteSubYieldPipelineBlockPipelineStep": {
             "properties": {
-                "ifPipelineValue": {
-                    "pattern": "^[a-z0-9-]*$",
-                    "type": "string"
-                },
                 "in": {
                     "items": {
                         "anyOf": [
@@ -1236,6 +1231,9 @@
                         ]
                     },
                     "type": "array"
+                },
+                "onlyIfTruthy": {
+                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                 },
                 "priceSequenceOut": {
                     "items": {
@@ -1288,9 +1286,6 @@
         },
         "SubProcessPipelineBlockPipelineStep": {
             "properties": {
-                "ifPipelineValue": {
-                    "type": "string"
-                },
                 "in": {
                     "items": {
                         "anyOf": [
@@ -1317,6 +1312,9 @@
                         ]
                     },
                     "type": "array"
+                },
+                "onlyIfTruthy": {
+                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                 },
                 "out": {
                     "items": {
