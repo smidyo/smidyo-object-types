@@ -391,7 +391,7 @@ export interface QuoteRunYieldPipelineResult {
 }
 
 export interface PriceSequenceStepResult {
-  type: 'ADD' | 'SUBTRACT' | 'MINIMUM' | 'PERCENTAGE-OFF' | 'PERCENTAGE-ON' | 'MULTIPLY';
+  type: 'ADD' | 'SUBTRACT' | 'MINIMUM' | 'PERCENTAGE_OFF' | 'PERCENTAGE_ON' | 'MULTIPLY';
   name: string;
   title: string;
   specification?: string;
