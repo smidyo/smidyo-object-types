@@ -15,7 +15,7 @@
                 },
                 "inPriority": {
                     "items": {
-                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                        "type": "string"
                     },
                     "type": "array"
                 },
