@@ -70,7 +70,7 @@ export interface YieldPipeline extends BasePipeline {
 }
 
 export interface YieldPipelineQuotePriceSequenceStep {
-  type: 'ADD' | 'SUBTRACT' | 'MINIMUM' | 'PERCENTAGE-OFF' | 'PERCENTAGE-ON' | 'MULTIPLY';
+  type: 'ADD' | 'SUBTRACT' | 'MINIMUM' | 'PERCENTAGE_OFF' | 'PERCENTAGE_ON' | 'MULTIPLY';
   title: string;
   specification?: PipelineStepInFromInlineValueOrPipelineValue<{
     type: 'text';

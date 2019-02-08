@@ -1416,8 +1416,8 @@
                         "ADD",
                         "MINIMUM",
                         "MULTIPLY",
-                        "PERCENTAGE-OFF",
-                        "PERCENTAGE-ON",
+                        "PERCENTAGE_OFF",
+                        "PERCENTAGE_ON",
                         "SUBTRACT"
                     ],
                     "type": "string"
