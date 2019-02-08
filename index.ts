@@ -344,7 +344,7 @@ export interface AssertBlockPipelineStep extends BasePipelineStep {
   type: 'ASSERT';
   inPriority: PipelineStepInFromPipelineValue[];
   fallback: AssertBlockPipelineStepRejectFallback | AssertBlockPipelineStepFallbackDataFallback;
-  out: PipelineStepOutToPipelineValue;
+  out?: PipelineStepOutToPipelineValue;
 }
 
 abstract class AssertBlockPipelineStepFallback {

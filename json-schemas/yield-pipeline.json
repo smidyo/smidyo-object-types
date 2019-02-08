@@ -32,7 +32,6 @@
             "required": [
                 "fallback",
                 "inPriority",
-                "out",
                 "type"
             ],
             "type": "object"
