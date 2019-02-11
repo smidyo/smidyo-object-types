@@ -387,8 +387,6 @@ export interface QuoteRunYieldPipelineResult {
   infoPoints: InfoPointResult[];
   priceSequence: PriceSequenceStepResult[];
   totalPrice: number;
-  taxPercentage: number;
-  totalTax: number;
 }
 
 export interface PriceSequenceStepResult {
