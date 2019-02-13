@@ -702,7 +702,7 @@
                                     "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                                 },
                                 {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"table-row-sub-slug\">"
+                                    "$ref": "#/definitions/PipelineStepInTo<\"table-row-slug\">"
                                 }
                             ]
                         },
@@ -712,7 +712,7 @@
                                     "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
                                 },
                                 {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"table-row-sub-slug\">"
+                                    "$ref": "#/definitions/PipelineStepInTo<\"table-row-slug\">"
                                 }
                             ]
                         }
@@ -1151,11 +1151,11 @@
             ],
             "type": "object"
         },
-        "PipelineStepInTo<\"table-row-sub-slug\">": {
+        "PipelineStepInTo<\"table-row-slug\">": {
             "properties": {
                 "inTo": {
                     "enum": [
-                        "table-row-sub-slug"
+                        "table-row-slug"
                     ],
                     "type": "string"
                 }

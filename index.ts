@@ -222,7 +222,7 @@ export interface InternalSourceBlockTableCells extends InternalSourceBlockPipeli
   sourceBlock: 'TABLE_CELLS';
   tableSlug: string;
   tableColumnsSubSlug: string[];
-  in: PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'table-row-sub-slug'>;
+  in: PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'table-row-slug'>;
   out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
