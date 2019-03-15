@@ -395,6 +395,39 @@
             ],
             "type": "object"
         },
+        "InlineValue<{type:string;nullable:boolean;list:false;}>": {
+            "properties": {
+                "data": {
+                },
+                "dataShape": {
+                    "properties": {
+                        "list": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "nullable": {
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "list",
+                        "nullable",
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
         "InlineValue<{type:string;nullable:false;list:boolean;}>": {
             "properties": {
                 "data": {
@@ -500,42 +533,6 @@
             ],
             "type": "object"
         },
-        "InlineValue<{type:string;nullable:false;list:false;}>_2": {
-            "properties": {
-                "data": {
-                },
-                "dataShape": {
-                    "properties": {
-                        "list": {
-                            "enum": [
-                                false
-                            ],
-                            "type": "boolean"
-                        },
-                        "nullable": {
-                            "enum": [
-                                false
-                            ],
-                            "type": "boolean"
-                        },
-                        "type": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "list",
-                        "nullable",
-                        "type"
-                    ],
-                    "type": "object"
-                }
-            },
-            "required": [
-                "data",
-                "dataShape"
-            ],
-            "type": "object"
-        },
         "InternalEffectBlockTableDeleteRow": {
             "properties": {
                 "effectBlock": {
@@ -552,7 +549,7 @@
                                     "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                                 },
                                 {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"delete-table-row-sub-slug\">"
+                                    "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
                                 }
                             ]
                         },
@@ -562,7 +559,7 @@
                                     "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>"
                                 },
                                 {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"delete-table-row-sub-slug\">"
+                                    "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
                                 }
                             ]
                         }
@@ -588,6 +585,9 @@
         },
         "InternalEffectBlockTableUpdateCell": {
             "properties": {
+                "column": {
+                    "type": "string"
+                },
                 "effectBlock": {
                     "enum": [
                         "TABLE_UPDATE_CELL"
@@ -603,6 +603,26 @@
                                         "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                                     },
                                     {
+                                        "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<\"data\">"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:boolean;list:false;}>"
+                                    },
+                                    {
                                         "$ref": "#/definitions/PipelineStepInTo<\"data\">"
                                     }
                                 ]
@@ -613,36 +633,13 @@
                                         "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>_1"
                                     },
                                     {
-                                        "$ref": "#/definitions/PipelineStepInTo<\"data\">"
-                                    }
-                                ]
-                            },
-                            {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
-                                    }
-                                ]
-                            },
-                            {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>_2"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInTo<\"table-column-sub-slug\">"
+                                        "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
                                     }
                                 ]
                             }
                         ]
                     },
                     "type": "array"
-                },
-                "tableColumnSubSlug": {
-                    "type": "string"
                 },
                 "tableSlug": {
                     "type": "string"
@@ -655,9 +652,9 @@
                 }
             },
             "required": [
+                "column",
                 "effectBlock",
                 "in",
-                "tableColumnSubSlug",
                 "tableSlug",
                 "type"
             ],
@@ -694,6 +691,12 @@
         },
         "InternalSourceBlockTableCells": {
             "properties": {
+                "columns": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "in": {
                     "anyOf": [
                         {
@@ -702,7 +705,7 @@
                                     "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                                 },
                                 {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"table-row-slug\">"
+                                    "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
                                 }
                             ]
                         },
@@ -712,7 +715,7 @@
                                     "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
                                 },
                                 {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"table-row-slug\">"
+                                    "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
                                 }
                             ]
                         }
@@ -737,12 +740,6 @@
                     ],
                     "type": "string"
                 },
-                "tableColumnsSubSlug": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "tableSlug": {
                     "type": "string"
                 },
@@ -754,10 +751,10 @@
                 }
             },
             "required": [
+                "columns",
                 "in",
                 "out",
                 "sourceBlock",
-                "tableColumnsSubSlug",
                 "tableSlug",
                 "type"
             ],
@@ -765,6 +762,12 @@
         },
         "InternalSourceBlockTableColumns": {
             "properties": {
+                "columns": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "out": {
                     "items": {
                         "allOf": [
@@ -784,12 +787,6 @@
                     ],
                     "type": "string"
                 },
-                "tableColumnsSubSlug": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "tableSlug": {
                     "type": "string"
                 },
@@ -801,9 +798,9 @@
                 }
             },
             "required": [
+                "columns",
                 "out",
                 "sourceBlock",
-                "tableColumnsSubSlug",
                 "tableSlug",
                 "type"
             ],
@@ -1019,6 +1016,24 @@
             ],
             "type": "object"
         },
+        "PipelineStepInFromInlineValue<{type:string;nullable:boolean;list:false;}>": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<{type:string;nullable:boolean;list:false;}>"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
         "PipelineStepInFromInlineValue<{type:string;nullable:false;list:boolean;}>": {
             "properties": {
                 "inFrom": {
@@ -1073,24 +1088,6 @@
             ],
             "type": "object"
         },
-        "PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>_2": {
-            "properties": {
-                "inFrom": {
-                    "$ref": "#/definitions/InlineValue<{type:string;nullable:false;list:false;}>_2"
-                },
-                "type": {
-                    "enum": [
-                        "INLINE_VALUE"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "inFrom",
-                "type"
-            ],
-            "type": "object"
-        },
         "PipelineStepInFromPipelineValue": {
             "properties": {
                 "inFrom": {
@@ -1123,39 +1120,11 @@
             ],
             "type": "object"
         },
-        "PipelineStepInTo<\"delete-table-row-sub-slug\">": {
+        "PipelineStepInTo<\"row-name\">": {
             "properties": {
                 "inTo": {
                     "enum": [
-                        "delete-table-row-sub-slug"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "inTo"
-            ],
-            "type": "object"
-        },
-        "PipelineStepInTo<\"table-column-sub-slug\">": {
-            "properties": {
-                "inTo": {
-                    "enum": [
-                        "table-column-sub-slug"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "inTo"
-            ],
-            "type": "object"
-        },
-        "PipelineStepInTo<\"table-row-slug\">": {
-            "properties": {
-                "inTo": {
-                    "enum": [
-                        "table-row-slug"
+                        "row-name"
                     ],
                     "type": "string"
                 }

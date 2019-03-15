@@ -214,19 +214,19 @@ export interface InternalSourceBlockTableColumns extends InternalSourceBlockPipe
 
   sourceBlock: 'TABLE_COLUMNS';
   tableSlug: string;
-  tableColumnsSubSlug: string[];
+  columns: string[];
   out: InternalSourceBlockTableColumnsOut[];
 }
 
 export type InternalSourceBlockTableCellsIn = PipelineStepInFromInlineValueOrPipelineValue &
-  PipelineStepInTo<'table-row-slug'>;
+  PipelineStepInTo<'row-name'>;
 export type InternalSourceBlockTableCellsOut = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
 export interface InternalSourceBlockTableCells extends InternalSourceBlockPipelineStep {
   type: 'INTERNAL_SOURCE';
 
   sourceBlock: 'TABLE_CELLS';
   tableSlug: string;
-  tableColumnsSubSlug: string[];
+  columns: string[];
   in: InternalSourceBlockTableCellsIn;
   out: InternalSourceBlockTableCellsOut[];
 }
@@ -245,7 +245,7 @@ export type InternalEffectBlockTableDeleteRowIn = PipelineStepInFromInlineValueO
   nullable: false;
   list: false;
 }> &
-  PipelineStepInTo<'delete-table-row-sub-slug'>;
+  PipelineStepInTo<'row-name'>;
 export interface InternalEffectBlockTableDeleteRow extends InternalEffectBlockPipelineStep {
   type: 'INTERNAL_EFFECT';
 
@@ -257,7 +257,7 @@ export interface InternalEffectBlockTableDeleteRow extends InternalEffectBlockPi
 type InternalEffectBlockTableUpdateCellOptionIn =
   | PipelineStepInFromInlineValueOrPipelineValue<{
       type: string;
-      nullable: false;
+      nullable: boolean;
       list: false;
     }> &
       PipelineStepInTo<'data'>
@@ -266,14 +266,14 @@ type InternalEffectBlockTableUpdateCellOptionIn =
       nullable: false;
       list: false;
     }> &
-      PipelineStepInTo<'table-column-sub-slug'>;
+      PipelineStepInTo<'row-name'>;
 
 export interface InternalEffectBlockTableUpdateCell extends InternalEffectBlockPipelineStep {
   type: 'INTERNAL_EFFECT';
 
   effectBlock: 'TABLE_UPDATE_CELL';
   tableSlug: string;
-  tableColumnSubSlug: string;
+  column: string;
   in: InternalEffectBlockTableUpdateCellOptionIn[];
 }
 
@@ -422,3 +422,7 @@ export interface InfoPointResult {
   title: string;
   data: any;
 }
+
+//
+//
+//
