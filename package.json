@@ -1,9 +1,9 @@
 {
-  "name": "@smidyo/smidyo-types-pipeline",
+  "name": "@smidyo/smidyo-object-types",
   "version": "0.1.70",
   "description": "",
   "scripts": {
-    "json": "typescript-json-schema \"index.ts\" YieldPipeline -o \"./json-schemas/yield-pipeline.json\" --ignoreErrors --required && typescript-json-schema \"index.ts\" ProcessPipeline -o \"./json-schemas/process-pipeline.json\" --ignoreErrors --required",
+    "json": "typescript-json-schema \"types/pipeline/yield.ts\" YieldPipelineBody -o \"./json-schemas/yield-pipeline-body.json\" --ignoreErrors --required && typescript-json-schema \"types/pipeline/process.ts\" ProcessPipelineBody -o \"./json-schemas/process-pipeline-body.json\" --ignoreErrors --required && typescript-json-schema \"types/table/index.ts\" TableBody -o \"./json-schemas/table-body.json\" --ignoreErrors --required",
     "bump-publish": "npm version patch && npm publish"
   },
   "repository": {

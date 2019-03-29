@@ -1,16 +1,10 @@
-export interface FullDataShape {
-  type: string;
-  nullable: boolean;
-  list: boolean;
-}
-
-export interface PartialDataShape {
-  type?: string;
-  nullable?: boolean;
-  list?: boolean;
-}
+import { FullDataShape } from '../data-shape';
 
 export type PipelineType = 'PROCESS' | 'FORM' | 'YIELD';
+
+export interface BasePipelineBody {
+  type: PipelineType;
+}
 
 export interface PipelineInput {
   /** @pattern "^[a-z0-9-]*$" */
@@ -22,75 +16,6 @@ export interface PipelineOutput {
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
   dataShape: FullDataShape;
-}
-
-export interface BasePipeline {
-  type: PipelineType;
-}
-
-export interface ProcessPipeline extends BasePipeline {
-  type: 'PROCESS';
-  inputs: PipelineInput[];
-  outputs: PipelineOutput[];
-  steps: Array<
-    OperationBlockPipelineStep | SubProcessPipelineBlockPipelineStep | AssertBlockPipelineStep
-  >;
-}
-
-export interface FormPipeline extends BasePipeline {
-  type: 'FORM';
-  steps: Array<
-    | ElementBlockPipelineStep
-    | SubFormPipelineBlockPipelineStep
-    | SourceBlockPipelineStep
-    | AssertBlockPipelineStep
-  >;
-}
-
-export interface YieldPipeline extends BasePipeline {
-  type: 'YIELD';
-  inputs: PipelineInput[];
-  titleFrom?: PipelineStepInFromInlineValueOrPipelineValue;
-  quoteInfoPoints: YieldPipelineInfoPoint[];
-  quotePriceSequence: YieldPipelineQuotePriceSequenceStep[];
-  quoteSteps: Array<
-    | SubProcessPipelineBlockPipelineStep
-    | QuoteSubYieldPipelineBlockPipelineStep
-    | SourceBlockPipelineStep
-    | AssertBlockPipelineStep
-  >;
-  orderInfoPoints: YieldPipelineInfoPoint[];
-  orderSteps: Array<
-    | EffectBlockPipelineStep
-    | SourceBlockPipelineStep
-    | SubProcessPipelineBlockPipelineStep
-    | OrderSubYieldPipelineBlockPipelineStep
-    | AssertBlockPipelineStep
-  >;
-}
-
-export interface YieldPipelineQuotePriceSequenceStep {
-  type: 'ADD' | 'SUBTRACT' | 'MINIMUM' | 'PERCENTAGE_OFF' | 'PERCENTAGE_ON' | 'MULTIPLY';
-  title: string;
-  specification?: PipelineStepInFromInlineValueOrPipelineValue<{
-    type: 'text';
-    nullable: false;
-    list: false;
-  }>;
-  /** @pattern "^[a-z0-9-]*$" */
-  name: string;
-}
-
-export interface YieldPipelineInfoPoint {
-  title: string;
-  /** @pattern "^[a-z0-9-]*$" */
-  name: string;
-
-  dataShape: FullDataShape;
-
-  elementBlock: string;
-  elementBlockInput: string;
-  elementBlockConfiguration: Array<PipelineStepInFromInlineValue & PipelineStepInTo>;
 }
 
 type BlockType =
@@ -110,7 +35,7 @@ export abstract class BasePipelineStep {
   type: BlockType;
 }
 
-interface IfableBasePipelineStep extends BasePipelineStep {
+export interface IfableBasePipelineStep extends BasePipelineStep {
   onlyIfTruthy?: PipelineStepInFromPipelineValue;
 }
 
@@ -119,7 +44,7 @@ abstract class PipelineStepInFrom<DS = FullDataShape> {
   inFrom: InlineValue<DS> | string;
 }
 
-interface PipelineStepInTo<T = string> {
+export interface PipelineStepInTo<T = string> {
   inTo: T;
 }
 
@@ -277,32 +202,6 @@ export interface InternalEffectBlockTableUpdateCell extends InternalEffectBlockP
   in: InternalEffectBlockTableUpdateCellOptionIn[];
 }
 
-//
-//
-//
-
-export type OperationBlockPipelineStepIn = PipelineStepInFromInlineValueOrPipelineValue &
-  PipelineStepInTo;
-export type OperationBlockPipelineStepOut = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
-export interface OperationBlockPipelineStep extends BasePipelineStep {
-  type: 'OPERATION';
-  /** @pattern "^[a-z0-9-]*$" */
-  operationBlockSlug: string;
-  in: OperationBlockPipelineStepIn[];
-  out: OperationBlockPipelineStepOut[];
-}
-
-export type ElementBlockPipelineStepIn = PipelineStepInFromInlineValueOrPipelineValue &
-  PipelineStepInTo;
-export type ElementBlockPipelineStepOut = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
-export interface ElementBlockPipelineStep extends BasePipelineStep {
-  type: 'ELEMENT';
-  /** @pattern "^[a-z0-9-]*$" */
-  elementBlockSlug: string;
-  in: ElementBlockPipelineStepIn[];
-  out: ElementBlockPipelineStepOut[];
-}
-
 export type SubProcessPipelineBlockPipelineStepIn = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo;
 export type SubProcessPipelineBlockPipelineStepOut = PipelineStepOutFrom &
@@ -313,51 +212,6 @@ export interface SubProcessPipelineBlockPipelineStep extends IfableBasePipelineS
   subProcessPipelineSlug: string;
   in: SubProcessPipelineBlockPipelineStepIn[];
   out: SubProcessPipelineBlockPipelineStepOut[];
-}
-
-export type SubFormPipelineBlockPipelineStepIn = PipelineStepInFromInlineValueOrPipelineValue &
-  PipelineStepInTo;
-export type SubFormPipelineBlockPipelineStepOut = PipelineStepOutFrom &
-  PipelineStepOutToPipelineValue;
-export interface SubFormPipelineBlockPipelineStep extends IfableBasePipelineStep {
-  type: 'SUB_FORM_PIPELINE';
-  /** @pattern "^[a-z0-9-.]*$" */
-  subFormPipelineSlug: string;
-  in: SubFormPipelineBlockPipelineStepIn[];
-  out: SubFormPipelineBlockPipelineStepIn[];
-}
-
-abstract class SubYieldPipelineBlockPipelineStep implements IfableBasePipelineStep {
-  type: 'QUOTING_SUB_YIELD_PIPELINE' | 'ORDERING_SUB_YIELD_PIPELINE';
-  onlyIfTruthy?: PipelineStepInFromPipelineValue;
-
-  /** @pattern "^[a-z0-9-.]*$" */
-  subYieldPipelineSlug: string;
-  in: Array<(PipelineStepInFromInlineValueOrPipelineValue) & PipelineStepInTo>;
-  priceSequenceOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
-  totalPriceOut?: PipelineStepOutToPipelineValue;
-  quoteInfoPointsOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
-}
-
-export interface QuoteSubYieldPipelineBlockPipelineStep extends SubYieldPipelineBlockPipelineStep {
-  type: 'QUOTING_SUB_YIELD_PIPELINE';
-}
-
-export interface OrderSubYieldPipelineBlockPipelineStep extends SubYieldPipelineBlockPipelineStep {
-  type: 'ORDERING_SUB_YIELD_PIPELINE';
-
-  proposalNameIn?: PipelineStepInFromInlineValueOrPipelineValue<{
-    type: 'text';
-    nullable: false;
-    list: false;
-  }>;
-  proposalTitleIn?: PipelineStepInFromInlineValueOrPipelineValue<{
-    type: 'text';
-    nullable: false;
-    list: false;
-  }>;
-
-  proposalSlugOut?: PipelineStepOutToPipelineValue;
 }
 
 export interface AssertBlockPipelineStep extends BasePipelineStep {
@@ -393,34 +247,10 @@ export interface AssertBlockPipelineStepFallbackDataFallback
 //
 //
 //
-//
-//
 
 export interface PipelineRejectionResult {
   type: 'REJECTION_RESULT';
   message: string;
-}
-
-export interface QuoteRunYieldPipelineResult {
-  type: 'QUOTE_RUN_YIELD_PIPELINE_RESULT';
-  title: string;
-  infoPoints: InfoPointResult[];
-  priceSequence: PriceSequenceStepResult[];
-  totalPrice: number;
-}
-
-export interface PriceSequenceStepResult {
-  type: 'ADD' | 'SUBTRACT' | 'MINIMUM' | 'PERCENTAGE_OFF' | 'PERCENTAGE_ON' | 'MULTIPLY';
-  name: string;
-  title: string;
-  specification?: string;
-  data: number;
-}
-
-export interface InfoPointResult {
-  name: string;
-  title: string;
-  data: any;
 }
 
 //
