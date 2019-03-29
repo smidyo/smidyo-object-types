@@ -1435,10 +1435,10 @@
                         "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
                     },
                     {
-                        "$ref": "#/definitions/OrderSubYieldPipelineBlockPipelineStep"
+                        "$ref": "#/definitions/AssertBlockPipelineStep"
                     },
                     {
-                        "$ref": "#/definitions/AssertBlockPipelineStep"
+                        "$ref": "#/definitions/OrderSubYieldPipelineBlockPipelineStep"
                     }
                 ]
             },
@@ -1475,10 +1475,10 @@
                         "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
                     },
                     {
-                        "$ref": "#/definitions/QuoteSubYieldPipelineBlockPipelineStep"
+                        "$ref": "#/definitions/AssertBlockPipelineStep"
                     },
                     {
-                        "$ref": "#/definitions/AssertBlockPipelineStep"
+                        "$ref": "#/definitions/QuoteSubYieldPipelineBlockPipelineStep"
                     }
                 ]
             },

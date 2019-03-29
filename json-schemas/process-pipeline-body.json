@@ -472,13 +472,13 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/OperationBlockPipelineStep"
-                    },
-                    {
                         "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
                     },
                     {
                         "$ref": "#/definitions/AssertBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/OperationBlockPipelineStep"
                     }
                 ]
             },

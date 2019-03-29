@@ -1,0 +1,100 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "properties": {
+        "columns": {
+            "items": {
+                "anyOf": [
+                    {
+                        "properties": {
+                            "dataShape": {
+                                "properties": {
+                                    "nullable": {
+                                        "enum": [
+                                            false
+                                        ],
+                                        "type": "boolean"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "nullable",
+                                    "type"
+                                ],
+                                "type": "object"
+                            },
+                            "fallbackData": {
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "dataShape",
+                            "fallbackData",
+                            "name"
+                        ],
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "dataShape": {
+                                "properties": {
+                                    "nullable": {
+                                        "enum": [
+                                            true
+                                        ],
+                                        "type": "boolean"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "nullable",
+                                    "type"
+                                ],
+                                "type": "object"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "dataShape",
+                            "name"
+                        ],
+                        "type": "object"
+                    }
+                ]
+            },
+            "type": "array"
+        },
+        "data": {
+            "additionalProperties": {
+                "additionalProperties": {
+                },
+                "type": "object"
+            },
+            "properties": {
+                "row-names": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "row-names"
+            ],
+            "type": "object"
+        }
+    },
+    "required": [
+        "columns",
+        "data"
+    ],
+    "type": "object"
+}
+
