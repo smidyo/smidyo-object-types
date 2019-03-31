@@ -7,7 +7,7 @@ export interface TableBody {
           nullable: false;
           list: false;
         };
-        fallbackData: any;
+        fallbackData: any[];
       }
     | {
         name: string;
@@ -22,7 +22,7 @@ export interface TableBody {
               nullable: false;
               list: true;
             };
-        fallbackData?: any;
+        fallbackData?: any[];
       }
   >;
   data: {
@@ -30,7 +30,7 @@ export interface TableBody {
       [rowName: string]: [string];
     };
     [columnName: string]: {
-      [rowName: string]: any;
+      [rowName: string]: any[];
     };
   };
 }

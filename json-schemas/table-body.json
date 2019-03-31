@@ -32,6 +32,9 @@
                                 "type": "object"
                             },
                             "fallbackData": {
+                                "items": {
+                                },
+                                "type": "array"
                             },
                             "name": {
                                 "type": "string"
@@ -98,6 +101,9 @@
                                 ]
                             },
                             "fallbackData": {
+                                "items": {
+                                },
+                                "type": "array"
                             },
                             "name": {
                                 "type": "string"
@@ -116,6 +122,9 @@
         "data": {
             "additionalProperties": {
                 "additionalProperties": {
+                    "items": {
+                    },
+                    "type": "array"
                 },
                 "type": "object"
             },
