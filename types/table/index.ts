@@ -27,7 +27,7 @@ export interface TableBody {
   >;
   data: {
     'row-names': {
-      [rowName: string]: string;
+      [rowName: string]: [string];
     };
     [columnName: string]: {
       [rowName: string]: any;

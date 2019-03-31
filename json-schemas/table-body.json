@@ -122,7 +122,20 @@
             "properties": {
                 "row-names": {
                     "additionalProperties": {
-                        "type": "string"
+                        "additionalItems": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "items": [
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "minItems": 1,
+                        "type": "array"
                     },
                     "type": "object"
                 }
