@@ -151,7 +151,7 @@ export interface InternalSourceBlockTableCells extends InternalSourceBlockPipeli
 
   sourceBlock: 'TABLE_CELLS';
   tableSlug: string;
-  columns: string[];
+  singularColumns: string[]; // must be columns of shape singular
   in: InternalSourceBlockTableCellsIn;
   out: InternalSourceBlockTableCellsOut[];
 }
@@ -180,12 +180,7 @@ export interface InternalEffectBlockTableDeleteRow extends InternalEffectBlockPi
 }
 
 type InternalEffectBlockTableUpdateCellOptionIn =
-  | PipelineStepInFromInlineValueOrPipelineValue<{
-      type: string;
-      nullable: boolean;
-      list: false;
-    }> &
-      PipelineStepInTo<'data'>
+  | PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'data'>
   | PipelineStepInFromInlineValueOrPipelineValue<{
       type: string;
       nullable: false;

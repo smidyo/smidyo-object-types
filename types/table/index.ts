@@ -5,15 +5,24 @@ export interface TableBody {
         dataShape: {
           type: string;
           nullable: false;
+          list: false;
         };
         fallbackData: any;
       }
     | {
         name: string;
-        dataShape: {
-          type: string;
-          nullable: true;
-        };
+        dataShape:
+          | {
+              type: string;
+              nullable: true;
+              list: boolean;
+            }
+          | {
+              type: string;
+              nullable: false;
+              list: true;
+            };
+        fallbackData?: any;
       }
   >;
   data: {
