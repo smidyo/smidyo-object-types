@@ -395,39 +395,6 @@
             ],
             "type": "object"
         },
-        "InlineValue<{type:string;nullable:boolean;list:false;}>": {
-            "properties": {
-                "data": {
-                },
-                "dataShape": {
-                    "properties": {
-                        "list": {
-                            "enum": [
-                                false
-                            ],
-                            "type": "boolean"
-                        },
-                        "nullable": {
-                            "type": "boolean"
-                        },
-                        "type": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "list",
-                        "nullable",
-                        "type"
-                    ],
-                    "type": "object"
-                }
-            },
-            "required": [
-                "data",
-                "dataShape"
-            ],
-            "type": "object"
-        },
         "InlineValue<{type:string;nullable:false;list:boolean;}>": {
             "properties": {
                 "data": {
@@ -620,7 +587,7 @@
                             {
                                 "allOf": [
                                     {
-                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:boolean;list:false;}>"
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
                                     },
                                     {
                                         "$ref": "#/definitions/PipelineStepInTo<\"data\">"
@@ -691,12 +658,6 @@
         },
         "InternalSourceBlockTableCells": {
             "properties": {
-                "columns": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "in": {
                     "anyOf": [
                         {
@@ -734,6 +695,12 @@
                     },
                     "type": "array"
                 },
+                "singularColumns": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "sourceBlock": {
                     "enum": [
                         "TABLE_CELLS"
@@ -751,9 +718,9 @@
                 }
             },
             "required": [
-                "columns",
                 "in",
                 "out",
+                "singularColumns",
                 "sourceBlock",
                 "tableSlug",
                 "type"
@@ -1002,24 +969,6 @@
             "properties": {
                 "inFrom": {
                     "$ref": "#/definitions/InlineValue<{type:\"text\";nullable:false;list:false;}>_3"
-                },
-                "type": {
-                    "enum": [
-                        "INLINE_VALUE"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "inFrom",
-                "type"
-            ],
-            "type": "object"
-        },
-        "PipelineStepInFromInlineValue<{type:string;nullable:boolean;list:false;}>": {
-            "properties": {
-                "inFrom": {
-                    "$ref": "#/definitions/InlineValue<{type:string;nullable:boolean;list:false;}>"
                 },
                 "type": {
                     "enum": [
