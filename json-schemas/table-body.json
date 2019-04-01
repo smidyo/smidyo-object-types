@@ -7,15 +7,9 @@
                     "dataShape": {
                         "properties": {
                             "list": {
-                                "enum": [
-                                    false
-                                ],
                                 "type": "boolean"
                             },
                             "nullable": {
-                                "enum": [
-                                    false
-                                ],
                                 "type": "boolean"
                             },
                             "type": {

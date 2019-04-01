@@ -3,8 +3,8 @@ export interface TableBody {
     name: string;
     dataShape: {
       type: string;
-      nullable: false;
-      list: false;
+      nullable: boolean;
+      list: boolean;
     };
   }>;
   data: {
