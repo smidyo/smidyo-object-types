@@ -3,119 +3,41 @@
     "properties": {
         "columns": {
             "items": {
-                "anyOf": [
-                    {
+                "properties": {
+                    "dataShape": {
                         "properties": {
-                            "dataShape": {
-                                "properties": {
-                                    "list": {
-                                        "enum": [
-                                            false
-                                        ],
-                                        "type": "boolean"
-                                    },
-                                    "nullable": {
-                                        "enum": [
-                                            false
-                                        ],
-                                        "type": "boolean"
-                                    },
-                                    "type": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "list",
-                                    "nullable",
-                                    "type"
+                            "list": {
+                                "enum": [
+                                    false
                                 ],
-                                "type": "object"
+                                "type": "boolean"
                             },
-                            "fallbackData": {
-                                "items": {
-                                },
-                                "type": "array"
+                            "nullable": {
+                                "enum": [
+                                    false
+                                ],
+                                "type": "boolean"
                             },
-                            "name": {
+                            "type": {
                                 "type": "string"
                             }
                         },
                         "required": [
-                            "dataShape",
-                            "fallbackData",
-                            "name"
+                            "list",
+                            "nullable",
+                            "type"
                         ],
                         "type": "object"
                     },
-                    {
-                        "properties": {
-                            "dataShape": {
-                                "anyOf": [
-                                    {
-                                        "properties": {
-                                            "list": {
-                                                "type": "boolean"
-                                            },
-                                            "nullable": {
-                                                "enum": [
-                                                    true
-                                                ],
-                                                "type": "boolean"
-                                            },
-                                            "type": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "required": [
-                                            "list",
-                                            "nullable",
-                                            "type"
-                                        ],
-                                        "type": "object"
-                                    },
-                                    {
-                                        "properties": {
-                                            "list": {
-                                                "enum": [
-                                                    true
-                                                ],
-                                                "type": "boolean"
-                                            },
-                                            "nullable": {
-                                                "enum": [
-                                                    false
-                                                ],
-                                                "type": "boolean"
-                                            },
-                                            "type": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "required": [
-                                            "list",
-                                            "nullable",
-                                            "type"
-                                        ],
-                                        "type": "object"
-                                    }
-                                ]
-                            },
-                            "fallbackData": {
-                                "items": {
-                                },
-                                "type": "array"
-                            },
-                            "name": {
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "dataShape",
-                            "name"
-                        ],
-                        "type": "object"
+                    "name": {
+                        "type": "string"
                     }
-                ]
+                },
+                "required": [
+                    "dataShape",
+                    "name"
+                ],
+                "type": "object"
             },
             "type": "array"
         },
