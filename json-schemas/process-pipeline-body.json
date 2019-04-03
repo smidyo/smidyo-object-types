@@ -221,7 +221,6 @@
                     "type": "array"
                 },
                 "operationBlockSlug": {
-                    "pattern": "^[a-z0-9-]*$",
                     "type": "string"
                 },
                 "out": {

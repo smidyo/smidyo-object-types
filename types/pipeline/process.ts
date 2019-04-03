@@ -29,7 +29,6 @@ export type OperationBlockPipelineStepIn = PipelineStepInFromInlineValueOrPipeli
 export type OperationBlockPipelineStepOut = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
 export interface OperationBlockPipelineStep extends BasePipelineStep {
   type: 'OPERATION';
-  /** @pattern "^[a-z0-9-]*$" */
   operationBlockSlug: string;
   in: OperationBlockPipelineStepIn[];
   out: OperationBlockPipelineStepOut[];
