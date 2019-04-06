@@ -639,6 +639,70 @@
                 "type"
             ],
             "type": "object"
+        },
+        "SubProcessPipelineBlockPipelineStep": {
+            "properties": {
+                "conditional": {
+                    "type": "boolean"
+                },
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "subProcessPipelineSlug": {
+                    "pattern": "^[a-z0-9-.]*$",
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "SUB_PROCESS_PIPELINE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "in",
+                "out",
+                "subProcessPipelineSlug",
+                "type"
+            ],
+            "type": "object"
         }
     },
     "properties": {
@@ -656,6 +720,9 @@
                     },
                     {
                         "$ref": "#/definitions/ExternalSystemSourceBlockPipelineStep"
+                    },
+                    {
+                        "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
                     },
                     {
                         "$ref": "#/definitions/AssertBlockPipelineStep"
