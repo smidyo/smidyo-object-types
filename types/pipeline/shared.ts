@@ -35,8 +35,8 @@ export abstract class BasePipelineStep {
   type: BlockType;
 }
 
-export interface IfableBasePipelineStep extends BasePipelineStep {
-  onlyIfTruthy?: PipelineStepInFromPipelineValue;
+export interface ConditionalPipelineStep extends BasePipelineStep {
+  conditional?: boolean;
 }
 
 abstract class PipelineStepInFrom<DS = FullDataShape> {
@@ -201,7 +201,7 @@ export type SubProcessPipelineBlockPipelineStepIn = PipelineStepInFromInlineValu
   PipelineStepInTo;
 export type SubProcessPipelineBlockPipelineStepOut = PipelineStepOutFrom &
   PipelineStepOutToPipelineValue;
-export interface SubProcessPipelineBlockPipelineStep extends IfableBasePipelineStep {
+export interface SubProcessPipelineBlockPipelineStep extends ConditionalPipelineStep {
   type: 'SUB_PROCESS_PIPELINE';
   /** @pattern "^[a-z0-9-.]*$" */
   subProcessPipelineSlug: string;

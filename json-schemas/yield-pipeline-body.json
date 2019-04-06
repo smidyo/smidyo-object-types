@@ -1200,6 +1200,9 @@
         },
         "SubProcessPipelineBlockPipelineStep": {
             "properties": {
+                "conditional": {
+                    "type": "boolean"
+                },
                 "in": {
                     "items": {
                         "anyOf": [
@@ -1226,9 +1229,6 @@
                         ]
                     },
                     "type": "array"
-                },
-                "onlyIfTruthy": {
-                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                 },
                 "out": {
                     "items": {
