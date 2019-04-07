@@ -457,6 +457,38 @@
             ],
             "type": "object"
         },
+        "PipelineInput": {
+            "properties": {
+                "dataShape": {
+                    "$ref": "#/definitions/FullDataShape"
+                },
+                "name": {
+                    "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataShape",
+                "name"
+            ],
+            "type": "object"
+        },
+        "PipelineOutput": {
+            "properties": {
+                "dataShape": {
+                    "$ref": "#/definitions/FullDataShape"
+                },
+                "name": {
+                    "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataShape",
+                "name"
+            ],
+            "type": "object"
+        },
         "PipelineStepInFromInlineValue<FullDataShape>": {
             "properties": {
                 "inFrom": {
@@ -706,6 +738,18 @@
         }
     },
     "properties": {
+        "inputs": {
+            "items": {
+                "$ref": "#/definitions/PipelineInput"
+            },
+            "type": "array"
+        },
+        "outputs": {
+            "items": {
+                "$ref": "#/definitions/PipelineOutput"
+            },
+            "type": "array"
+        },
         "steps": {
             "items": {
                 "anyOf": [
@@ -745,6 +789,8 @@
         }
     },
     "required": [
+        "inputs",
+        "outputs",
         "steps",
         "type"
     ],

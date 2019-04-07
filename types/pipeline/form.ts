@@ -8,11 +8,15 @@ import {
   PipelineStepOutToPipelineValue,
   ConditionalPipelineStep,
   BasePipelineStep,
-  SubProcessPipelineBlockPipelineStep
+  SubProcessPipelineBlockPipelineStep,
+  PipelineInput,
+  PipelineOutput
 } from './shared';
 
 export interface FormPipelineBody extends BasePipelineBody {
   type: 'FORM';
+  inputs: PipelineInput[];
+  outputs: PipelineOutput[];
   steps: Array<
     | ElementBlockPipelineStep
     | SubFormPipelineBlockPipelineStep
