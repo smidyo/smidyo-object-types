@@ -8,7 +8,7 @@ import {
   EffectBlockPipelineStep,
   PipelineStepInFromInlineValue,
   PipelineStepInTo,
-  IfableBasePipelineStep,
+  ConditionalPipelineStep,
   PipelineStepInFromPipelineValue,
   PipelineStepOutFrom,
   PipelineStepOutToPipelineValue
@@ -61,9 +61,9 @@ export interface YieldPipelineInfoPoint {
   elementBlockConfiguration: Array<PipelineStepInFromInlineValue & PipelineStepInTo>;
 }
 
-abstract class SubYieldPipelineBlockPipelineStep implements IfableBasePipelineStep {
+abstract class SubYieldPipelineBlockPipelineStep implements ConditionalPipelineStep {
   type: 'QUOTING_SUB_YIELD_PIPELINE' | 'ORDERING_SUB_YIELD_PIPELINE';
-  onlyIfTruthy?: PipelineStepInFromPipelineValue;
+  conditional?: boolean;
 
   /** @pattern "^[a-z0-9-.]*$" */
   subYieldPipelineSlug: string;

@@ -35,7 +35,11 @@ export abstract class BasePipelineStep {
   type: BlockType;
 }
 
-export interface ConditionalPipelineStep extends BasePipelineStep {
+export interface IfablePipelineStep extends BasePipelineStep {
+  ifPipelineValue?: string;
+}
+
+export interface ConditionalPipelineStep extends IfablePipelineStep {
   conditional?: boolean;
 }
 

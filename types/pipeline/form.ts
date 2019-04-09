@@ -6,7 +6,7 @@ import {
   PipelineStepInTo,
   PipelineStepOutFrom,
   PipelineStepOutToPipelineValue,
-  ConditionalPipelineStep,
+  IfablePipelineStep,
   BasePipelineStep,
   SubProcessPipelineBlockPipelineStep,
   PipelineInput,
@@ -34,7 +34,7 @@ export type SubFormPipelineBlockPipelineStepIn = PipelineStepInFromInlineValueOr
   PipelineStepInTo;
 export type SubFormPipelineBlockPipelineStepOut = PipelineStepOutFrom &
   PipelineStepOutToPipelineValue;
-export interface SubFormPipelineBlockPipelineStep extends ConditionalPipelineStep {
+export interface SubFormPipelineBlockPipelineStep extends IfablePipelineStep {
   type: 'SUB_FORM_PIPELINE';
   subFormPipelineSlug: string;
   in: SubFormPipelineBlockPipelineStepIn[];
