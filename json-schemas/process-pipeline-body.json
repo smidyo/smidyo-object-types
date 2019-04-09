@@ -394,6 +394,9 @@
                 "conditional": {
                     "type": "boolean"
                 },
+                "ifPipelineValue": {
+                    "type": "string"
+                },
                 "in": {
                     "items": {
                         "anyOf": [

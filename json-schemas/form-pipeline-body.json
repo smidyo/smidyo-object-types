@@ -611,8 +611,8 @@
         },
         "SubFormPipelineBlockPipelineStep": {
             "properties": {
-                "conditional": {
-                    "type": "boolean"
+                "ifPipelineValue": {
+                    "type": "string"
                 },
                 "in": {
                     "items": {
@@ -676,6 +676,9 @@
             "properties": {
                 "conditional": {
                     "type": "boolean"
+                },
+                "ifPipelineValue": {
+                    "type": "string"
                 },
                 "in": {
                     "items": {

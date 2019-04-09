@@ -775,6 +775,9 @@
         },
         "OrderSubYieldPipelineBlockPipelineStep": {
             "properties": {
+                "conditional": {
+                    "type": "boolean"
+                },
                 "in": {
                     "items": {
                         "anyOf": [
@@ -801,9 +804,6 @@
                         ]
                     },
                     "type": "array"
-                },
-                "onlyIfTruthy": {
-                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                 },
                 "priceSequenceOut": {
                     "items": {
@@ -1119,6 +1119,9 @@
         },
         "QuoteSubYieldPipelineBlockPipelineStep": {
             "properties": {
+                "conditional": {
+                    "type": "boolean"
+                },
                 "in": {
                     "items": {
                         "anyOf": [
@@ -1145,9 +1148,6 @@
                         ]
                     },
                     "type": "array"
-                },
-                "onlyIfTruthy": {
-                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                 },
                 "priceSequenceOut": {
                     "items": {
@@ -1202,6 +1202,9 @@
             "properties": {
                 "conditional": {
                     "type": "boolean"
+                },
+                "ifPipelineValue": {
+                    "type": "string"
                 },
                 "in": {
                     "items": {
