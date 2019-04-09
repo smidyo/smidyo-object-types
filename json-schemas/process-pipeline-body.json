@@ -395,10 +395,7 @@
                     "type": "boolean"
                 },
                 "ifPipelineValues": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
+                    "type": "string"
                 },
                 "in": {
                     "items": {
