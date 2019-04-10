@@ -1203,7 +1203,7 @@
                 "conditional": {
                     "type": "boolean"
                 },
-                "ifPipelineValues": {
+                "ifPipelineValue": {
                     "type": "string"
                 },
                 "in": {
