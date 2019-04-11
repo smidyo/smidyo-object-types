@@ -1,91 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
-        "AssertBlockPipelineStep": {
-            "properties": {
-                "fallback": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/AssertBlockPipelineStepRejectFallback"
-                        },
-                        {
-                            "$ref": "#/definitions/AssertBlockPipelineStepFallbackDataFallback"
-                        }
-                    ]
-                },
-                "inPriority": {
-                    "items": {
-                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                    },
-                    "type": "array"
-                },
-                "out": {
-                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
-                },
-                "type": {
-                    "enum": [
-                        "ASSERT"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "fallback",
-                "inPriority",
-                "type"
-            ],
-            "type": "object"
-        },
-        "AssertBlockPipelineStepFallbackDataFallback": {
-            "properties": {
-                "data": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                        },
-                        {
-                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:false;list:boolean;}>"
-                        }
-                    ]
-                },
-                "type": {
-                    "enum": [
-                        "FALLBACK_DATA"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "data",
-                "type"
-            ],
-            "type": "object"
-        },
-        "AssertBlockPipelineStepRejectFallback": {
-            "properties": {
-                "message": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                        },
-                        {
-                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>"
-                        }
-                    ]
-                },
-                "type": {
-                    "enum": [
-                        "REJECT"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "message",
-                "type"
-            ],
-            "type": "object"
-        },
         "ElementBlockPipelineStep": {
             "properties": {
                 "elementBlockSlug": {
@@ -231,78 +146,6 @@
                 },
                 "dataShape": {
                     "$ref": "#/definitions/FullDataShape"
-                }
-            },
-            "required": [
-                "data",
-                "dataShape"
-            ],
-            "type": "object"
-        },
-        "InlineValue<{type:\"text\";nullable:false;list:false;}>": {
-            "properties": {
-                "data": {
-                },
-                "dataShape": {
-                    "properties": {
-                        "list": {
-                            "enum": [
-                                false
-                            ],
-                            "type": "boolean"
-                        },
-                        "nullable": {
-                            "enum": [
-                                false
-                            ],
-                            "type": "boolean"
-                        },
-                        "type": {
-                            "enum": [
-                                "text"
-                            ],
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "list",
-                        "nullable",
-                        "type"
-                    ],
-                    "type": "object"
-                }
-            },
-            "required": [
-                "data",
-                "dataShape"
-            ],
-            "type": "object"
-        },
-        "InlineValue<{type:string;nullable:false;list:boolean;}>": {
-            "properties": {
-                "data": {
-                },
-                "dataShape": {
-                    "properties": {
-                        "list": {
-                            "type": "boolean"
-                        },
-                        "nullable": {
-                            "enum": [
-                                false
-                            ],
-                            "type": "boolean"
-                        },
-                        "type": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "list",
-                        "nullable",
-                        "type"
-                    ],
-                    "type": "object"
                 }
             },
             "required": [
@@ -493,42 +336,6 @@
             "properties": {
                 "inFrom": {
                     "$ref": "#/definitions/InlineValue<FullDataShape>"
-                },
-                "type": {
-                    "enum": [
-                        "INLINE_VALUE"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "inFrom",
-                "type"
-            ],
-            "type": "object"
-        },
-        "PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>": {
-            "properties": {
-                "inFrom": {
-                    "$ref": "#/definitions/InlineValue<{type:\"text\";nullable:false;list:false;}>"
-                },
-                "type": {
-                    "enum": [
-                        "INLINE_VALUE"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "inFrom",
-                "type"
-            ],
-            "type": "object"
-        },
-        "PipelineStepInFromInlineValue<{type:string;nullable:false;list:boolean;}>": {
-            "properties": {
-                "inFrom": {
-                    "$ref": "#/definitions/InlineValue<{type:string;nullable:false;list:boolean;}>"
                 },
                 "type": {
                     "enum": [
@@ -770,9 +577,6 @@
                     },
                     {
                         "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
-                    },
-                    {
-                        "$ref": "#/definitions/AssertBlockPipelineStep"
                     },
                     {
                         "$ref": "#/definitions/SubFormPipelineBlockPipelineStep"

@@ -22,7 +22,6 @@ export interface FormPipelineBody extends BasePipelineBody {
     | SubFormPipelineBlockPipelineStep
     | SubProcessPipelineBlockPipelineStep
     | SourceBlockPipelineStep
-    | AssertBlockPipelineStep
   >;
 }
 
