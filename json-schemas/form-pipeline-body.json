@@ -6,6 +6,12 @@
                 "elementBlockSlug": {
                     "type": "string"
                 },
+                "ifPipelineValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "in": {
                     "items": {
                         "anyOf": [

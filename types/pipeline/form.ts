@@ -1,6 +1,5 @@
 import {
   BasePipelineBody,
-  AssertBlockPipelineStep,
   SourceBlockPipelineStep,
   PipelineStepInFromInlineValueOrPipelineValue,
   PipelineStepInTo,
@@ -43,7 +42,7 @@ export interface SubFormPipelineBlockPipelineStep extends IfablePipelineStep {
 export type ElementBlockPipelineStepIn = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo;
 export type ElementBlockPipelineStepOut = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
-export interface ElementBlockPipelineStep extends BasePipelineStep {
+export interface ElementBlockPipelineStep extends IfablePipelineStep {
   type: 'ELEMENT';
   elementBlockSlug: string;
   in: ElementBlockPipelineStepIn[];
