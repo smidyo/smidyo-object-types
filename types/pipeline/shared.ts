@@ -36,7 +36,7 @@ export abstract class BasePipelineStep {
 }
 
 export interface IfablePipelineStep extends BasePipelineStep {
-  ifPipelineValue?: string;
+  ifPipelineValues?: string[];
 }
 
 export interface ConditionalPipelineStep extends IfablePipelineStep {
