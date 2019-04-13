@@ -36,7 +36,7 @@ export interface BasePipelineStep {
 }
 
 export interface SkipablePipelineStep {
-  skipable?: boolean;
+  skippable?: boolean;
 }
 
 abstract class PipelineStepInFrom<DS = FullDataShape> {

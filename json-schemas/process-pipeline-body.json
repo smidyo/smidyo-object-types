@@ -391,7 +391,7 @@
         },
         "SkipablePipelineStep": {
             "properties": {
-                "skipable": {
+                "skippable": {
                     "type": "boolean"
                 }
             },
