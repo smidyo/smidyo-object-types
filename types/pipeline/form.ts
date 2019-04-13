@@ -11,26 +11,37 @@ import {
   PipelineOutput
 } from './shared';
 
+// All FP steps are skipable per default
+
+export interface SkipUnlessPipelineValuesPipelineStep {
+  skipUnlessPipelineValues?: string[];
+}
+
+export type ElementBlockFormPipelineStep = ElementBlockPipelineStep &
+  SkipUnlessPipelineValuesPipelineStep;
+export type SubFormPipelineBlockFormPipelineStep = SubFormPipelineBlockPipelineStep &
+  SkipUnlessPipelineValuesPipelineStep;
+export type SubProcessPipelineBlockFormPipelineStep = SubProcessPipelineBlockPipelineStep &
+  SkipUnlessPipelineValuesPipelineStep;
+export type SourceBlockFormPipelineStep = SourceBlockPipelineStep &
+  SkipUnlessPipelineValuesPipelineStep;
+
+export type FormPipelineStep =
+  | ElementBlockFormPipelineStep
+  | SubFormPipelineBlockFormPipelineStep
+  | SubProcessPipelineBlockFormPipelineStep
+  | SourceBlockFormPipelineStep;
+
 export interface FormPipelineBody extends BasePipelineBody {
   type: 'FORM';
   inputs: PipelineInput[];
   outputs: PipelineOutput[];
-  steps: Array<FormPipelineStep>;
+  steps: FormPipelineStep[];
 }
 
 //
 //
 //
-
-// All FP steps are conditional per standard
-
-export type FormPipelineStep = (
-  | ElementBlockPipelineStep
-  | SubFormPipelineBlockPipelineStep
-  | SubProcessPipelineBlockPipelineStep
-  | SourceBlockPipelineStep) & {
-  skipUnlessPipelineValues?: string[];
-};
 
 export type SubFormPipelineBlockPipelineStepIn = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo;

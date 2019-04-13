@@ -8,8 +8,19 @@ import {
   PipelineStepInTo,
   PipelineStepOutFrom,
   PipelineStepOutToPipelineValue,
-  BasePipelineStep
+  BasePipelineStep,
+  SkipablePipelineStep
 } from './shared';
+
+export type OperationBlockProcessPipelineStep = OperationBlockPipelineStep &
+  SkipablePipelineStep;
+export type SubProcessPipelineBlockProcessPipelineStep = SubProcessPipelineBlockPipelineStep &
+  SkipablePipelineStep;
+
+export type ProcessPipelineStep =
+  | OperationBlockProcessPipelineStep
+  | SubProcessPipelineBlockProcessPipelineStep
+  | AssertBlockPipelineStep;
 
 export interface ProcessPipelineBody extends BasePipelineBody {
   type: 'PROCESS';
@@ -17,12 +28,6 @@ export interface ProcessPipelineBody extends BasePipelineBody {
   outputs: PipelineOutput[];
   steps: ProcessPipelineStep[];
 }
-
-export type ProcessPipelineStep =
-  | (OperationBlockPipelineStep | SubProcessPipelineBlockPipelineStep) & {
-      skipable?: boolean;
-    }
-  | AssertBlockPipelineStep;
 
 //
 //

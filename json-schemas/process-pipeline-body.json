@@ -389,6 +389,14 @@
             ],
             "type": "object"
         },
+        "SkipablePipelineStep": {
+            "properties": {
+                "skipable": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
         "SubProcessPipelineBlockPipelineStep": {
             "properties": {
                 "in": {
@@ -473,30 +481,20 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
+                                "$ref": "#/definitions/OperationBlockPipelineStep"
                             },
                             {
-                                "properties": {
-                                    "skipable": {
-                                        "type": "boolean"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/SkipablePipelineStep"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/OperationBlockPipelineStep"
+                                "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
                             },
                             {
-                                "properties": {
-                                    "skipable": {
-                                        "type": "boolean"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/SkipablePipelineStep"
                             }
                         ]
                     }

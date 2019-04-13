@@ -416,6 +416,17 @@
             ],
             "type": "object"
         },
+        "SkipUnlessPipelineValuesPipelineStep": {
+            "properties": {
+                "skipUnlessPipelineValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
         "SubFormPipelineBlockPipelineStep": {
             "properties": {
                 "in": {
@@ -557,108 +568,10 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/InternalSourceBlockConstant"
-                            },
-                            {
-                                "properties": {
-                                    "skipUnlessPipelineValues": {
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "type": "array"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/InternalSourceBlockTableColumns"
-                            },
-                            {
-                                "properties": {
-                                    "skipUnlessPipelineValues": {
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "type": "array"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/InternalSourceBlockTableCells"
-                            },
-                            {
-                                "properties": {
-                                    "skipUnlessPipelineValues": {
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "type": "array"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/ExternalSystemSourceBlockPipelineStep"
-                            },
-                            {
-                                "properties": {
-                                    "skipUnlessPipelineValues": {
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "type": "array"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
-                            },
-                            {
-                                "properties": {
-                                    "skipUnlessPipelineValues": {
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "type": "array"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
                                 "$ref": "#/definitions/ElementBlockPipelineStep"
                             },
                             {
-                                "properties": {
-                                    "skipUnlessPipelineValues": {
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "type": "array"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/SkipUnlessPipelineValuesPipelineStep"
                             }
                         ]
                     },
@@ -668,15 +581,57 @@
                                 "$ref": "#/definitions/SubFormPipelineBlockPipelineStep"
                             },
                             {
-                                "properties": {
-                                    "skipUnlessPipelineValues": {
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "type": "array"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/definitions/SkipUnlessPipelineValuesPipelineStep"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValuesPipelineStep"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/InternalSourceBlockConstant"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValuesPipelineStep"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/InternalSourceBlockTableColumns"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValuesPipelineStep"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/InternalSourceBlockTableCells"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValuesPipelineStep"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/ExternalSystemSourceBlockPipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValuesPipelineStep"
                             }
                         ]
                     }

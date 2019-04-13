@@ -35,6 +35,10 @@ export interface BasePipelineStep {
   type: BlockType;
 }
 
+export interface SkipablePipelineStep {
+  skipable?: boolean;
+}
+
 abstract class PipelineStepInFrom<DS = FullDataShape> {
   type: 'INLINE_VALUE' | 'PIPELINE_VALUE';
   inFrom: InlineValue<DS> | string;

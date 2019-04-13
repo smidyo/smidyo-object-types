@@ -1,18 +1,42 @@
+import { FullDataShape } from '../data-shape';
 import {
-  BasePipelineBody,
-  PipelineInput,
-  PipelineStepInFromInlineValueOrPipelineValue,
-  SubProcessPipelineBlockPipelineStep,
-  SourceBlockPipelineStep,
   AssertBlockPipelineStep,
+  BasePipelineBody,
+  BasePipelineStep,
   EffectBlockPipelineStep,
+  PipelineInput,
+  PipelineOutput,
   PipelineStepInFromInlineValue,
+  PipelineStepInFromInlineValueOrPipelineValue,
   PipelineStepInTo,
   PipelineStepOutFrom,
   PipelineStepOutToPipelineValue,
-  BasePipelineStep
+  SkipablePipelineStep,
+  SourceBlockPipelineStep,
+  SubProcessPipelineBlockPipelineStep
 } from './shared';
-import { FullDataShape } from '../data-shape';
+
+export type SubProcessPipelineBlockYieldPipelineStep = SubProcessPipelineBlockPipelineStep &
+  SkipablePipelineStep;
+export type QuoteSubYieldPipelineBlockYieldPipelineStep = QuoteSubYieldPipelineBlockPipelineStep &
+  SkipablePipelineStep;
+export type OrderSubYieldPipelineBlockYieldPipelineStep = OrderSubYieldPipelineBlockPipelineStep &
+  SkipablePipelineStep;
+export type SourceBlockYieldPipelineStep = SourceBlockPipelineStep & SkipablePipelineStep;
+export type EffectBlockYieldPipelineStep = EffectBlockPipelineStep & SkipablePipelineStep;
+
+export type ProcessPipelineQuoteStep =
+  | SubProcessPipelineBlockYieldPipelineStep
+  | QuoteSubYieldPipelineBlockYieldPipelineStep
+  | SourceBlockYieldPipelineStep
+  | AssertBlockPipelineStep;
+
+export type ProcessPipelineOrderStep =
+  | SubProcessPipelineBlockYieldPipelineStep
+  | OrderSubYieldPipelineBlockYieldPipelineStep
+  | SourceBlockYieldPipelineStep
+  | EffectBlockYieldPipelineStep
+  | AssertBlockPipelineStep;
 
 export interface YieldPipelineBody extends BasePipelineBody {
   type: 'YIELD';
@@ -21,29 +45,10 @@ export interface YieldPipelineBody extends BasePipelineBody {
   titleFrom?: PipelineStepInFromInlineValueOrPipelineValue;
   quoteInfoPoints: YieldPipelineInfoPoint[];
   quotePriceSequence: YieldPipelineQuotePriceSequenceStep[];
-  quoteSteps: YieldPipelineQuoteStep[];
+  quoteSteps: ProcessPipelineQuoteStep[];
   orderInfoPoints: YieldPipelineInfoPoint[];
-  orderSteps: YieldPipelineOrderStep[];
+  orderSteps: ProcessPipelineOrderStep[];
 }
-
-export type YieldPipelineQuoteStep =
-  | (
-      | SubProcessPipelineBlockPipelineStep
-      | QuoteSubYieldPipelineBlockPipelineStep
-      | SourceBlockPipelineStep) & {
-      skipable?: boolean;
-    }
-  | AssertBlockPipelineStep;
-
-export type YieldPipelineOrderStep =
-  | (
-      | EffectBlockPipelineStep
-      | SourceBlockPipelineStep
-      | SubProcessPipelineBlockPipelineStep
-      | OrderSubYieldPipelineBlockPipelineStep) & {
-      skipable?: boolean;
-    }
-  | AssertBlockPipelineStep;
 
 export interface YieldPipelineQuotePriceSequenceStep {
   type: 'ADD' | 'SUBTRACT' | 'MINIMUM' | 'PERCENTAGE_OFF' | 'PERCENTAGE_ON' | 'MULTIPLY';
