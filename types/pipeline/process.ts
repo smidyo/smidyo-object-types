@@ -15,10 +15,14 @@ export interface ProcessPipelineBody extends BasePipelineBody {
   type: 'PROCESS';
   inputs: PipelineInput[];
   outputs: PipelineOutput[];
-  steps: Array<
-    OperationBlockPipelineStep | SubProcessPipelineBlockPipelineStep | AssertBlockPipelineStep
-  >;
+  steps: ProcessPipelineStep[];
 }
+
+export type ProcessPipelineStep =
+  | (OperationBlockPipelineStep | SubProcessPipelineBlockPipelineStep) & {
+      skipable?: boolean;
+    }
+  | AssertBlockPipelineStep;
 
 //
 //

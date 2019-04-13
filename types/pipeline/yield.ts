@@ -8,34 +8,42 @@ import {
   EffectBlockPipelineStep,
   PipelineStepInFromInlineValue,
   PipelineStepInTo,
-  ConditionalPipelineStep,
-  PipelineStepInFromPipelineValue,
   PipelineStepOutFrom,
-  PipelineStepOutToPipelineValue
+  PipelineStepOutToPipelineValue,
+  BasePipelineStep
 } from './shared';
 import { FullDataShape } from '../data-shape';
 
 export interface YieldPipelineBody extends BasePipelineBody {
   type: 'YIELD';
   inputs: PipelineInput[];
+  outputs: PipelineOutput[];
   titleFrom?: PipelineStepInFromInlineValueOrPipelineValue;
   quoteInfoPoints: YieldPipelineInfoPoint[];
   quotePriceSequence: YieldPipelineQuotePriceSequenceStep[];
-  quoteSteps: Array<
-    | SubProcessPipelineBlockPipelineStep
-    | QuoteSubYieldPipelineBlockPipelineStep
-    | SourceBlockPipelineStep
-    | AssertBlockPipelineStep
-  >;
+  quoteSteps: YieldPipelineQuoteStep[];
   orderInfoPoints: YieldPipelineInfoPoint[];
-  orderSteps: Array<
-    | EffectBlockPipelineStep
-    | SourceBlockPipelineStep
-    | SubProcessPipelineBlockPipelineStep
-    | OrderSubYieldPipelineBlockPipelineStep
-    | AssertBlockPipelineStep
-  >;
+  orderSteps: YieldPipelineOrderStep[];
 }
+
+export type YieldPipelineQuoteStep =
+  | (
+      | SubProcessPipelineBlockPipelineStep
+      | QuoteSubYieldPipelineBlockPipelineStep
+      | SourceBlockPipelineStep) & {
+      skipable?: boolean;
+    }
+  | AssertBlockPipelineStep;
+
+export type YieldPipelineOrderStep =
+  | (
+      | EffectBlockPipelineStep
+      | SourceBlockPipelineStep
+      | SubProcessPipelineBlockPipelineStep
+      | OrderSubYieldPipelineBlockPipelineStep) & {
+      skipable?: boolean;
+    }
+  | AssertBlockPipelineStep;
 
 export interface YieldPipelineQuotePriceSequenceStep {
   type: 'ADD' | 'SUBTRACT' | 'MINIMUM' | 'PERCENTAGE_OFF' | 'PERCENTAGE_ON' | 'MULTIPLY';
@@ -61,9 +69,8 @@ export interface YieldPipelineInfoPoint {
   elementBlockConfiguration: Array<PipelineStepInFromInlineValue & PipelineStepInTo>;
 }
 
-abstract class SubYieldPipelineBlockPipelineStep implements ConditionalPipelineStep {
+abstract class SubYieldPipelineBlockPipelineStep implements BasePipelineStep {
   type: 'QUOTING_SUB_YIELD_PIPELINE' | 'ORDERING_SUB_YIELD_PIPELINE';
-  conditional?: boolean;
 
   /** @pattern "^[a-z0-9-.]*$" */
   subYieldPipelineSlug: string;

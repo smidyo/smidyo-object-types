@@ -391,15 +391,6 @@
         },
         "SubProcessPipelineBlockPipelineStep": {
             "properties": {
-                "conditional": {
-                    "type": "boolean"
-                },
-                "ifPipelineValues": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "in": {
                     "items": {
                         "anyOf": [
@@ -477,13 +468,37 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
-                    },
-                    {
                         "$ref": "#/definitions/AssertBlockPipelineStep"
                     },
                     {
-                        "$ref": "#/definitions/OperationBlockPipelineStep"
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
+                            },
+                            {
+                                "properties": {
+                                    "skipable": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/OperationBlockPipelineStep"
+                            },
+                            {
+                                "properties": {
+                                    "skipable": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        ]
                     }
                 ]
             },

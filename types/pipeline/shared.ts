@@ -31,16 +31,8 @@ type BlockType =
   | 'ORDERING_SUB_YIELD_PIPELINE'
   | 'ASSERT';
 
-export abstract class BasePipelineStep {
+export interface BasePipelineStep {
   type: BlockType;
-}
-
-export interface IfablePipelineStep extends BasePipelineStep {
-  ifPipelineValues?: string[];
-}
-
-export interface ConditionalPipelineStep extends IfablePipelineStep {
-  conditional?: boolean;
 }
 
 abstract class PipelineStepInFrom<DS = FullDataShape> {
@@ -97,7 +89,7 @@ export type EffectBlockPipelineStep =
   | InternalEffectBlockTableUpdateCell
   | ExternalSystemEffectBlockPipelineStep;
 
-abstract class ExternalSystemSourceOrEffectBlockPipelineStep extends BasePipelineStep {
+abstract class ExternalSystemSourceOrEffectBlockPipelineStep implements BasePipelineStep {
   type: 'EXTERNAL_SYSTEM_SOURCE' | 'EXTERNAL_SYSTEM_EFFECT';
   in: Array<(PipelineStepInFromInlineValueOrPipelineValue) & PipelineStepInTo>;
   out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
@@ -115,7 +107,7 @@ export interface ExternalSystemEffectBlockPipelineStep
   effectBlock: string;
 }
 
-abstract class InternalSourceOrEffectBlockPipelineStep extends BasePipelineStep {
+abstract class InternalSourceOrEffectBlockPipelineStep implements BasePipelineStep {
   type: 'INTERNAL_SOURCE' | 'INTERNAL_EFFECT';
 }
 
@@ -205,7 +197,7 @@ export type SubProcessPipelineBlockPipelineStepIn = PipelineStepInFromInlineValu
   PipelineStepInTo;
 export type SubProcessPipelineBlockPipelineStepOut = PipelineStepOutFrom &
   PipelineStepOutToPipelineValue;
-export interface SubProcessPipelineBlockPipelineStep extends ConditionalPipelineStep {
+export interface SubProcessPipelineBlockPipelineStep extends BasePipelineStep {
   type: 'SUB_PROCESS_PIPELINE';
   /** @pattern "^[a-z0-9-.]*$" */
   subProcessPipelineSlug: string;

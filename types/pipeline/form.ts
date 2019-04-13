@@ -5,7 +5,6 @@ import {
   PipelineStepInTo,
   PipelineStepOutFrom,
   PipelineStepOutToPipelineValue,
-  IfablePipelineStep,
   BasePipelineStep,
   SubProcessPipelineBlockPipelineStep,
   PipelineInput,
@@ -16,23 +15,28 @@ export interface FormPipelineBody extends BasePipelineBody {
   type: 'FORM';
   inputs: PipelineInput[];
   outputs: PipelineOutput[];
-  steps: Array<
-    | ElementBlockPipelineStep
-    | SubFormPipelineBlockPipelineStep
-    | SubProcessPipelineBlockPipelineStep
-    | SourceBlockPipelineStep
-  >;
+  steps: Array<FormPipelineStep>;
 }
 
 //
 //
 //
 
+// All FP steps are conditional per standard
+
+export type FormPipelineStep = (
+  | ElementBlockPipelineStep
+  | SubFormPipelineBlockPipelineStep
+  | SubProcessPipelineBlockPipelineStep
+  | SourceBlockPipelineStep) & {
+  skipUnlessPipelineValues?: string[];
+};
+
 export type SubFormPipelineBlockPipelineStepIn = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo;
 export type SubFormPipelineBlockPipelineStepOut = PipelineStepOutFrom &
   PipelineStepOutToPipelineValue;
-export interface SubFormPipelineBlockPipelineStep extends IfablePipelineStep {
+export interface SubFormPipelineBlockPipelineStep extends BasePipelineStep {
   type: 'SUB_FORM_PIPELINE';
   subFormPipelineSlug: string;
   in: SubFormPipelineBlockPipelineStepIn[];
@@ -42,7 +46,7 @@ export interface SubFormPipelineBlockPipelineStep extends IfablePipelineStep {
 export type ElementBlockPipelineStepIn = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo;
 export type ElementBlockPipelineStepOut = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
-export interface ElementBlockPipelineStep extends IfablePipelineStep {
+export interface ElementBlockPipelineStep extends BasePipelineStep {
   type: 'ELEMENT';
   elementBlockSlug: string;
   in: ElementBlockPipelineStepIn[];
