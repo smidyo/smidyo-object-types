@@ -1,36 +1,34 @@
 import {
   BasePipelineBody,
-  SourceBlockPipelineStep,
+  BasePipelineStep,
+  PipelineInput,
+  PipelineOutput,
   PipelineStepInFromInlineValueOrPipelineValue,
   PipelineStepInTo,
   PipelineStepOutFrom,
   PipelineStepOutToPipelineValue,
-  BasePipelineStep,
-  SubProcessPipelineBlockPipelineStep,
-  PipelineInput,
-  PipelineOutput
+  SourceBlock_PipelineStep,
+  SubProcessPipeline_PipelineStep
 } from './shared';
 
 // All FP steps are skipable per default
 
-export interface SkipUnlessPipelineValuesPipelineStep {
+export interface SkipUnlessPipelineValues {
   skipUnlessPipelineValues?: string[];
 }
 
-export type ElementBlockFormPipelineStep = ElementBlockPipelineStep &
-  SkipUnlessPipelineValuesPipelineStep;
-export type SubFormPipelineBlockFormPipelineStep = SubFormPipelineBlockPipelineStep &
-  SkipUnlessPipelineValuesPipelineStep;
-export type SubProcessPipelineBlockFormPipelineStep = SubProcessPipelineBlockPipelineStep &
-  SkipUnlessPipelineValuesPipelineStep;
-export type SourceBlockFormPipelineStep = SourceBlockPipelineStep &
-  SkipUnlessPipelineValuesPipelineStep;
+export type ElementBlock_FormPipelineStep = ElementBlock_PipelineStep & SkipUnlessPipelineValues;
+export type SourceBlock_FormPipelineStep = SourceBlock_PipelineStep & SkipUnlessPipelineValues;
+export type SubFormPipeline_FormPipelineStep = SubFormPipeline_PipelineStep &
+  SkipUnlessPipelineValues;
+export type SubProcessPipeline_FormPipelineStep = SubProcessPipeline_PipelineStep &
+  SkipUnlessPipelineValues;
 
 export type FormPipelineStep =
-  | ElementBlockFormPipelineStep
-  | SubFormPipelineBlockFormPipelineStep
-  | SubProcessPipelineBlockFormPipelineStep
-  | SourceBlockFormPipelineStep;
+  | ElementBlock_FormPipelineStep
+  | SubFormPipeline_FormPipelineStep
+  | SubProcessPipeline_FormPipelineStep
+  | SourceBlock_FormPipelineStep;
 
 export interface FormPipelineBody extends BasePipelineBody {
   type: 'FORM';
@@ -43,23 +41,22 @@ export interface FormPipelineBody extends BasePipelineBody {
 //
 //
 
-export type SubFormPipelineBlockPipelineStepIn = PipelineStepInFromInlineValueOrPipelineValue &
+export type SubFormPipeline_PipelineStep_In = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo;
-export type SubFormPipelineBlockPipelineStepOut = PipelineStepOutFrom &
-  PipelineStepOutToPipelineValue;
-export interface SubFormPipelineBlockPipelineStep extends BasePipelineStep {
+export type SubFormPipeline_PipelineStep_Out = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
+export interface SubFormPipeline_PipelineStep extends BasePipelineStep {
   type: 'SUB_FORM_PIPELINE';
   subFormPipelineSlug: string;
-  in: SubFormPipelineBlockPipelineStepIn[];
-  out: SubFormPipelineBlockPipelineStepOut[];
+  in: SubFormPipeline_PipelineStep_In[];
+  out: SubFormPipeline_PipelineStep_Out[];
 }
 
-export type ElementBlockPipelineStepIn = PipelineStepInFromInlineValueOrPipelineValue &
+export type ElementBlock_PipelineStep_In = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo;
-export type ElementBlockPipelineStepOut = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
-export interface ElementBlockPipelineStep extends BasePipelineStep {
-  type: 'ELEMENT';
+export type ElementBlock_PipelineStep_Out = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
+export interface ElementBlock_PipelineStep extends BasePipelineStep {
+  type: 'ELEMENT_BLOCK';
   elementBlockSlug: string;
-  in: ElementBlockPipelineStepIn[];
-  out: ElementBlockPipelineStepOut[];
+  in: ElementBlock_PipelineStep_In[];
+  out: ElementBlock_PipelineStep_Out[];
 }

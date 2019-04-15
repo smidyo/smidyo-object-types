@@ -1,15 +1,15 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
-        "AssertBlockPipelineStep": {
+        "AssertPipelineStep": {
             "properties": {
                 "fallback": {
                     "anyOf": [
                         {
-                            "$ref": "#/definitions/AssertBlockPipelineStepRejectFallback"
+                            "$ref": "#/definitions/AssertPipelineStepRejectFallback"
                         },
                         {
-                            "$ref": "#/definitions/AssertBlockPipelineStepFallbackDataFallback"
+                            "$ref": "#/definitions/AssertPipelineStepFallbackDataFallback"
                         }
                     ]
                 },
@@ -36,7 +36,7 @@
             ],
             "type": "object"
         },
-        "AssertBlockPipelineStepFallbackDataFallback": {
+        "AssertPipelineStepFallbackDataFallback": {
             "properties": {
                 "data": {
                     "anyOf": [
@@ -61,7 +61,7 @@
             ],
             "type": "object"
         },
-        "AssertBlockPipelineStepRejectFallback": {
+        "AssertPipelineStepRejectFallback": {
             "properties": {
                 "message": {
                     "anyOf": [
@@ -86,7 +86,7 @@
             ],
             "type": "object"
         },
-        "ExternalSystemEffectBlockPipelineStep": {
+        "ExternalSystemEffectBlock_PipelineStep": {
             "properties": {
                 "effectBlock": {
                     "type": "string"
@@ -133,7 +133,7 @@
                 },
                 "type": {
                     "enum": [
-                        "EXTERNAL_SYSTEM_EFFECT"
+                        "EXTERNAL_SYSTEM_EFFECT_BLOCK"
                     ],
                     "type": "string"
                 }
@@ -146,7 +146,7 @@
             ],
             "type": "object"
         },
-        "ExternalSystemSourceBlockPipelineStep": {
+        "ExternalSystemSourceBlock_PipelineStep": {
             "properties": {
                 "in": {
                     "items": {
@@ -193,7 +193,7 @@
                 },
                 "type": {
                     "enum": [
-                        "EXTERNAL_SYSTEM_SOURCE"
+                        "EXTERNAL_SYSTEM_SOURCE_BLOCK"
                     ],
                     "type": "string"
                 }
@@ -500,7 +500,7 @@
             ],
             "type": "object"
         },
-        "InternalEffectBlockTableDeleteRow": {
+        "InternalEffectBlockTableDeleteRow_PipelineStep": {
             "properties": {
                 "effectBlock": {
                     "enum": [
@@ -537,7 +537,7 @@
                 },
                 "type": {
                     "enum": [
-                        "INTERNAL_EFFECT"
+                        "INTERNAL_EFFECT_BLOCK"
                     ],
                     "type": "string"
                 }
@@ -550,7 +550,7 @@
             ],
             "type": "object"
         },
-        "InternalEffectBlockTableUpdateCell": {
+        "InternalEffectBlockTableUpdateCell_PipelineStep": {
             "properties": {
                 "column": {
                     "type": "string"
@@ -613,7 +613,7 @@
                 },
                 "type": {
                     "enum": [
-                        "INTERNAL_EFFECT"
+                        "INTERNAL_EFFECT_BLOCK"
                     ],
                     "type": "string"
                 }
@@ -627,7 +627,7 @@
             ],
             "type": "object"
         },
-        "InternalSourceBlockConstant": {
+        "InternalSourceBlockConstant_PipelineStep": {
             "properties": {
                 "constantSlug": {
                     "type": "string"
@@ -643,7 +643,7 @@
                 },
                 "type": {
                     "enum": [
-                        "INTERNAL_SOURCE"
+                        "INTERNAL_SOURCE_BLOCK"
                     ],
                     "type": "string"
                 }
@@ -656,7 +656,7 @@
             ],
             "type": "object"
         },
-        "InternalSourceBlockTableCells": {
+        "InternalSourceBlockTableCells_PipelineStep": {
             "properties": {
                 "in": {
                     "anyOf": [
@@ -712,7 +712,7 @@
                 },
                 "type": {
                     "enum": [
-                        "INTERNAL_SOURCE"
+                        "INTERNAL_SOURCE_BLOCK"
                     ],
                     "type": "string"
                 }
@@ -727,7 +727,7 @@
             ],
             "type": "object"
         },
-        "InternalSourceBlockTableColumns": {
+        "InternalSourceBlockTableColumns_PipelineStep": {
             "properties": {
                 "columns": {
                     "items": {
@@ -759,7 +759,7 @@
                 },
                 "type": {
                     "enum": [
-                        "INTERNAL_SOURCE"
+                        "INTERNAL_SOURCE_BLOCK"
                     ],
                     "type": "string"
                 }
@@ -773,7 +773,7 @@
             ],
             "type": "object"
         },
-        "OrderSubYieldPipelineBlockPipelineStep": {
+        "OrderSubYieldPipeline_PipelineStep": {
             "properties": {
                 "in": {
                     "items": {
@@ -1130,7 +1130,7 @@
             ],
             "type": "object"
         },
-        "QuoteSubYieldPipelineBlockPipelineStep": {
+        "QuoteSubYieldPipeline_PipelineStep": {
             "properties": {
                 "in": {
                     "items": {
@@ -1208,7 +1208,7 @@
             ],
             "type": "object"
         },
-        "SkipablePipelineStep": {
+        "Skippable": {
             "properties": {
                 "skippable": {
                     "type": "boolean"
@@ -1216,7 +1216,7 @@
             },
             "type": "object"
         },
-        "SubProcessPipelineBlockPipelineStep": {
+        "SubProcessPipeline_PipelineStep": {
             "properties": {
                 "in": {
                     "items": {
@@ -1375,95 +1375,95 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/AssertBlockPipelineStep"
+                        "$ref": "#/definitions/AssertPipelineStep"
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
+                                "$ref": "#/definitions/InternalSourceBlockConstant_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipablePipelineStep"
+                                "$ref": "#/definitions/Skippable"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/OrderSubYieldPipelineBlockPipelineStep"
+                                "$ref": "#/definitions/InternalSourceBlockTableColumns_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipablePipelineStep"
+                                "$ref": "#/definitions/Skippable"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/InternalSourceBlockConstant"
+                                "$ref": "#/definitions/InternalSourceBlockTableCells_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipablePipelineStep"
+                                "$ref": "#/definitions/Skippable"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/InternalSourceBlockTableColumns"
+                                "$ref": "#/definitions/ExternalSystemSourceBlock_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipablePipelineStep"
+                                "$ref": "#/definitions/Skippable"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/InternalSourceBlockTableCells"
+                                "$ref": "#/definitions/InternalEffectBlockTableDeleteRow_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipablePipelineStep"
+                                "$ref": "#/definitions/Skippable"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/ExternalSystemSourceBlockPipelineStep"
+                                "$ref": "#/definitions/InternalEffectBlockTableUpdateCell_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipablePipelineStep"
+                                "$ref": "#/definitions/Skippable"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/InternalEffectBlockTableDeleteRow"
+                                "$ref": "#/definitions/ExternalSystemEffectBlock_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipablePipelineStep"
+                                "$ref": "#/definitions/Skippable"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/InternalEffectBlockTableUpdateCell"
+                                "$ref": "#/definitions/OrderSubYieldPipeline_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipablePipelineStep"
+                                "$ref": "#/definitions/Skippable"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/ExternalSystemEffectBlockPipelineStep"
+                                "$ref": "#/definitions/SubProcessPipeline_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipablePipelineStep"
+                                "$ref": "#/definitions/Skippable"
                             }
                         ]
                     }
@@ -1493,65 +1493,65 @@
             "items": {
                 "anyOf": [
                     {
-                        "$ref": "#/definitions/AssertBlockPipelineStep"
+                        "$ref": "#/definitions/AssertPipelineStep"
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
+                                "$ref": "#/definitions/InternalSourceBlockConstant_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipablePipelineStep"
+                                "$ref": "#/definitions/Skippable"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/QuoteSubYieldPipelineBlockPipelineStep"
+                                "$ref": "#/definitions/InternalSourceBlockTableColumns_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipablePipelineStep"
+                                "$ref": "#/definitions/Skippable"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/InternalSourceBlockConstant"
+                                "$ref": "#/definitions/InternalSourceBlockTableCells_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipablePipelineStep"
+                                "$ref": "#/definitions/Skippable"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/InternalSourceBlockTableColumns"
+                                "$ref": "#/definitions/ExternalSystemSourceBlock_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipablePipelineStep"
+                                "$ref": "#/definitions/Skippable"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/InternalSourceBlockTableCells"
+                                "$ref": "#/definitions/QuoteSubYieldPipeline_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipablePipelineStep"
+                                "$ref": "#/definitions/Skippable"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/ExternalSystemSourceBlockPipelineStep"
+                                "$ref": "#/definitions/SubProcessPipeline_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipablePipelineStep"
+                                "$ref": "#/definitions/Skippable"
                             }
                         ]
                     }

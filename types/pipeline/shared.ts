@@ -18,13 +18,13 @@ export interface PipelineOutput {
   dataShape: FullDataShape;
 }
 
-type BlockType =
-  | 'OPERATION'
-  | 'ELEMENT'
-  | 'EXTERNAL_SYSTEM_SOURCE'
-  | 'INTERNAL_SOURCE'
-  | 'EXTERNAL_SYSTEM_EFFECT'
-  | 'INTERNAL_EFFECT'
+type StepType =
+  | 'OPERATION_BLOCK'
+  | 'ELEMENT_BLOCK'
+  | 'EXTERNAL_SYSTEM_SOURCE_BLOCK'
+  | 'INTERNAL_SOURCE_BLOCK'
+  | 'EXTERNAL_SYSTEM_EFFECT_BLOCK'
+  | 'INTERNAL_EFFECT_BLOCK'
   | 'SUB_PROCESS_PIPELINE'
   | 'SUB_FORM_PIPELINE'
   | 'QUOTING_SUB_YIELD_PIPELINE'
@@ -32,10 +32,10 @@ type BlockType =
   | 'ASSERT';
 
 export interface BasePipelineStep {
-  type: BlockType;
+  type: StepType;
 }
 
-export interface SkipablePipelineStep {
+export interface Skippable {
   skippable?: boolean;
 }
 
@@ -80,103 +80,106 @@ export interface PipelineStepOutToPipelineValue {
 //
 //
 
-export type SourceOrEffectBlockPipelineStep = SourceBlockPipelineStep | EffectBlockPipelineStep;
+export type SourceOrEffectBlock_PipelineStep = SourceBlock_PipelineStep | EffectBlock_PipelineStep;
 
-export type SourceBlockPipelineStep =
-  | InternalSourceBlockConstant
-  | InternalSourceBlockTableColumns
-  | InternalSourceBlockTableCells
-  | ExternalSystemSourceBlockPipelineStep;
+export type SourceBlock_PipelineStep =
+  | InternalSourceBlockConstant_PipelineStep
+  | InternalSourceBlockTableColumns_PipelineStep
+  | InternalSourceBlockTableCells_PipelineStep
+  | ExternalSystemSourceBlock_PipelineStep;
 
-export type EffectBlockPipelineStep =
-  | InternalEffectBlockTableDeleteRow
-  | InternalEffectBlockTableUpdateCell
-  | ExternalSystemEffectBlockPipelineStep;
+export type EffectBlock_PipelineStep =
+  | InternalEffectBlockTableDeleteRow_PipelineStep
+  | InternalEffectBlockTableUpdateCell_PipelineStep
+  | ExternalSystemEffectBlock_PipelineStep;
 
-abstract class ExternalSystemSourceOrEffectBlockPipelineStep implements BasePipelineStep {
-  type: 'EXTERNAL_SYSTEM_SOURCE' | 'EXTERNAL_SYSTEM_EFFECT';
+abstract class ExternalSystemSourceOrEffectBlock_PipelineStep implements BasePipelineStep {
+  type: 'EXTERNAL_SYSTEM_SOURCE_BLOCK' | 'EXTERNAL_SYSTEM_EFFECT_BLOCK';
   in: Array<(PipelineStepInFromInlineValueOrPipelineValue) & PipelineStepInTo>;
   out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
-export interface ExternalSystemSourceBlockPipelineStep
-  extends ExternalSystemSourceOrEffectBlockPipelineStep {
-  type: 'EXTERNAL_SYSTEM_SOURCE';
+export interface ExternalSystemSourceBlock_PipelineStep
+  extends ExternalSystemSourceOrEffectBlock_PipelineStep {
+  type: 'EXTERNAL_SYSTEM_SOURCE_BLOCK';
   sourceBlock: string;
 }
 
-export interface ExternalSystemEffectBlockPipelineStep
-  extends ExternalSystemSourceOrEffectBlockPipelineStep {
-  type: 'EXTERNAL_SYSTEM_EFFECT';
+export interface ExternalSystemEffectBlock_PipelineStep
+  extends ExternalSystemSourceOrEffectBlock_PipelineStep {
+  type: 'EXTERNAL_SYSTEM_EFFECT_BLOCK';
   effectBlock: string;
 }
 
-abstract class InternalSourceOrEffectBlockPipelineStep implements BasePipelineStep {
-  type: 'INTERNAL_SOURCE' | 'INTERNAL_EFFECT';
+abstract class InternalSourceOrEffectBlock_PipelineStep implements BasePipelineStep {
+  type: 'INTERNAL_SOURCE_BLOCK' | 'INTERNAL_EFFECT_BLOCK';
 }
 
 //
 
-abstract class InternalSourceBlockPipelineStep extends InternalSourceOrEffectBlockPipelineStep {
-  type: 'INTERNAL_SOURCE';
+abstract class InternalSourceBlock_PipelineStep extends InternalSourceOrEffectBlock_PipelineStep {
+  type: 'INTERNAL_SOURCE_BLOCK';
   sourceBlock: InternalSourceBlockName;
 }
 
 type InternalSourceBlockName = 'CONSTANT' | 'TABLE_COLUMNS' | 'TABLE_CELLS';
 
-export interface InternalSourceBlockConstant extends InternalSourceBlockPipelineStep {
-  type: 'INTERNAL_SOURCE';
+export interface InternalSourceBlockConstant_PipelineStep extends InternalSourceBlock_PipelineStep {
+  type: 'INTERNAL_SOURCE_BLOCK';
 
   sourceBlock: 'CONSTANT';
   constantSlug: string;
   out: PipelineStepOutToPipelineValue;
 }
 
-export type InternalSourceBlockTableColumnsOut = PipelineStepOutFrom &
+export type InternalSourceBlockTableColumns_PipelineStep_Out = PipelineStepOutFrom &
   PipelineStepOutToPipelineValue;
-export interface InternalSourceBlockTableColumns extends InternalSourceBlockPipelineStep {
-  type: 'INTERNAL_SOURCE';
+export interface InternalSourceBlockTableColumns_PipelineStep
+  extends InternalSourceBlock_PipelineStep {
+  type: 'INTERNAL_SOURCE_BLOCK';
 
   sourceBlock: 'TABLE_COLUMNS';
   tableSlug: string;
   columns: string[];
-  out: InternalSourceBlockTableColumnsOut[];
+  out: InternalSourceBlockTableColumns_PipelineStep_Out[];
 }
 
-export type InternalSourceBlockTableCellsIn = PipelineStepInFromInlineValueOrPipelineValue &
+export type InternalSourceBlockTableCells_PipelineStep_In = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo<'row-name'>;
-export type InternalSourceBlockTableCellsOut = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
-export interface InternalSourceBlockTableCells extends InternalSourceBlockPipelineStep {
-  type: 'INTERNAL_SOURCE';
+export type InternalSourceBlockTableCells_PipelineStep_Out = PipelineStepOutFrom &
+  PipelineStepOutToPipelineValue;
+export interface InternalSourceBlockTableCells_PipelineStep
+  extends InternalSourceBlock_PipelineStep {
+  type: 'INTERNAL_SOURCE_BLOCK';
 
   sourceBlock: 'TABLE_CELLS';
   tableSlug: string;
   singularColumns: string[]; // must be columns of shape singular
-  in: InternalSourceBlockTableCellsIn;
-  out: InternalSourceBlockTableCellsOut[];
+  in: InternalSourceBlockTableCells_PipelineStep_In;
+  out: InternalSourceBlockTableCells_PipelineStep_Out[];
 }
 
 //
 
-abstract class InternalEffectBlockPipelineStep extends InternalSourceOrEffectBlockPipelineStep {
-  type: 'INTERNAL_EFFECT';
+type InternalEffectBlockName = 'TABLE_DELETE_ROW' | 'TABLE_UPDATE_CELL';
+abstract class InternalEffectBlock_PipelineStep extends InternalSourceOrEffectBlock_PipelineStep {
+  type: 'INTERNAL_EFFECT_BLOCK';
   effectBlock: InternalEffectBlockName;
 }
 
-type InternalEffectBlockName = 'TABLE_DELETE_ROW' | 'TABLE_UPDATE_CELL';
-
-export type InternalEffectBlockTableDeleteRowIn = PipelineStepInFromInlineValueOrPipelineValue<{
+export type InternalEffectBlockTableDeleteRow_PipelineStep_In = PipelineStepInFromInlineValueOrPipelineValue<{
   type: string;
   nullable: false;
   list: false;
 }> &
   PipelineStepInTo<'row-name'>;
-export interface InternalEffectBlockTableDeleteRow extends InternalEffectBlockPipelineStep {
-  type: 'INTERNAL_EFFECT';
+export interface InternalEffectBlockTableDeleteRow_PipelineStep
+  extends InternalEffectBlock_PipelineStep {
+  type: 'INTERNAL_EFFECT_BLOCK';
 
   effectBlock: 'TABLE_DELETE_ROW';
   tableSlug: string;
-  in: InternalEffectBlockTableDeleteRowIn;
+  in: InternalEffectBlockTableDeleteRow_PipelineStep_In;
 }
 
 type InternalEffectBlockTableUpdateCellOptionIn =
@@ -188,8 +191,9 @@ type InternalEffectBlockTableUpdateCellOptionIn =
     }> &
       PipelineStepInTo<'row-name'>;
 
-export interface InternalEffectBlockTableUpdateCell extends InternalEffectBlockPipelineStep {
-  type: 'INTERNAL_EFFECT';
+export interface InternalEffectBlockTableUpdateCell_PipelineStep
+  extends InternalEffectBlock_PipelineStep {
+  type: 'INTERNAL_EFFECT_BLOCK';
 
   effectBlock: 'TABLE_UPDATE_CELL';
   tableSlug: string;
@@ -197,30 +201,30 @@ export interface InternalEffectBlockTableUpdateCell extends InternalEffectBlockP
   in: InternalEffectBlockTableUpdateCellOptionIn[];
 }
 
-export type SubProcessPipelineBlockPipelineStepIn = PipelineStepInFromInlineValueOrPipelineValue &
+export type SubProcessPipeline_PipelineStep_In = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo;
-export type SubProcessPipelineBlockPipelineStepOut = PipelineStepOutFrom &
+export type SubProcessPipeline_PipelineStep_Out = PipelineStepOutFrom &
   PipelineStepOutToPipelineValue;
-export interface SubProcessPipelineBlockPipelineStep extends BasePipelineStep {
+export interface SubProcessPipeline_PipelineStep extends BasePipelineStep {
   type: 'SUB_PROCESS_PIPELINE';
   /** @pattern "^[a-z0-9-.]*$" */
   subProcessPipelineSlug: string;
-  in: SubProcessPipelineBlockPipelineStepIn[];
-  out: SubProcessPipelineBlockPipelineStepOut[];
+  in: SubProcessPipeline_PipelineStep_In[];
+  out: SubProcessPipeline_PipelineStep_Out[];
 }
 
-export interface AssertBlockPipelineStep extends BasePipelineStep {
+export interface AssertPipelineStep extends BasePipelineStep {
   type: 'ASSERT';
   inPriority: PipelineStepInFromPipelineValue[];
-  fallback: AssertBlockPipelineStepRejectFallback | AssertBlockPipelineStepFallbackDataFallback;
+  fallback: AssertPipelineStepRejectFallback | AssertPipelineStepFallbackDataFallback;
   out?: PipelineStepOutToPipelineValue;
 }
 
-abstract class AssertBlockPipelineStepFallback {
+abstract class AssertPipelineStepFallback {
   type: 'REJECT' | 'FALLBACK_DATA';
 }
 
-export interface AssertBlockPipelineStepRejectFallback extends AssertBlockPipelineStepFallback {
+export interface AssertPipelineStepRejectFallback extends AssertPipelineStepFallback {
   type: 'REJECT';
   message: PipelineStepInFromInlineValueOrPipelineValue<{
     type: 'text';
@@ -229,8 +233,7 @@ export interface AssertBlockPipelineStepRejectFallback extends AssertBlockPipeli
   }>;
 }
 
-export interface AssertBlockPipelineStepFallbackDataFallback
-  extends AssertBlockPipelineStepFallback {
+export interface AssertPipelineStepFallbackDataFallback extends AssertPipelineStepFallback {
   type: 'FALLBACK_DATA';
   data: PipelineStepInFromInlineValueOrPipelineValue<{
     type: string;

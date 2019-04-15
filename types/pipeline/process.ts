@@ -2,25 +2,23 @@ import {
   BasePipelineBody,
   PipelineInput,
   PipelineOutput,
-  SubProcessPipelineBlockPipelineStep,
-  AssertBlockPipelineStep,
   PipelineStepInFromInlineValueOrPipelineValue,
   PipelineStepInTo,
   PipelineStepOutFrom,
   PipelineStepOutToPipelineValue,
   BasePipelineStep,
-  SkipablePipelineStep
+  SubProcessPipeline_PipelineStep,
+  Skippable,
+  AssertPipelineStep
 } from './shared';
 
-export type OperationBlockProcessPipelineStep = OperationBlockPipelineStep &
-  SkipablePipelineStep;
-export type SubProcessPipelineBlockProcessPipelineStep = SubProcessPipelineBlockPipelineStep &
-  SkipablePipelineStep;
+export type OperationBlock_ProcessPipelineStep = OperationBlock_PipelineStep & Skippable;
+export type SubProcessPipeline_ProcessPipelineStep = SubProcessPipeline_PipelineStep & Skippable;
 
 export type ProcessPipelineStep =
-  | OperationBlockProcessPipelineStep
-  | SubProcessPipelineBlockProcessPipelineStep
-  | AssertBlockPipelineStep;
+  | OperationBlock_ProcessPipelineStep
+  | SubProcessPipeline_ProcessPipelineStep
+  | AssertPipelineStep;
 
 export interface ProcessPipelineBody extends BasePipelineBody {
   type: 'PROCESS';
@@ -33,12 +31,12 @@ export interface ProcessPipelineBody extends BasePipelineBody {
 //
 //
 
-export type OperationBlockPipelineStepIn = PipelineStepInFromInlineValueOrPipelineValue &
+export type OperationBlock_PipelineStep_In = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo;
-export type OperationBlockPipelineStepOut = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
-export interface OperationBlockPipelineStep extends BasePipelineStep {
-  type: 'OPERATION';
+export type OperationBlock_PipelineStep_Out = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
+export interface OperationBlock_PipelineStep extends BasePipelineStep {
+  type: 'OPERATION_BLOCK';
   operationBlockSlug: string;
-  in: OperationBlockPipelineStepIn[];
-  out: OperationBlockPipelineStepOut[];
+  in: OperationBlock_PipelineStep_In[];
+  out: OperationBlock_PipelineStep_Out[];
 }

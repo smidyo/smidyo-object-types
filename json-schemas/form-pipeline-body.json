@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
-        "ElementBlockPipelineStep": {
+        "ElementBlock_PipelineStep": {
             "properties": {
                 "elementBlockSlug": {
                     "type": "string"
@@ -48,7 +48,7 @@
                 },
                 "type": {
                     "enum": [
-                        "ELEMENT"
+                        "ELEMENT_BLOCK"
                     ],
                     "type": "string"
                 }
@@ -61,7 +61,7 @@
             ],
             "type": "object"
         },
-        "ExternalSystemSourceBlockPipelineStep": {
+        "ExternalSystemSourceBlock_PipelineStep": {
             "properties": {
                 "in": {
                     "items": {
@@ -108,7 +108,7 @@
                 },
                 "type": {
                     "enum": [
-                        "EXTERNAL_SYSTEM_SOURCE"
+                        "EXTERNAL_SYSTEM_SOURCE_BLOCK"
                     ],
                     "type": "string"
                 }
@@ -154,7 +154,7 @@
             ],
             "type": "object"
         },
-        "InternalSourceBlockConstant": {
+        "InternalSourceBlockConstant_PipelineStep": {
             "properties": {
                 "constantSlug": {
                     "type": "string"
@@ -170,7 +170,7 @@
                 },
                 "type": {
                     "enum": [
-                        "INTERNAL_SOURCE"
+                        "INTERNAL_SOURCE_BLOCK"
                     ],
                     "type": "string"
                 }
@@ -183,7 +183,7 @@
             ],
             "type": "object"
         },
-        "InternalSourceBlockTableCells": {
+        "InternalSourceBlockTableCells_PipelineStep": {
             "properties": {
                 "in": {
                     "anyOf": [
@@ -239,7 +239,7 @@
                 },
                 "type": {
                     "enum": [
-                        "INTERNAL_SOURCE"
+                        "INTERNAL_SOURCE_BLOCK"
                     ],
                     "type": "string"
                 }
@@ -254,7 +254,7 @@
             ],
             "type": "object"
         },
-        "InternalSourceBlockTableColumns": {
+        "InternalSourceBlockTableColumns_PipelineStep": {
             "properties": {
                 "columns": {
                     "items": {
@@ -286,7 +286,7 @@
                 },
                 "type": {
                     "enum": [
-                        "INTERNAL_SOURCE"
+                        "INTERNAL_SOURCE_BLOCK"
                     ],
                     "type": "string"
                 }
@@ -416,7 +416,7 @@
             ],
             "type": "object"
         },
-        "SkipUnlessPipelineValuesPipelineStep": {
+        "SkipUnlessPipelineValues": {
             "properties": {
                 "skipUnlessPipelineValues": {
                     "items": {
@@ -427,7 +427,7 @@
             },
             "type": "object"
         },
-        "SubFormPipelineBlockPipelineStep": {
+        "SubFormPipeline_PipelineStep": {
             "properties": {
                 "in": {
                     "items": {
@@ -487,7 +487,7 @@
             ],
             "type": "object"
         },
-        "SubProcessPipelineBlockPipelineStep": {
+        "SubProcessPipeline_PipelineStep": {
             "properties": {
                 "in": {
                     "items": {
@@ -568,70 +568,70 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/ElementBlockPipelineStep"
+                                "$ref": "#/definitions/ElementBlock_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipUnlessPipelineValuesPipelineStep"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/SubFormPipelineBlockPipelineStep"
+                                "$ref": "#/definitions/InternalSourceBlockConstant_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipUnlessPipelineValuesPipelineStep"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/SubProcessPipelineBlockPipelineStep"
+                                "$ref": "#/definitions/InternalSourceBlockTableColumns_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipUnlessPipelineValuesPipelineStep"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/InternalSourceBlockConstant"
+                                "$ref": "#/definitions/InternalSourceBlockTableCells_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipUnlessPipelineValuesPipelineStep"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/InternalSourceBlockTableColumns"
+                                "$ref": "#/definitions/ExternalSystemSourceBlock_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipUnlessPipelineValuesPipelineStep"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/InternalSourceBlockTableCells"
+                                "$ref": "#/definitions/SubFormPipeline_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipUnlessPipelineValuesPipelineStep"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/ExternalSystemSourceBlockPipelineStep"
+                                "$ref": "#/definitions/SubProcessPipeline_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/SkipUnlessPipelineValuesPipelineStep"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     }
