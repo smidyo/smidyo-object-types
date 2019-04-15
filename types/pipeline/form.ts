@@ -8,14 +8,9 @@ import {
   PipelineStepOutFrom,
   PipelineStepOutToPipelineValue,
   SourceBlock_PipelineStep,
-  SubProcessPipeline_PipelineStep
+  SubProcessPipeline_PipelineStep,
+  SkipUnlessPipelineValues
 } from './shared';
-
-// All FP steps are skipable per default
-
-export interface SkipUnlessPipelineValues {
-  skipUnlessPipelineValues?: string[];
-}
 
 export type ElementBlock_FormPipelineStep = ElementBlock_PipelineStep & SkipUnlessPipelineValues;
 export type SourceBlock_FormPipelineStep = SourceBlock_PipelineStep & SkipUnlessPipelineValues;

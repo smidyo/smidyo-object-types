@@ -11,31 +11,32 @@ import {
   PipelineStepInTo,
   PipelineStepOutFrom,
   PipelineStepOutToPipelineValue,
-  Skippable,
   SourceBlock_PipelineStep,
-  SubProcessPipeline_PipelineStep
+  SubProcessPipeline_PipelineStep,
+  SkipUnlessPipelineValues
 } from './shared';
 
-export type SourceBlock_YieldPipelineStep = SourceBlock_PipelineStep & Skippable;
-export type EffectBlock_YieldPipelineStep = EffectBlock_PipelineStep & Skippable;
+export type SourceBlock_YieldPipelineStep = SourceBlock_PipelineStep & SkipUnlessPipelineValues;
+export type EffectBlock_YieldPipelineStep = EffectBlock_PipelineStep & SkipUnlessPipelineValues;
 export type QuoteSubYieldPipeline_YieldPipelineStep = QuoteSubYieldPipeline_PipelineStep &
-  Skippable;
+  SkipUnlessPipelineValues;
 export type OrderSubYieldPipeline_YieldPipelineStep = OrderSubYieldPipeline_PipelineStep &
-  Skippable;
-export type SubProcessPipeline_YieldPipelineStep = SubProcessPipeline_PipelineStep & Skippable;
+  SkipUnlessPipelineValues;
+export type SubProcessPipeline_YieldPipelineStep = SubProcessPipeline_PipelineStep &
+  SkipUnlessPipelineValues;
 
 export type ProcessPipelineQuoteStep =
-  | AssertPipelineStep
   | SubProcessPipeline_YieldPipelineStep
   | QuoteSubYieldPipeline_YieldPipelineStep
-  | SourceBlock_YieldPipelineStep;
+  | SourceBlock_YieldPipelineStep
+  | AssertPipelineStep;
 
 export type ProcessPipelineOrderStep =
-  | AssertPipelineStep
   | SubProcessPipeline_YieldPipelineStep
   | OrderSubYieldPipeline_YieldPipelineStep
   | SourceBlock_YieldPipelineStep
-  | EffectBlock_YieldPipelineStep;
+  | EffectBlock_YieldPipelineStep
+  | AssertPipelineStep;
 
 export interface YieldPipelineBody extends BasePipelineBody {
   type: 'YIELD';

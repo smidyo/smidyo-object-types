@@ -8,12 +8,14 @@ import {
   PipelineStepOutToPipelineValue,
   BasePipelineStep,
   SubProcessPipeline_PipelineStep,
-  Skippable,
-  AssertPipelineStep
+  AssertPipelineStep,
+  SkipUnlessPipelineValues
 } from './shared';
 
-export type OperationBlock_ProcessPipelineStep = OperationBlock_PipelineStep & Skippable;
-export type SubProcessPipeline_ProcessPipelineStep = SubProcessPipeline_PipelineStep & Skippable;
+export type OperationBlock_ProcessPipelineStep = OperationBlock_PipelineStep &
+  SkipUnlessPipelineValues;
+export type SubProcessPipeline_ProcessPipelineStep = SubProcessPipeline_PipelineStep &
+  SkipUnlessPipelineValues;
 
 export type ProcessPipelineStep =
   | OperationBlock_ProcessPipelineStep

@@ -1208,10 +1208,13 @@
             ],
             "type": "object"
         },
-        "Skippable": {
+        "SkipUnlessPipelineValues": {
             "properties": {
-                "skippable": {
-                    "type": "boolean"
+                "skipUnlessPipelineValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "type": "object"
@@ -1383,7 +1386,7 @@
                                 "$ref": "#/definitions/InternalSourceBlockConstant_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
@@ -1393,7 +1396,7 @@
                                 "$ref": "#/definitions/InternalSourceBlockTableColumns_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
@@ -1403,7 +1406,7 @@
                                 "$ref": "#/definitions/InternalSourceBlockTableCells_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
@@ -1413,7 +1416,7 @@
                                 "$ref": "#/definitions/ExternalSystemSourceBlock_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
@@ -1423,7 +1426,7 @@
                                 "$ref": "#/definitions/InternalEffectBlockTableDeleteRow_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
@@ -1433,7 +1436,7 @@
                                 "$ref": "#/definitions/InternalEffectBlockTableUpdateCell_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
@@ -1443,7 +1446,7 @@
                                 "$ref": "#/definitions/ExternalSystemEffectBlock_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
@@ -1453,7 +1456,7 @@
                                 "$ref": "#/definitions/OrderSubYieldPipeline_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
@@ -1463,7 +1466,7 @@
                                 "$ref": "#/definitions/SubProcessPipeline_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     }
@@ -1501,7 +1504,7 @@
                                 "$ref": "#/definitions/InternalSourceBlockConstant_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
@@ -1511,7 +1514,7 @@
                                 "$ref": "#/definitions/InternalSourceBlockTableColumns_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
@@ -1521,7 +1524,7 @@
                                 "$ref": "#/definitions/InternalSourceBlockTableCells_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
@@ -1531,7 +1534,7 @@
                                 "$ref": "#/definitions/ExternalSystemSourceBlock_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
@@ -1541,7 +1544,7 @@
                                 "$ref": "#/definitions/QuoteSubYieldPipeline_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
@@ -1551,7 +1554,7 @@
                                 "$ref": "#/definitions/SubProcessPipeline_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     }

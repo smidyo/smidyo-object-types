@@ -389,10 +389,13 @@
             ],
             "type": "object"
         },
-        "Skippable": {
+        "SkipUnlessPipelineValues": {
             "properties": {
-                "skippable": {
-                    "type": "boolean"
+                "skipUnlessPipelineValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "type": "object"
@@ -484,7 +487,7 @@
                                 "$ref": "#/definitions/OperationBlock_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     },
@@ -494,7 +497,7 @@
                                 "$ref": "#/definitions/SubProcessPipeline_PipelineStep"
                             },
                             {
-                                "$ref": "#/definitions/Skippable"
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
                             }
                         ]
                     }
