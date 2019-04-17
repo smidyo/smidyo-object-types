@@ -186,28 +186,62 @@
         "InternalSourceBlockTableCells_PipelineStep": {
             "properties": {
                 "in": {
-                    "anyOf": [
+                    "additionalItems": {
+                        "anyOf": [
+                            {
+                                "anyOf": [
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "items": [
                         {
-                            "allOf": [
+                            "anyOf": [
                                 {
-                                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                        }
+                                    ]
                                 },
                                 {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
-                                }
-                            ]
-                        },
-                        {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
-                                },
-                                {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                        }
+                                    ]
                                 }
                             ]
                         }
-                    ]
+                    ],
+                    "minItems": 1,
+                    "type": "array"
                 },
                 "out": {
                     "items": {

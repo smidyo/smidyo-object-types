@@ -20,7 +20,20 @@
                     "type": "array"
                 },
                 "out": {
-                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                    "additionalItems": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                        }
+                    ],
+                    "minItems": 1,
+                    "type": "array"
                 },
                 "type": {
                     "enum": [
@@ -509,28 +522,62 @@
                     "type": "string"
                 },
                 "in": {
-                    "anyOf": [
+                    "additionalItems": {
+                        "anyOf": [
+                            {
+                                "anyOf": [
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "items": [
                         {
-                            "allOf": [
+                            "anyOf": [
                                 {
-                                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                        }
+                                    ]
                                 },
                                 {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
-                                }
-                            ]
-                        },
-                        {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>"
-                                },
-                                {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                        }
+                                    ]
                                 }
                             ]
                         }
-                    ]
+                    ],
+                    "minItems": 1,
+                    "type": "array"
                 },
                 "tableSlug": {
                     "type": "string"
@@ -659,28 +706,62 @@
         "InternalSourceBlockTableCells_PipelineStep": {
             "properties": {
                 "in": {
-                    "anyOf": [
+                    "additionalItems": {
+                        "anyOf": [
+                            {
+                                "anyOf": [
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "items": [
                         {
-                            "allOf": [
+                            "anyOf": [
                                 {
-                                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                        }
+                                    ]
                                 },
                                 {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
-                                }
-                            ]
-                        },
-                        {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
-                                },
-                                {
-                                    "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                        }
+                                    ]
                                 }
                             ]
                         }
-                    ]
+                    ],
+                    "minItems": 1,
+                    "type": "array"
                 },
                 "out": {
                     "items": {

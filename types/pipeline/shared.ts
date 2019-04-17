@@ -155,7 +155,7 @@ export interface InternalSourceBlockTableCells_PipelineStep
   sourceBlock: 'TABLE_CELLS';
   tableSlug: string;
   singularColumns: string[]; // must be columns of shape singular
-  in: InternalSourceBlockTableCells_PipelineStep_In;
+  in: [InternalSourceBlockTableCells_PipelineStep_In];
   out: InternalSourceBlockTableCells_PipelineStep_Out[];
 }
 
@@ -179,7 +179,7 @@ export interface InternalEffectBlockTableDeleteRow_PipelineStep
 
   effectBlock: 'TABLE_DELETE_ROW';
   tableSlug: string;
-  in: InternalEffectBlockTableDeleteRow_PipelineStep_In;
+  in: [InternalEffectBlockTableDeleteRow_PipelineStep_In];
 }
 
 type InternalEffectBlockTableUpdateCellOptionIn =
@@ -217,7 +217,7 @@ export interface AssertPipelineStep extends BasePipelineStep {
   type: 'ASSERT';
   inPriority: PipelineStepInFromPipelineValue[];
   fallback: AssertPipelineStepRejectFallback | AssertPipelineStepFallbackDataFallback;
-  out?: PipelineStepOutToPipelineValue;
+  out?: [PipelineStepOutToPipelineValue];
 }
 
 abstract class AssertPipelineStepFallback {

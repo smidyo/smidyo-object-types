@@ -20,7 +20,20 @@
                     "type": "array"
                 },
                 "out": {
-                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                    "additionalItems": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                        }
+                    ],
+                    "minItems": 1,
+                    "type": "array"
                 },
                 "type": {
                     "enum": [
