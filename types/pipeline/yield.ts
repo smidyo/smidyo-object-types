@@ -25,13 +25,13 @@ export type OrderSubYieldPipeline_YieldPipelineStep = OrderSubYieldPipeline_Pipe
 export type SubProcessPipeline_YieldPipelineStep = SubProcessPipeline_PipelineStep &
   SkipUnlessPipelineValues;
 
-export type ProcessPipelineQuoteStep =
+export type YieldPipelineQuoteStep =
   | SubProcessPipeline_YieldPipelineStep
   | QuoteSubYieldPipeline_YieldPipelineStep
   | SourceBlock_YieldPipelineStep
   | AssertPipelineStep;
 
-export type ProcessPipelineOrderStep =
+export type YieldPipelineOrderStep =
   | SubProcessPipeline_YieldPipelineStep
   | OrderSubYieldPipeline_YieldPipelineStep
   | SourceBlock_YieldPipelineStep
@@ -45,9 +45,9 @@ export interface YieldPipelineBody extends BasePipelineBody {
   titleFrom?: PipelineStepInFromInlineValueOrPipelineValue;
   quoteInfoPoints: YieldPipelineInfoPoint[];
   quotePriceSequence: YieldPipelineQuotePriceSequenceStep[];
-  quoteSteps: ProcessPipelineQuoteStep[];
+  quoteSteps: YieldPipelineQuoteStep[];
   orderInfoPoints: YieldPipelineInfoPoint[];
-  orderSteps: ProcessPipelineOrderStep[];
+  orderSteps: YieldPipelineOrderStep[];
 }
 
 export interface YieldPipelineQuotePriceSequenceStep {
