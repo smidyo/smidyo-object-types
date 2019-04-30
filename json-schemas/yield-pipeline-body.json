@@ -330,84 +330,6 @@
             ],
             "type": "object"
         },
-        "InlineValue<{type:\"text\";nullable:false;list:false;}>_2": {
-            "properties": {
-                "data": {
-                },
-                "dataShape": {
-                    "properties": {
-                        "list": {
-                            "enum": [
-                                false
-                            ],
-                            "type": "boolean"
-                        },
-                        "nullable": {
-                            "enum": [
-                                false
-                            ],
-                            "type": "boolean"
-                        },
-                        "type": {
-                            "enum": [
-                                "text"
-                            ],
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "list",
-                        "nullable",
-                        "type"
-                    ],
-                    "type": "object"
-                }
-            },
-            "required": [
-                "data",
-                "dataShape"
-            ],
-            "type": "object"
-        },
-        "InlineValue<{type:\"text\";nullable:false;list:false;}>_3": {
-            "properties": {
-                "data": {
-                },
-                "dataShape": {
-                    "properties": {
-                        "list": {
-                            "enum": [
-                                false
-                            ],
-                            "type": "boolean"
-                        },
-                        "nullable": {
-                            "enum": [
-                                false
-                            ],
-                            "type": "boolean"
-                        },
-                        "type": {
-                            "enum": [
-                                "text"
-                            ],
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "list",
-                        "nullable",
-                        "type"
-                    ],
-                    "type": "object"
-                }
-            },
-            "required": [
-                "data",
-                "dataShape"
-            ],
-            "type": "object"
-        },
         "InlineValue<{type:string;nullable:false;list:boolean;}>": {
             "properties": {
                 "data": {
@@ -854,107 +776,6 @@
             ],
             "type": "object"
         },
-        "OrderSubYieldPipeline_PipelineStep": {
-            "properties": {
-                "in": {
-                    "items": {
-                        "anyOf": [
-                            {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
-                                    }
-                                ]
-                            },
-                            {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "priceSequenceOut": {
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
-                            },
-                            {
-                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "proposalNameIn": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                        },
-                        {
-                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>_2"
-                        }
-                    ]
-                },
-                "proposalSlugOut": {
-                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
-                },
-                "proposalTitleIn": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                        },
-                        {
-                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>_3"
-                        }
-                    ]
-                },
-                "quoteInfoPointsOut": {
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
-                            },
-                            {
-                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "subYieldPipelineSlug": {
-                    "pattern": "^[a-z0-9-.]*$",
-                    "type": "string"
-                },
-                "totalPriceOut": {
-                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
-                },
-                "type": {
-                    "enum": [
-                        "ORDERING_SUB_YIELD_PIPELINE"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "in",
-                "priceSequenceOut",
-                "quoteInfoPointsOut",
-                "subYieldPipelineSlug",
-                "type"
-            ],
-            "type": "object"
-        },
         "PipelineInput": {
             "properties": {
                 "dataShape": {
@@ -1027,42 +848,6 @@
             "properties": {
                 "inFrom": {
                     "$ref": "#/definitions/InlineValue<{type:\"text\";nullable:false;list:false;}>_1"
-                },
-                "type": {
-                    "enum": [
-                        "INLINE_VALUE"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "inFrom",
-                "type"
-            ],
-            "type": "object"
-        },
-        "PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>_2": {
-            "properties": {
-                "inFrom": {
-                    "$ref": "#/definitions/InlineValue<{type:\"text\";nullable:false;list:false;}>_2"
-                },
-                "type": {
-                    "enum": [
-                        "INLINE_VALUE"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "inFrom",
-                "type"
-            ],
-            "type": "object"
-        },
-        "PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>_3": {
-            "properties": {
-                "inFrom": {
-                    "$ref": "#/definitions/InlineValue<{type:\"text\";nullable:false;list:false;}>_3"
                 },
                 "type": {
                     "enum": [
@@ -1208,84 +993,6 @@
             },
             "required": [
                 "outTo"
-            ],
-            "type": "object"
-        },
-        "QuoteSubYieldPipeline_PipelineStep": {
-            "properties": {
-                "in": {
-                    "items": {
-                        "anyOf": [
-                            {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
-                                    }
-                                ]
-                            },
-                            {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
-                                    },
-                                    {
-                                        "$ref": "#/definitions/PipelineStepInTo<string>"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "priceSequenceOut": {
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
-                            },
-                            {
-                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "quoteInfoPointsOut": {
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
-                            },
-                            {
-                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "subYieldPipelineSlug": {
-                    "pattern": "^[a-z0-9-.]*$",
-                    "type": "string"
-                },
-                "totalPriceOut": {
-                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
-                },
-                "type": {
-                    "enum": [
-                        "QUOTING_SUB_YIELD_PIPELINE"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "in",
-                "priceSequenceOut",
-                "quoteInfoPointsOut",
-                "subYieldPipelineSlug",
-                "type"
             ],
             "type": "object"
         },
@@ -1534,16 +1241,6 @@
                     {
                         "allOf": [
                             {
-                                "$ref": "#/definitions/OrderSubYieldPipeline_PipelineStep"
-                            },
-                            {
-                                "$ref": "#/definitions/SkipUnlessPipelineValues"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
                                 "$ref": "#/definitions/SubProcessPipeline_PipelineStep"
                             },
                             {
@@ -1613,16 +1310,6 @@
                         "allOf": [
                             {
                                 "$ref": "#/definitions/ExternalSystemSourceBlock_PipelineStep"
-                            },
-                            {
-                                "$ref": "#/definitions/SkipUnlessPipelineValues"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/QuoteSubYieldPipeline_PipelineStep"
                             },
                             {
                                 "$ref": "#/definitions/SkipUnlessPipelineValues"

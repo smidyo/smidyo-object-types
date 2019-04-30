@@ -18,22 +18,17 @@ import {
 
 export type SourceBlock_YieldPipelineStep = SourceBlock_PipelineStep & SkipUnlessPipelineValues;
 export type EffectBlock_YieldPipelineStep = EffectBlock_PipelineStep & SkipUnlessPipelineValues;
-export type QuoteSubYieldPipeline_YieldPipelineStep = QuoteSubYieldPipeline_PipelineStep &
-  SkipUnlessPipelineValues;
-export type OrderSubYieldPipeline_YieldPipelineStep = OrderSubYieldPipeline_PipelineStep &
-  SkipUnlessPipelineValues;
+
 export type SubProcessPipeline_YieldPipelineStep = SubProcessPipeline_PipelineStep &
   SkipUnlessPipelineValues;
 
 export type YieldPipelineQuoteStep =
   | SubProcessPipeline_YieldPipelineStep
-  | QuoteSubYieldPipeline_YieldPipelineStep
   | SourceBlock_YieldPipelineStep
   | AssertPipelineStep;
 
 export type YieldPipelineOrderStep =
   | SubProcessPipeline_YieldPipelineStep
-  | OrderSubYieldPipeline_YieldPipelineStep
   | SourceBlock_YieldPipelineStep
   | EffectBlock_YieldPipelineStep
   | AssertPipelineStep;
@@ -85,6 +80,13 @@ abstract class SubYieldPipeline_PipelineStep implements BasePipelineStep {
   quoteInfoPointsOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
+/*
+
+Should replace this with internal effect and source blocks.
+
+Quote an offering with an internal source block, and order using an internal effect block.
+
+
 export interface QuoteSubYieldPipeline_PipelineStep extends SubYieldPipeline_PipelineStep {
   type: 'QUOTING_SUB_YIELD_PIPELINE';
 }
@@ -105,6 +107,7 @@ export interface OrderSubYieldPipeline_PipelineStep extends SubYieldPipeline_Pip
 
   proposalSlugOut?: PipelineStepOutToPipelineValue;
 }
+*/
 
 //
 //
