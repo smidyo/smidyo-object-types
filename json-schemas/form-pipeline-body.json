@@ -33,6 +33,9 @@
                     },
                     "type": "array"
                 },
+                "label": {
+                    "type": "string"
+                },
                 "out": {
                     "items": {
                         "allOf": [
