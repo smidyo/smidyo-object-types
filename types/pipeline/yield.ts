@@ -36,7 +36,6 @@ export type YieldPipelineOrderStep =
 export interface YieldPipelineBody extends BasePipelineBody {
   type: 'YIELD';
   inputs: PipelineInput[];
-  outputs: PipelineOutput[];
   titleFrom?: PipelineStepInFromInlineValueOrPipelineValue;
   quoteInfoPoints: YieldPipelineInfoPoint[];
   quotePriceSequence: YieldPipelineQuotePriceSequenceStep[];

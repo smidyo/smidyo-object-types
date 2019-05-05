@@ -792,22 +792,6 @@
             ],
             "type": "object"
         },
-        "PipelineOutput": {
-            "properties": {
-                "dataShape": {
-                    "$ref": "#/definitions/FullDataShape"
-                },
-                "name": {
-                    "pattern": "^[a-z0-9-]*$",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "dataShape",
-                "name"
-            ],
-            "type": "object"
-        },
         "PipelineStepInFromInlineValue<FullDataShape>": {
             "properties": {
                 "inFrom": {
@@ -1252,12 +1236,6 @@
             },
             "type": "array"
         },
-        "outputs": {
-            "items": {
-                "$ref": "#/definitions/PipelineOutput"
-            },
-            "type": "array"
-        },
         "quoteInfoPoints": {
             "items": {
                 "$ref": "#/definitions/YieldPipelineInfoPoint"
@@ -1351,7 +1329,6 @@
         "inputs",
         "orderInfoPoints",
         "orderSteps",
-        "outputs",
         "quoteInfoPoints",
         "quotePriceSequence",
         "quoteSteps",
