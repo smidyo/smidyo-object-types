@@ -188,6 +188,12 @@
         },
         "InternalSourceBlockTableCells_PipelineStep": {
             "properties": {
+                "columns": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "in": {
                     "additionalItems": {
                         "anyOf": [
@@ -259,12 +265,6 @@
                     },
                     "type": "array"
                 },
-                "singularColumns": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "sourceBlock": {
                     "enum": [
                         "TABLE_CELLS"
@@ -282,9 +282,9 @@
                 }
             },
             "required": [
+                "columns",
                 "in",
                 "out",
-                "singularColumns",
                 "sourceBlock",
                 "tableSlug",
                 "type"
@@ -293,12 +293,6 @@
         },
         "InternalSourceBlockTableColumns_PipelineStep": {
             "properties": {
-                "columns": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "out": {
                     "items": {
                         "allOf": [
@@ -309,6 +303,12 @@
                                 "$ref": "#/definitions/PipelineStepOutToPipelineValue"
                             }
                         ]
+                    },
+                    "type": "array"
+                },
+                "singularColumns": {
+                    "items": {
+                        "type": "string"
                     },
                     "type": "array"
                 },
@@ -329,8 +329,8 @@
                 }
             },
             "required": [
-                "columns",
                 "out",
+                "singularColumns",
                 "sourceBlock",
                 "tableSlug",
                 "type"
