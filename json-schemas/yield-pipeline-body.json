@@ -627,12 +627,6 @@
         },
         "InternalSourceBlockTableCells_PipelineStep": {
             "properties": {
-                "columns": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "in": {
                     "additionalItems": {
                         "anyOf": [
@@ -721,7 +715,6 @@
                 }
             },
             "required": [
-                "columns",
                 "in",
                 "out",
                 "sourceBlock",
@@ -745,12 +738,6 @@
                     },
                     "type": "array"
                 },
-                "singularColumns": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "sourceBlock": {
                     "enum": [
                         "TABLE_COLUMNS"
@@ -769,7 +756,6 @@
             },
             "required": [
                 "out",
-                "singularColumns",
                 "sourceBlock",
                 "tableSlug",
                 "type"

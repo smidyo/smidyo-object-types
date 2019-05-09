@@ -140,7 +140,6 @@ export interface InternalSourceBlockTableColumns_PipelineStep
 
   sourceBlock: 'TABLE_COLUMNS';
   tableSlug: string;
-  singularColumns: string[]; // must be columns of shape singular
   out: InternalSourceBlockTableColumns_PipelineStep_Out[];
 }
 
@@ -154,7 +153,6 @@ export interface InternalSourceBlockTableCells_PipelineStep
 
   sourceBlock: 'TABLE_CELLS';
   tableSlug: string;
-  columns: string[];
   in: [InternalSourceBlockTableCells_PipelineStep_In];
   out: InternalSourceBlockTableCells_PipelineStep_Out[];
 }
