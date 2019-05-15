@@ -68,17 +68,6 @@ export interface YieldPipelineInfoPoint {
   elementBlockConfiguration: Array<PipelineStepInFromInlineValue & PipelineStepInTo>;
 }
 
-abstract class SubYieldPipeline_PipelineStep implements BasePipelineStep {
-  type: 'QUOTING_SUB_YIELD_PIPELINE' | 'ORDERING_SUB_YIELD_PIPELINE';
-
-  /** @pattern "^[a-z0-9-.]*$" */
-  subYieldPipelineSlug: string;
-  in: Array<(PipelineStepInFromInlineValueOrPipelineValue) & PipelineStepInTo>;
-  priceSequenceOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
-  totalPriceOut?: PipelineStepOutToPipelineValue;
-  quoteInfoPointsOut: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
-}
-
 /*
 
 Should replace this with internal effect and source blocks.
@@ -112,12 +101,12 @@ export interface OrderSubYieldPipeline_PipelineStep extends SubYieldPipeline_Pip
 //
 //
 
-export interface QuoteRunYieldPipelineResult {
-  type: 'QUOTE_RUN_YIELD_PIPELINE_RESULT';
+export interface QuoteRunYieldPipelineResultOutcome {
+  type: 'QUOTE_RUN_YIELD_PIPELINE_OUTCOME';
   title: string;
-  infoPoints: InfoPointResult[];
-  priceSequence: PriceSequenceStepResult[];
-  totalPrice: number;
+  infoPointResults: InfoPointResult[];
+  priceSequenceResults: PriceSequenceStepResult[];
+  totalPriceResult: number;
 }
 
 export interface PriceSequenceStepResult {
@@ -125,11 +114,11 @@ export interface PriceSequenceStepResult {
   name: string;
   title: string;
   specification?: string;
-  data: number;
+  value: number;
 }
 
 export interface InfoPointResult {
   name: string;
   title: string;
-  data: any;
+  data: any[];
 }
