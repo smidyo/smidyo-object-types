@@ -245,13 +245,23 @@ export interface AssertPipelineStepFallbackDataFallback extends AssertPipelineSt
 //
 
 export interface PipelineRejectionOutcome {
+  type: 'PIPELINE_REJECTION_OUTCOME';
+  location: string;
+  rejection: string;
+}
+
+export interface RejectionOutcome {
   type: 'REJECTION_OUTCOME';
-  message: string;
+  rejection: string;
 }
 
 export interface PipelineErrorOutcome {
+  type: 'PIPELINE_ERROR_OUTCOME';
+  error: string;
+}
+
+export interface ErrorOutcome {
   type: 'ERROR_OUTCOME';
-  location: string;
   error: string;
 }
 

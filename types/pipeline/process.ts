@@ -47,6 +47,11 @@ export interface OperationBlock_PipelineStep extends BasePipelineStep {
 //
 //
 
+export interface OperationBlockResultOutcome {
+  type: 'OPERATION_BLOCK_RESULT_OUTCOME';
+  result: Record<string, any[]>;
+}
+
 export interface ProcessPipelineResultOutcome {
   type: 'PROCESS_PIPELINE_RESULT_OUTCOME';
   result: Record<string, any[]>;
