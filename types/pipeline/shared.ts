@@ -257,6 +257,7 @@ export interface RejectionOutcome {
 
 export interface PipelineErrorOutcome {
   type: 'PIPELINE_ERROR_OUTCOME';
+  location: string;
   error: string;
 }
 
