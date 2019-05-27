@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "json": "rm -rf ./json-schemas/* && typescript-json-schema \"types/pipeline/yield.ts\" YieldPipelineBody -o \"./json-schemas/yield-pipeline-body.json\" --ignoreErrors --required && typescript-json-schema \"types/pipeline/process.ts\" ProcessPipelineBody -o \"./json-schemas/process-pipeline-body.json\" --ignoreErrors --required&& typescript-json-schema \"types/pipeline/form.ts\" FormPipelineBody -o \"./json-schemas/form-pipeline-body.json\" --ignoreErrors --required && typescript-json-schema \"types/table/index.ts\" TableBody -o \"./json-schemas/table-body.json\" --ignoreErrors --required",
+    "md": "jsonschema2md -d json-schemas -o docs -e json",
     "bump-publish": "npm version patch && npm publish"
   },
   "repository": {
@@ -15,6 +16,8 @@
   "bugs": {
     "url": "https://github.com/smidyo/smidyo-types-pipeline/issues"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@adobe/jsonschema2md": "^2.1.0"
+  },
   "dependencies": {}
 }

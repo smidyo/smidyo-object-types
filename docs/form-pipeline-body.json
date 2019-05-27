@@ -1,0 +1,678 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "ElementBlock_PipelineStep": {
+            "properties": {
+                "elementBlockSlug": {
+                    "type": "string"
+                },
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "enum": [
+                        "ELEMENT_BLOCK"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "elementBlockSlug",
+                "in",
+                "out",
+                "type"
+            ],
+            "type": "object"
+        },
+        "ExternalSystemSourceBlock_PipelineStep": {
+            "properties": {
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "sourceBlock": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "EXTERNAL_SYSTEM_SOURCE_BLOCK"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "in",
+                "out",
+                "sourceBlock",
+                "type"
+            ],
+            "type": "object"
+        },
+        "FullDataShape": {
+            "properties": {
+                "list": {
+                    "type": "boolean"
+                },
+                "nullable": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "list",
+                "nullable",
+                "type"
+            ],
+            "type": "object"
+        },
+        "InlineValue<FullDataShape>": {
+            "properties": {
+                "data": {},
+                "dataShape": {
+                    "$ref": "#/definitions/FullDataShape"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "InternalSourceBlockConstant_PipelineStep": {
+            "properties": {
+                "constantSlug": {
+                    "type": "string"
+                },
+                "out": {
+                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                },
+                "sourceBlock": {
+                    "enum": [
+                        "CONSTANT"
+                    ],
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_SOURCE_BLOCK"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "constantSlug",
+                "out",
+                "sourceBlock",
+                "type"
+            ],
+            "type": "object"
+        },
+        "InternalSourceBlockTableCells_PipelineStep": {
+            "properties": {
+                "in": {
+                    "additionalItems": {
+                        "anyOf": [
+                            {
+                                "anyOf": [
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "anyOf": [
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "type": "array"
+                },
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "sourceBlock": {
+                    "enum": [
+                        "TABLE_CELLS"
+                    ],
+                    "type": "string"
+                },
+                "tableSlug": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_SOURCE_BLOCK"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "in",
+                "out",
+                "sourceBlock",
+                "tableSlug",
+                "type"
+            ],
+            "type": "object"
+        },
+        "InternalSourceBlockTableColumns_PipelineStep": {
+            "properties": {
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "sourceBlock": {
+                    "enum": [
+                        "TABLE_COLUMNS"
+                    ],
+                    "type": "string"
+                },
+                "tableSlug": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_SOURCE_BLOCK"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "out",
+                "sourceBlock",
+                "tableSlug",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineInput": {
+            "properties": {
+                "dataShape": {
+                    "$ref": "#/definitions/FullDataShape"
+                },
+                "name": {
+                    "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataShape",
+                "name"
+            ],
+            "type": "object"
+        },
+        "PipelineOutput": {
+            "properties": {
+                "dataShape": {
+                    "$ref": "#/definitions/FullDataShape"
+                },
+                "name": {
+                    "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataShape",
+                "name"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromInlineValue<FullDataShape>": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<FullDataShape>"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromPipelineValue": {
+            "properties": {
+                "inFrom": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "PIPELINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInTo<\"row-name\">": {
+            "properties": {
+                "inTo": {
+                    "enum": [
+                        "row-name"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inTo"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInTo<string>": {
+            "properties": {
+                "inTo": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inTo"
+            ],
+            "type": "object"
+        },
+        "PipelineStepOutFrom<string>": {
+            "properties": {
+                "outFrom": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "outFrom"
+            ],
+            "type": "object"
+        },
+        "PipelineStepOutToPipelineValue": {
+            "properties": {
+                "outTo": {
+                    "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "outTo"
+            ],
+            "type": "object"
+        },
+        "SkipUnlessPipelineValues": {
+            "properties": {
+                "skipUnlessPipelineValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "SubFormPipeline_PipelineStep": {
+            "properties": {
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "subFormPipelineSlug": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "SUB_FORM_PIPELINE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "in",
+                "out",
+                "subFormPipelineSlug",
+                "type"
+            ],
+            "type": "object"
+        },
+        "SubProcessPipeline_PipelineStep": {
+            "properties": {
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "subProcessPipelineSlug": {
+                    "pattern": "^[a-z0-9-.]*$",
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "SUB_PROCESS_PIPELINE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "in",
+                "out",
+                "subProcessPipelineSlug",
+                "type"
+            ],
+            "type": "object"
+        }
+    },
+    "properties": {
+        "inputs": {
+            "items": {
+                "$ref": "#/definitions/PipelineInput"
+            },
+            "type": "array"
+        },
+        "outputs": {
+            "items": {
+                "$ref": "#/definitions/PipelineOutput"
+            },
+            "type": "array"
+        },
+        "steps": {
+            "items": {
+                "anyOf": [
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/ElementBlock_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/InternalSourceBlockConstant_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/InternalSourceBlockTableColumns_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/InternalSourceBlockTableCells_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/ExternalSystemSourceBlock_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/SubFormPipeline_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/SubProcessPipeline_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "type": "array"
+        },
+        "type": {
+            "enum": [
+                "FORM"
+            ],
+            "type": "string"
+        }
+    },
+    "required": [
+        "inputs",
+        "outputs",
+        "steps",
+        "type"
+    ],
+    "type": "object"
+}

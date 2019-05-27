@@ -1,0 +1,1318 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "AssertPipelineStep": {
+            "properties": {
+                "fallback": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/AssertPipelineStepRejectFallback"
+                        },
+                        {
+                            "$ref": "#/definitions/AssertPipelineStepFallbackDataFallback"
+                        }
+                    ]
+                },
+                "inPriority": {
+                    "items": {
+                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                    },
+                    "type": "array"
+                },
+                "out": {
+                    "additionalItems": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                        }
+                    ],
+                    "minItems": 1,
+                    "type": "array"
+                },
+                "type": {
+                    "enum": [
+                        "ASSERT"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "fallback",
+                "inPriority",
+                "type"
+            ],
+            "type": "object"
+        },
+        "AssertPipelineStepFallbackDataFallback": {
+            "properties": {
+                "data": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                        },
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:false;list:boolean;}>"
+                        }
+                    ]
+                },
+                "type": {
+                    "enum": [
+                        "FALLBACK_DATA"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "data",
+                "type"
+            ],
+            "type": "object"
+        },
+        "AssertPipelineStepRejectFallback": {
+            "properties": {
+                "message": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                        },
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>_1"
+                        }
+                    ]
+                },
+                "type": {
+                    "enum": [
+                        "REJECT"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "message",
+                "type"
+            ],
+            "type": "object"
+        },
+        "ExternalSystemEffectBlock_PipelineStep": {
+            "properties": {
+                "effectBlock": {
+                    "type": "string"
+                },
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "enum": [
+                        "EXTERNAL_SYSTEM_EFFECT_BLOCK"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "effectBlock",
+                "in",
+                "out",
+                "type"
+            ],
+            "type": "object"
+        },
+        "ExternalSystemSourceBlock_PipelineStep": {
+            "properties": {
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "sourceBlock": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "EXTERNAL_SYSTEM_SOURCE_BLOCK"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "in",
+                "out",
+                "sourceBlock",
+                "type"
+            ],
+            "type": "object"
+        },
+        "FullDataShape": {
+            "properties": {
+                "list": {
+                    "type": "boolean"
+                },
+                "nullable": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "list",
+                "nullable",
+                "type"
+            ],
+            "type": "object"
+        },
+        "InlineValue<FullDataShape>": {
+            "properties": {
+                "data": {},
+                "dataShape": {
+                    "$ref": "#/definitions/FullDataShape"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "InlineValue<{type:\"text\";nullable:false;list:false;}>": {
+            "properties": {
+                "data": {},
+                "dataShape": {
+                    "properties": {
+                        "list": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "nullable": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "enum": [
+                                "text"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "list",
+                        "nullable",
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "InlineValue<{type:\"text\";nullable:false;list:false;}>_1": {
+            "properties": {
+                "data": {},
+                "dataShape": {
+                    "properties": {
+                        "list": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "nullable": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "enum": [
+                                "text"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "list",
+                        "nullable",
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "InlineValue<{type:string;nullable:false;list:boolean;}>": {
+            "properties": {
+                "data": {},
+                "dataShape": {
+                    "properties": {
+                        "list": {
+                            "type": "boolean"
+                        },
+                        "nullable": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "list",
+                        "nullable",
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "InlineValue<{type:string;nullable:false;list:false;}>": {
+            "properties": {
+                "data": {},
+                "dataShape": {
+                    "properties": {
+                        "list": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "nullable": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "list",
+                        "nullable",
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "InlineValue<{type:string;nullable:false;list:false;}>_1": {
+            "properties": {
+                "data": {},
+                "dataShape": {
+                    "properties": {
+                        "list": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "nullable": {
+                            "enum": [
+                                false
+                            ],
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "list",
+                        "nullable",
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "InternalEffectBlockTableDeleteRow_PipelineStep": {
+            "properties": {
+                "effectBlock": {
+                    "enum": [
+                        "TABLE_DELETE_ROW"
+                    ],
+                    "type": "string"
+                },
+                "in": {
+                    "additionalItems": {
+                        "anyOf": [
+                            {
+                                "anyOf": [
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "anyOf": [
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "type": "array"
+                },
+                "tableSlug": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_EFFECT_BLOCK"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "effectBlock",
+                "in",
+                "tableSlug",
+                "type"
+            ],
+            "type": "object"
+        },
+        "InternalEffectBlockTableUpdateCell_PipelineStep": {
+            "properties": {
+                "column": {
+                    "type": "string"
+                },
+                "effectBlock": {
+                    "enum": [
+                        "TABLE_UPDATE_CELL"
+                    ],
+                    "type": "string"
+                },
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<\"data\">"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<\"data\">"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>_1"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "tableSlug": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_EFFECT_BLOCK"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "column",
+                "effectBlock",
+                "in",
+                "tableSlug",
+                "type"
+            ],
+            "type": "object"
+        },
+        "InternalSourceBlockConstant_PipelineStep": {
+            "properties": {
+                "constantSlug": {
+                    "type": "string"
+                },
+                "out": {
+                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                },
+                "sourceBlock": {
+                    "enum": [
+                        "CONSTANT"
+                    ],
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_SOURCE_BLOCK"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "constantSlug",
+                "out",
+                "sourceBlock",
+                "type"
+            ],
+            "type": "object"
+        },
+        "InternalSourceBlockTableCells_PipelineStep": {
+            "properties": {
+                "in": {
+                    "additionalItems": {
+                        "anyOf": [
+                            {
+                                "anyOf": [
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "anyOf": [
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/PipelineStepInTo<\"row-name\">"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "type": "array"
+                },
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "sourceBlock": {
+                    "enum": [
+                        "TABLE_CELLS"
+                    ],
+                    "type": "string"
+                },
+                "tableSlug": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_SOURCE_BLOCK"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "in",
+                "out",
+                "sourceBlock",
+                "tableSlug",
+                "type"
+            ],
+            "type": "object"
+        },
+        "InternalSourceBlockTableColumns_PipelineStep": {
+            "properties": {
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "sourceBlock": {
+                    "enum": [
+                        "TABLE_COLUMNS"
+                    ],
+                    "type": "string"
+                },
+                "tableSlug": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "INTERNAL_SOURCE_BLOCK"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "out",
+                "sourceBlock",
+                "tableSlug",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineInput": {
+            "properties": {
+                "dataShape": {
+                    "$ref": "#/definitions/FullDataShape"
+                },
+                "name": {
+                    "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataShape",
+                "name"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromInlineValue<FullDataShape>": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<FullDataShape>"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<{type:\"text\";nullable:false;list:false;}>"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>_1": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<{type:\"text\";nullable:false;list:false;}>_1"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromInlineValue<{type:string;nullable:false;list:boolean;}>": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<{type:string;nullable:false;list:boolean;}>"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<{type:string;nullable:false;list:false;}>"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromInlineValue<{type:string;nullable:false;list:false;}>_1": {
+            "properties": {
+                "inFrom": {
+                    "$ref": "#/definitions/InlineValue<{type:string;nullable:false;list:false;}>_1"
+                },
+                "type": {
+                    "enum": [
+                        "INLINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInFromPipelineValue": {
+            "properties": {
+                "inFrom": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "PIPELINE_VALUE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inFrom",
+                "type"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInTo<\"data\">": {
+            "properties": {
+                "inTo": {
+                    "enum": [
+                        "data"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inTo"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInTo<\"row-name\">": {
+            "properties": {
+                "inTo": {
+                    "enum": [
+                        "row-name"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inTo"
+            ],
+            "type": "object"
+        },
+        "PipelineStepInTo<string>": {
+            "properties": {
+                "inTo": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inTo"
+            ],
+            "type": "object"
+        },
+        "PipelineStepOutFrom<string>": {
+            "properties": {
+                "outFrom": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "outFrom"
+            ],
+            "type": "object"
+        },
+        "PipelineStepOutToPipelineValue": {
+            "properties": {
+                "outTo": {
+                    "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "outTo"
+            ],
+            "type": "object"
+        },
+        "SkipUnlessPipelineValues": {
+            "properties": {
+                "skipUnlessPipelineValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "SubProcessPipeline_PipelineStep": {
+            "properties": {
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "subProcessPipelineSlug": {
+                    "pattern": "^[a-z0-9-.]*$",
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "SUB_PROCESS_PIPELINE"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "in",
+                "out",
+                "subProcessPipelineSlug",
+                "type"
+            ],
+            "type": "object"
+        },
+        "YieldPipelineInfoPoint": {
+            "properties": {
+                "dataShape": {
+                    "$ref": "#/definitions/FullDataShape"
+                },
+                "elementBlock": {
+                    "type": "string"
+                },
+                "elementBlockConfiguration": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepInTo<string>"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "elementBlockInput": {
+                    "type": "string"
+                },
+                "name": {
+                    "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataShape",
+                "elementBlock",
+                "elementBlockConfiguration",
+                "elementBlockInput",
+                "name",
+                "title"
+            ],
+            "type": "object"
+        },
+        "YieldPipelineQuotePriceSequenceStep": {
+            "properties": {
+                "name": {
+                    "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                },
+                "specification": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                        },
+                        {
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>"
+                        }
+                    ]
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "ADD",
+                        "MINIMUM",
+                        "MULTIPLY",
+                        "PERCENTAGE_OFF",
+                        "PERCENTAGE_ON",
+                        "SUBTRACT"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "title",
+                "type"
+            ],
+            "type": "object"
+        }
+    },
+    "properties": {
+        "inputs": {
+            "items": {
+                "$ref": "#/definitions/PipelineInput"
+            },
+            "type": "array"
+        },
+        "orderInfoPoints": {
+            "items": {
+                "$ref": "#/definitions/YieldPipelineInfoPoint"
+            },
+            "type": "array"
+        },
+        "orderSteps": {
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/AssertPipelineStep"
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/InternalSourceBlockConstant_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/InternalSourceBlockTableColumns_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/InternalSourceBlockTableCells_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/ExternalSystemSourceBlock_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/InternalEffectBlockTableDeleteRow_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/InternalEffectBlockTableUpdateCell_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/ExternalSystemEffectBlock_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/SubProcessPipeline_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "type": "array"
+        },
+        "quoteInfoPoints": {
+            "items": {
+                "$ref": "#/definitions/YieldPipelineInfoPoint"
+            },
+            "type": "array"
+        },
+        "quotePriceSequence": {
+            "items": {
+                "$ref": "#/definitions/YieldPipelineQuotePriceSequenceStep"
+            },
+            "type": "array"
+        },
+        "quoteSteps": {
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/AssertPipelineStep"
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/InternalSourceBlockConstant_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/InternalSourceBlockTableColumns_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/InternalSourceBlockTableCells_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/ExternalSystemSourceBlock_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/SubProcessPipeline_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "type": "array"
+        },
+        "titleFrom": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                },
+                {
+                    "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                }
+            ]
+        },
+        "type": {
+            "enum": [
+                "YIELD"
+            ],
+            "type": "string"
+        }
+    },
+    "required": [
+        "inputs",
+        "orderInfoPoints",
+        "orderSteps",
+        "quoteInfoPoints",
+        "quotePriceSequence",
+        "quoteSteps",
+        "type"
+    ],
+    "type": "object"
+}
