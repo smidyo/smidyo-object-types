@@ -2,6 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
         "AssertPipelineStep": {
+            "description": "Asserts that a pipeline is not null. Values are asserted in the order that\ninPriority is defined. If none of values in inPriority are non-null, the fallback\nis used.\n\nThe asserted value (which is now surely not null), can also be used from out.",
             "properties": {
                 "fallback": {
                     "anyOf": [
@@ -50,6 +51,7 @@
             "type": "object"
         },
         "AssertPipelineStepFallbackDataFallback": {
+            "description": "A fallback value to use. The data's data shape can not be nullable.",
             "properties": {
                 "data": {
                     "anyOf": [
@@ -75,6 +77,7 @@
             "type": "object"
         },
         "AssertPipelineStepRejectFallback": {
+            "description": "Rejects the pipeline. You can specify the message from an inline value or make\nit dynamic from a pipeline value.",
             "properties": {
                 "message": {
                     "anyOf": [
@@ -119,6 +122,7 @@
             "type": "object"
         },
         "InlineValue<FullDataShape>": {
+            "description": "An inline value needs to define both its data and the data shape of the data.",
             "properties": {
                 "data": {},
                 "dataShape": {
@@ -132,6 +136,7 @@
             "type": "object"
         },
         "InlineValue<{type:\"text\";nullable:false;list:false;}>": {
+            "description": "An inline value needs to define both its data and the data shape of the data.",
             "properties": {
                 "data": {},
                 "dataShape": {
@@ -170,6 +175,7 @@
             "type": "object"
         },
         "InlineValue<{type:string;nullable:false;list:boolean;}>": {
+            "description": "An inline value needs to define both its data and the data shape of the data.",
             "properties": {
                 "data": {},
                 "dataShape": {
@@ -262,6 +268,7 @@
             "type": "object"
         },
         "PipelineInput": {
+            "description": "Defines a pipeline input",
             "properties": {
                 "dataShape": {
                     "$ref": "#/definitions/FullDataShape"
@@ -278,6 +285,7 @@
             "type": "object"
         },
         "PipelineOutput": {
+            "description": "Defines a pipeline output",
             "properties": {
                 "dataShape": {
                     "$ref": "#/definitions/FullDataShape"
@@ -400,6 +408,7 @@
             "type": "object"
         },
         "SkipUnlessPipelineValues": {
+            "description": "If this property is defined, the pipeline step will be skipped unless\nthe following pipeline values are set, and not set to null.",
             "properties": {
                 "skipUnlessPipelineValues": {
                     "items": {
@@ -411,6 +420,7 @@
             "type": "object"
         },
         "SubProcessPipeline_PipelineStep": {
+            "description": "Runs another process pipeline",
             "properties": {
                 "in": {
                     "items": {

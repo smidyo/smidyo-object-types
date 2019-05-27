@@ -2,6 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
         "ElementBlock_PipelineStep": {
+            "description": "An element block rendered for the user. You can provide a label to describe what\nthe element block step is for.",
             "properties": {
                 "elementBlockSlug": {
                     "type": "string"
@@ -65,6 +66,7 @@
             "type": "object"
         },
         "ExternalSystemSourceBlock_PipelineStep": {
+            "description": "External systems are not yet implemented, this may change",
             "properties": {
                 "in": {
                     "items": {
@@ -144,6 +146,7 @@
             "type": "object"
         },
         "InlineValue<FullDataShape>": {
+            "description": "An inline value needs to define both its data and the data shape of the data.",
             "properties": {
                 "data": {},
                 "dataShape": {
@@ -157,6 +160,7 @@
             "type": "object"
         },
         "InternalSourceBlockConstant_PipelineStep": {
+            "description": "Gets a constant",
             "properties": {
                 "constantSlug": {
                     "type": "string"
@@ -323,6 +327,7 @@
             "type": "object"
         },
         "PipelineInput": {
+            "description": "Defines a pipeline input",
             "properties": {
                 "dataShape": {
                     "$ref": "#/definitions/FullDataShape"
@@ -339,6 +344,7 @@
             "type": "object"
         },
         "PipelineOutput": {
+            "description": "Defines a pipeline output",
             "properties": {
                 "dataShape": {
                     "$ref": "#/definitions/FullDataShape"
@@ -439,6 +445,7 @@
             "type": "object"
         },
         "SkipUnlessPipelineValues": {
+            "description": "If this property is defined, the pipeline step will be skipped unless\nthe following pipeline values are set, and not set to null.",
             "properties": {
                 "skipUnlessPipelineValues": {
                     "items": {
@@ -450,6 +457,7 @@
             "type": "object"
         },
         "SubFormPipeline_PipelineStep": {
+            "description": "A form pipeline can have other form pipelines within itself. This is useful for\nbranching paths in the form pipeline. The sub-form-pipeline is not rendered unless\nall of its inputs are provided.",
             "properties": {
                 "in": {
                     "items": {
@@ -510,6 +518,7 @@
             "type": "object"
         },
         "SubProcessPipeline_PipelineStep": {
+            "description": "Runs another process pipeline",
             "properties": {
                 "in": {
                     "items": {

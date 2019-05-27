@@ -39,6 +39,12 @@ export interface FormPipelineBody extends BasePipelineBody {
 export type SubFormPipeline_PipelineStep_In = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo;
 export type SubFormPipeline_PipelineStep_Out = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
+
+/**
+ * A form pipeline can have other form pipelines within itself. This is useful for
+ * branching paths in the form pipeline. The sub-form-pipeline is not rendered unless
+ * all of its inputs are provided.
+ */
 export interface SubFormPipeline_PipelineStep extends BasePipelineStep {
   type: 'SUB_FORM_PIPELINE';
   subFormPipelineSlug: string;
@@ -49,6 +55,11 @@ export interface SubFormPipeline_PipelineStep extends BasePipelineStep {
 export type ElementBlock_PipelineStep_In = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo;
 export type ElementBlock_PipelineStep_Out = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
+
+/**
+ * An element block rendered for the user. You can provide a label to describe what
+ * the element block step is for.
+ */
 export interface ElementBlock_PipelineStep extends BasePipelineStep {
   type: 'ELEMENT_BLOCK';
   elementBlockSlug: string;

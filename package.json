@@ -17,7 +17,8 @@
     "url": "https://github.com/smidyo/smidyo-types-pipeline/issues"
   },
   "devDependencies": {
-    "@adobe/jsonschema2md": "^2.1.0"
+    "@adobe/jsonschema2md": "^2.1.0",
+    "typescript-json-schema": "^0.38.1"
   },
   "dependencies": {}
 }

@@ -4,6 +4,8 @@
 
 ```
 
+The price is calculated in the order defined in quotePriceSequence
+
 | Abstract            | Extensible | Status       | Identifiable | Custom Properties | Additional Properties | Defined In                                           |
 | ------------------- | ---------- | ------------ | ------------ | ----------------- | --------------------- | ---------------------------------------------------- |
 | Can be instantiated | Yes        | Experimental | No           | Forbidden         | Permitted             | [yield-pipeline-body.json](yield-pipeline-body.json) |

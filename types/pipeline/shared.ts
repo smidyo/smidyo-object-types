@@ -6,12 +6,18 @@ export interface BasePipelineBody {
   type: PipelineType;
 }
 
+/**
+ * Defines a pipeline input
+ */
 export interface PipelineInput {
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
   dataShape: FullDataShape;
 }
 
+/**
+ * Defines a pipeline output
+ */
 export interface PipelineOutput {
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
@@ -35,10 +41,18 @@ export interface BasePipelineStep {
   type: StepType;
 }
 
+/**
+ * If this property is defined, the pipeline step will be skipped unless
+ * the following pipeline values are set, and not set to null.
+ */
 export interface SkipUnlessPipelineValues {
   skipUnlessPipelineValues?: string[];
 }
 
+/**
+ * A pipeline step can get its payload from either an inline value or a
+ * pipeline value.
+ */
 abstract class PipelineStepInFrom<DS = FullDataShape> {
   type: 'INLINE_VALUE' | 'PIPELINE_VALUE';
   inFrom: InlineValue<DS> | string;
@@ -48,6 +62,9 @@ export interface PipelineStepInTo<T = string> {
   inTo: T;
 }
 
+/**
+ * An inline value needs to define both its data and the data shape of the data.
+ */
 export interface InlineValue<DS = FullDataShape> {
   dataShape: DS;
   data: any;
@@ -82,35 +99,53 @@ export interface PipelineStepOutToPipelineValue {
 
 export type SourceOrEffectBlock_PipelineStep = SourceBlock_PipelineStep | EffectBlock_PipelineStep;
 
+/**
+ * External systems are not yet implemented, this may change
+ */
 export type SourceBlock_PipelineStep =
   | InternalSourceBlockConstant_PipelineStep
   | InternalSourceBlockTableColumns_PipelineStep
   | InternalSourceBlockTableCells_PipelineStep
   | ExternalSystemSourceBlock_PipelineStep;
 
+/**
+ * Effect blocks are not yet implemented, these may change
+ */
 export type EffectBlock_PipelineStep =
   | InternalEffectBlockTableDeleteRow_PipelineStep
   | InternalEffectBlockTableUpdateCell_PipelineStep
   | ExternalSystemEffectBlock_PipelineStep;
 
+/**
+ * External systems are not yet implemented, this may change
+ */
 abstract class ExternalSystemSourceOrEffectBlock_PipelineStep implements BasePipelineStep {
   type: 'EXTERNAL_SYSTEM_SOURCE_BLOCK' | 'EXTERNAL_SYSTEM_EFFECT_BLOCK';
   in: Array<(PipelineStepInFromInlineValueOrPipelineValue) & PipelineStepInTo>;
   out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
+/**
+ * External systems are not yet implemented, this may change
+ */
 export interface ExternalSystemSourceBlock_PipelineStep
   extends ExternalSystemSourceOrEffectBlock_PipelineStep {
   type: 'EXTERNAL_SYSTEM_SOURCE_BLOCK';
   sourceBlock: string;
 }
 
+/**
+ * External systems are not yet implemented, this may change
+ */
 export interface ExternalSystemEffectBlock_PipelineStep
   extends ExternalSystemSourceOrEffectBlock_PipelineStep {
   type: 'EXTERNAL_SYSTEM_EFFECT_BLOCK';
   effectBlock: string;
 }
 
+/**
+ * Effect blocks are not yet implemented, these may change
+ */
 abstract class InternalSourceOrEffectBlock_PipelineStep implements BasePipelineStep {
   type: 'INTERNAL_SOURCE_BLOCK' | 'INTERNAL_EFFECT_BLOCK';
 }
@@ -124,6 +159,9 @@ abstract class InternalSourceBlock_PipelineStep extends InternalSourceOrEffectBl
 
 type InternalSourceBlockName = 'CONSTANT' | 'TABLE_COLUMNS' | 'TABLE_CELLS';
 
+/**
+ * Gets a constant
+ */
 export interface InternalSourceBlockConstant_PipelineStep extends InternalSourceBlock_PipelineStep {
   type: 'INTERNAL_SOURCE_BLOCK';
 
@@ -132,6 +170,10 @@ export interface InternalSourceBlockConstant_PipelineStep extends InternalSource
   out: PipelineStepOutToPipelineValue;
 }
 
+/**
+ * Gets an entire table column. The columns are outputted as a list, therefore the column
+ * type must be of a singular type.
+ */
 export type InternalSourceBlockTableColumns_PipelineStep_Out = PipelineStepOutFrom &
   PipelineStepOutToPipelineValue;
 export interface InternalSourceBlockTableColumns_PipelineStep
@@ -143,6 +185,9 @@ export interface InternalSourceBlockTableColumns_PipelineStep
   out: InternalSourceBlockTableColumns_PipelineStep_Out[];
 }
 
+/**
+ * Gets cells from a specific row
+ */
 export type InternalSourceBlockTableCells_PipelineStep_In = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo<'row-name'>;
 export type InternalSourceBlockTableCells_PipelineStep_Out = PipelineStepOutFrom &
@@ -159,12 +204,18 @@ export interface InternalSourceBlockTableCells_PipelineStep
 
 //
 
+/**
+ * Not yet implemented
+ */
 type InternalEffectBlockName = 'TABLE_DELETE_ROW' | 'TABLE_UPDATE_CELL';
 abstract class InternalEffectBlock_PipelineStep extends InternalSourceOrEffectBlock_PipelineStep {
   type: 'INTERNAL_EFFECT_BLOCK';
   effectBlock: InternalEffectBlockName;
 }
 
+/**
+ * Not yet implemented
+ */
 export type InternalEffectBlockTableDeleteRow_PipelineStep_In = PipelineStepInFromInlineValueOrPipelineValue<{
   type: string;
   nullable: false;
@@ -180,6 +231,9 @@ export interface InternalEffectBlockTableDeleteRow_PipelineStep
   in: [InternalEffectBlockTableDeleteRow_PipelineStep_In];
 }
 
+/**
+ * Not yet implemented
+ */
 type InternalEffectBlockTableUpdateCellOptionIn =
   | PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'data'>
   | PipelineStepInFromInlineValueOrPipelineValue<{
@@ -189,6 +243,9 @@ type InternalEffectBlockTableUpdateCellOptionIn =
     }> &
       PipelineStepInTo<'row-name'>;
 
+/**
+ * Not yet implemented
+ */
 export interface InternalEffectBlockTableUpdateCell_PipelineStep
   extends InternalEffectBlock_PipelineStep {
   type: 'INTERNAL_EFFECT_BLOCK';
@@ -203,6 +260,10 @@ export type SubProcessPipeline_PipelineStep_In = PipelineStepInFromInlineValueOr
   PipelineStepInTo;
 export type SubProcessPipeline_PipelineStep_Out = PipelineStepOutFrom &
   PipelineStepOutToPipelineValue;
+
+/**
+ * Runs another process pipeline
+ */
 export interface SubProcessPipeline_PipelineStep extends BasePipelineStep {
   type: 'SUB_PROCESS_PIPELINE';
   /** @pattern "^[a-z0-9-.]*$" */
@@ -211,6 +272,13 @@ export interface SubProcessPipeline_PipelineStep extends BasePipelineStep {
   out: SubProcessPipeline_PipelineStep_Out[];
 }
 
+/**
+ * Asserts that a pipeline is not null. Values are asserted in the order that
+ * inPriority is defined. If none of values in inPriority are non-null, the fallback
+ * is used.
+ *
+ * The asserted value (which is now surely not null), can also be used from out.
+ */
 export interface AssertPipelineStep extends BasePipelineStep {
   type: 'ASSERT';
   inPriority: PipelineStepInFromPipelineValue[];
@@ -222,6 +290,10 @@ abstract class AssertPipelineStepFallback {
   type: 'REJECT' | 'FALLBACK_DATA';
 }
 
+/**
+ * Rejects the pipeline. You can specify the message from an inline value or make
+ * it dynamic from a pipeline value.
+ */
 export interface AssertPipelineStepRejectFallback extends AssertPipelineStepFallback {
   type: 'REJECT';
   message: PipelineStepInFromInlineValueOrPipelineValue<{
@@ -231,6 +303,9 @@ export interface AssertPipelineStepRejectFallback extends AssertPipelineStepFall
   }>;
 }
 
+/**
+ * A fallback value to use. The data's data shape can not be nullable.
+ */
 export interface AssertPipelineStepFallbackDataFallback extends AssertPipelineStepFallback {
   type: 'FALLBACK_DATA';
   data: PipelineStepInFromInlineValueOrPipelineValue<{
@@ -244,28 +319,38 @@ export interface AssertPipelineStepFallbackDataFallback extends AssertPipelineSt
 //
 //
 
+/**
+ * What a pipeline outputs in case of a rejection outcome. Same as RejectionOutcome
+ * except it has location information.
+ */
 export interface PipelineRejectionOutcome {
   type: 'PIPELINE_REJECTION_OUTCOME';
   location: string;
   rejection: string;
 }
 
+/**
+ * A general rejection outcome
+ */
 export interface RejectionOutcome {
   type: 'REJECTION_OUTCOME';
   rejection: string;
 }
 
+/**
+ * What a pipeline outputs in case of an error outcome. Same as ErrorOutcome
+ * except it has location information.
+ */
 export interface PipelineErrorOutcome {
   type: 'PIPELINE_ERROR_OUTCOME';
   location: string;
   error: string;
 }
 
+/**
+ * General error outcome
+ */
 export interface ErrorOutcome {
   type: 'ERROR_OUTCOME';
   error: string;
 }
-
-//
-//
-//

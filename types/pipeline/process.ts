@@ -47,11 +47,17 @@ export interface OperationBlock_PipelineStep extends BasePipelineStep {
 //
 //
 
+/**
+ * What an operation block outputs if it has a successful outcome
+ */
 export interface OperationBlockResultOutcome {
   type: 'OPERATION_BLOCK_RESULT_OUTCOME';
   result: Record<string, any[]>;
 }
 
+/**
+ * What an process pipeline outputs if it has a successful outcome
+ */
 export interface ProcessPipelineResultOutcome {
   type: 'PROCESS_PIPELINE_RESULT_OUTCOME';
   result: Record<string, any[]>;
