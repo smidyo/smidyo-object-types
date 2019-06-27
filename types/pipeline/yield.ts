@@ -114,12 +114,21 @@ export interface OrderSubYieldPipeline_PipelineStep extends SubYieldPipeline_Pip
 /**
  * What a yield pipeline outputs in case of a successful outcome
  */
-export interface QuoteRunYieldPipelineResultOutcome {
-  type: 'QUOTE_RUN_YIELD_PIPELINE_OUTCOME';
+
+export interface BaseYieldPipelineResultOutcome {
+  type: 'QUOTE_RUN_YIELD_PIPELINE_OUTCOME' | 'ORDER_RUN_YIELD_PIPELINE_OUTCOME';
   title: string;
   infoPointResults: InfoPointResult[];
   priceSequenceResults: PriceSequenceStepResult[];
   totalPriceResult: number;
+}
+
+export interface QuoteRunYieldPipelineResultOutcome extends BaseYieldPipelineResultOutcome {
+  type: 'QUOTE_RUN_YIELD_PIPELINE_OUTCOME';
+}
+
+export interface OrderRunYieldPipelineResultOutcome extends BaseYieldPipelineResultOutcome {
+  type: 'ORDER_RUN_YIELD_PIPELINE_OUTCOME';
 }
 
 export interface PriceSequenceStepResult {
