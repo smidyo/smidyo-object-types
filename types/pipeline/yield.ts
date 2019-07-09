@@ -131,7 +131,7 @@ export interface QuoteRunYieldPipelineResultOutcome extends BaseYieldPipelineRes
 
 export interface OrderRunYieldPipelineResultOutcome extends BaseYieldPipelineResultOutcome {
   type: 'ORDER_RUN_YIELD_PIPELINE_OUTCOME';
-  outputs: Record<string, any[]>;
+  result: Record<string, any[]>;
 }
 
 export interface PriceSequenceStepResult {
