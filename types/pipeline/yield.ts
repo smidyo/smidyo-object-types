@@ -9,7 +9,8 @@ import {
   PipelineStepInTo,
   SourceBlock_PipelineStep,
   SubProcessPipeline_PipelineStep,
-  SkipUnlessPipelineValues
+  SkipUnlessPipelineValues,
+  PipelineOutput
 } from './shared';
 
 export type SourceBlock_YieldPipelineStep = SourceBlock_PipelineStep & SkipUnlessPipelineValues;
@@ -38,6 +39,7 @@ export type YieldPipelineOrderStep =
 export interface YieldPipelineBody extends BasePipelineBody {
   type: 'YIELD';
   inputs: PipelineInput[];
+  outputs: PipelineOutput[];
   titleFrom?: PipelineStepInFromInlineValueOrPipelineValue;
   quoteInfoPoints: YieldPipelineInfoPoint[];
   quotePriceSequence: YieldPipelineQuotePriceSequenceStep[];
@@ -129,6 +131,7 @@ export interface QuoteRunYieldPipelineResultOutcome extends BaseYieldPipelineRes
 
 export interface OrderRunYieldPipelineResultOutcome extends BaseYieldPipelineResultOutcome {
   type: 'ORDER_RUN_YIELD_PIPELINE_OUTCOME';
+  outputs: Record<string, any[]>;
 }
 
 export interface PriceSequenceStepResult {
