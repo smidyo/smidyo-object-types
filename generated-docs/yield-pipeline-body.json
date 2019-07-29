@@ -786,6 +786,23 @@
             ],
             "type": "object"
         },
+        "PipelineOutput": {
+            "description": "Defines a pipeline output",
+            "properties": {
+                "dataShape": {
+                    "$ref": "#/definitions/FullDataShape"
+                },
+                "name": {
+                    "pattern": "^[a-z0-9-]*$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataShape",
+                "name"
+            ],
+            "type": "object"
+        },
         "PipelineStepInFromInlineValue<FullDataShape>": {
             "properties": {
                 "inFrom": {
@@ -1048,49 +1065,6 @@
             ],
             "type": "object"
         },
-        "YieldPipelineInfoPoint": {
-            "description": "Not fully implemented yet\n\nThis provides information about the product. It's a payloadlet that is stored\npermanently. You can also provide an element block to view the data with, along\nwith configuration for it",
-            "properties": {
-                "dataShape": {
-                    "$ref": "#/definitions/FullDataShape"
-                },
-                "elementBlock": {
-                    "type": "string"
-                },
-                "elementBlockConfiguration": {
-                    "items": {
-                        "allOf": [
-                            {
-                                "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
-                            },
-                            {
-                                "$ref": "#/definitions/PipelineStepInTo<string>"
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "elementBlockInput": {
-                    "type": "string"
-                },
-                "name": {
-                    "pattern": "^[a-z0-9-]*$",
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "dataShape",
-                "elementBlock",
-                "elementBlockConfiguration",
-                "elementBlockInput",
-                "name",
-                "title"
-            ],
-            "type": "object"
-        },
         "YieldPipelineQuotePriceSequenceStep": {
             "description": "You can provide an additional text regarding the specification of this\nspecific price sequence step",
             "properties": {
@@ -1139,9 +1113,9 @@
             },
             "type": "array"
         },
-        "orderInfoPoints": {
+        "orderOutputs": {
             "items": {
-                "$ref": "#/definitions/YieldPipelineInfoPoint"
+                "$ref": "#/definitions/PipelineOutput"
             },
             "type": "array"
         },
@@ -1235,9 +1209,9 @@
             },
             "type": "array"
         },
-        "quoteInfoPoints": {
+        "quoteOutputs": {
             "items": {
-                "$ref": "#/definitions/YieldPipelineInfoPoint"
+                "$ref": "#/definitions/PipelineOutput"
             },
             "type": "array"
         },
@@ -1326,9 +1300,9 @@
     },
     "required": [
         "inputs",
-        "orderInfoPoints",
+        "orderOutputs",
         "orderSteps",
-        "quoteInfoPoints",
+        "quoteOutputs",
         "quotePriceSequence",
         "quoteSteps",
         "type"

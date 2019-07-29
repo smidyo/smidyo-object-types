@@ -12,34 +12,31 @@ The price is calculated in the order defined in quotePriceSequence
 
 # Definitions
 
-| Property                                                | Type       | Group                                                                         |
-| ------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------- |
-| [column](#column)                                       | `string`   | `#/definitions/InternalEffectBlockTableUpdateCell_PipelineStep`               |
-| [constantSlug](#constantslug)                           | `string`   | `#/definitions/InternalSourceBlockConstant_PipelineStep`                      |
-| [data](#data)                                           | complex    | `#/definitions/InlineValue&lt;{type:string;nullable:false;list:false;}&gt;_1` |
-| [dataShape](#datashape)                                 | reference  | `#/definitions/YieldPipelineInfoPoint`                                        |
-| [effectBlock](#effectblock)                             | `enum`     | `#/definitions/InternalEffectBlockTableUpdateCell_PipelineStep`               |
-| [elementBlock](#elementblock)                           | `string`   | `#/definitions/YieldPipelineInfoPoint`                                        |
-| [elementBlockConfiguration](#elementblockconfiguration) | `array`    | `#/definitions/YieldPipelineInfoPoint`                                        |
-| [elementBlockInput](#elementblockinput)                 | `string`   | `#/definitions/YieldPipelineInfoPoint`                                        |
-| [fallback](#fallback)                                   | complex    | `#/definitions/AssertPipelineStep`                                            |
-| [in](#in)                                               | `array`    | `#/definitions/SubProcessPipeline_PipelineStep`                               |
-| [inFrom](#infrom)                                       | `string`   | `#/definitions/PipelineStepInFromPipelineValue`                               |
-| [inPriority](#inpriority)                               | reference  | `#/definitions/AssertPipelineStep`                                            |
-| [inTo](#into)                                           | `string`   | `#/definitions/PipelineStepInTo&lt;string&gt;`                                |
-| [list](#list)                                           | `boolean`  | `#/definitions/FullDataShape`                                                 |
-| [message](#message)                                     | complex    | `#/definitions/AssertPipelineStepRejectFallback`                              |
-| [name](#name)                                           | `string`   | `#/definitions/YieldPipelineQuotePriceSequenceStep`                           |
-| [nullable](#nullable)                                   | `boolean`  | `#/definitions/FullDataShape`                                                 |
-| [out](#out)                                             | `array`    | `#/definitions/SubProcessPipeline_PipelineStep`                               |
-| [outFrom](#outfrom)                                     | `string`   | `#/definitions/PipelineStepOutFrom&lt;string&gt;`                             |
-| [outTo](#outto)                                         | `string`   | `#/definitions/PipelineStepOutToPipelineValue`                                |
-| [skipUnlessPipelineValues](#skipunlesspipelinevalues)   | `string[]` | `#/definitions/SkipUnlessPipelineValues`                                      |
-| [sourceBlock](#sourceblock)                             | `enum`     | `#/definitions/InternalSourceBlockTableColumns_PipelineStep`                  |
-| [specification](#specification)                         | complex    | `#/definitions/YieldPipelineQuotePriceSequenceStep`                           |
-| [subProcessPipelineSlug](#subprocesspipelineslug)       | `string`   | `#/definitions/SubProcessPipeline_PipelineStep`                               |
-| [tableSlug](#tableslug)                                 | `string`   | `#/definitions/InternalSourceBlockTableColumns_PipelineStep`                  |
-| [title](#title)                                         | `string`   | `#/definitions/YieldPipelineQuotePriceSequenceStep`                           |
+| Property                                              | Type       | Group                                                                         |
+| ----------------------------------------------------- | ---------- | ----------------------------------------------------------------------------- |
+| [column](#column)                                     | `string`   | `#/definitions/InternalEffectBlockTableUpdateCell_PipelineStep`               |
+| [constantSlug](#constantslug)                         | `string`   | `#/definitions/InternalSourceBlockConstant_PipelineStep`                      |
+| [data](#data)                                         | complex    | `#/definitions/InlineValue&lt;{type:string;nullable:false;list:false;}&gt;_1` |
+| [dataShape](#datashape)                               | reference  | `#/definitions/PipelineOutput`                                                |
+| [effectBlock](#effectblock)                           | `enum`     | `#/definitions/InternalEffectBlockTableUpdateCell_PipelineStep`               |
+| [fallback](#fallback)                                 | complex    | `#/definitions/AssertPipelineStep`                                            |
+| [in](#in)                                             | `array`    | `#/definitions/SubProcessPipeline_PipelineStep`                               |
+| [inFrom](#infrom)                                     | `string`   | `#/definitions/PipelineStepInFromPipelineValue`                               |
+| [inPriority](#inpriority)                             | reference  | `#/definitions/AssertPipelineStep`                                            |
+| [inTo](#into)                                         | `string`   | `#/definitions/PipelineStepInTo&lt;string&gt;`                                |
+| [list](#list)                                         | `boolean`  | `#/definitions/FullDataShape`                                                 |
+| [message](#message)                                   | complex    | `#/definitions/AssertPipelineStepRejectFallback`                              |
+| [name](#name)                                         | `string`   | `#/definitions/YieldPipelineQuotePriceSequenceStep`                           |
+| [nullable](#nullable)                                 | `boolean`  | `#/definitions/FullDataShape`                                                 |
+| [out](#out)                                           | `array`    | `#/definitions/SubProcessPipeline_PipelineStep`                               |
+| [outFrom](#outfrom)                                   | `string`   | `#/definitions/PipelineStepOutFrom&lt;string&gt;`                             |
+| [outTo](#outto)                                       | `string`   | `#/definitions/PipelineStepOutToPipelineValue`                                |
+| [skipUnlessPipelineValues](#skipunlesspipelinevalues) | `string[]` | `#/definitions/SkipUnlessPipelineValues`                                      |
+| [sourceBlock](#sourceblock)                           | `enum`     | `#/definitions/InternalSourceBlockTableColumns_PipelineStep`                  |
+| [specification](#specification)                       | complex    | `#/definitions/YieldPipelineQuotePriceSequenceStep`                           |
+| [subProcessPipelineSlug](#subprocesspipelineslug)     | `string`   | `#/definitions/SubProcessPipeline_PipelineStep`                               |
+| [tableSlug](#tableslug)                               | `string`   | `#/definitions/InternalSourceBlockTableColumns_PipelineStep`                  |
+| [title](#title)                                       | `string`   | `#/definitions/YieldPipelineQuotePriceSequenceStep`                           |
 
 ## column
 
@@ -112,54 +109,6 @@ The value of this property **must** be equal to one of the [known values below](
 | Value               | Description |
 | ------------------- | ----------- |
 | `TABLE_UPDATE_CELL` |             |
-
-## elementBlock
-
-`elementBlock`
-
-- is **required**
-- type: `string`
-- defined in this schema
-
-### elementBlock Type
-
-`string`
-
-## elementBlockConfiguration
-
-`elementBlockConfiguration`
-
-- is **required**
-- type: `array`
-- defined in this schema
-
-### elementBlockConfiguration Type
-
-Array type: `array`
-
-All items must be of the type:
-
-**All** of the following _requirements_ need to be fulfilled.
-
-#### Requirement 1
-
-- []() – `#/definitions/PipelineStepInFromInlineValue&lt;FullDataShape&gt;`
-
-#### Requirement 2
-
-- []() – `#/definitions/PipelineStepInTo&lt;string&gt;`
-
-## elementBlockInput
-
-`elementBlockInput`
-
-- is **required**
-- type: `string`
-- defined in this schema
-
-### elementBlockInput Type
-
-`string`
 
 ## fallback
 
@@ -477,9 +426,9 @@ All instances must conform to this regular expression (test examples
 | Property                                  | Type      | Required     | Nullable | Defined by                                 |
 | ----------------------------------------- | --------- | ------------ | -------- | ------------------------------------------ |
 | [inputs](#inputs)                         | reference | **Required** | No       | (this schema)                              |
-| [orderInfoPoints](#orderinfopoints)       | reference | **Required** | No       | (this schema)                              |
+| [orderOutputs](#orderoutputs)             | reference | **Required** | No       | (this schema)                              |
 | [orderSteps](#ordersteps)                 | `array`   | **Required** | No       | (this schema)                              |
-| [quoteInfoPoints](#quoteinfopoints)       | reference | **Required** | No       | (this schema)                              |
+| [quoteOutputs](#quoteoutputs)             | reference | **Required** | No       | (this schema)                              |
 | [quotePriceSequence](#quotepricesequence) | reference | **Required** | No       | (this schema)                              |
 | [quoteSteps](#quotesteps)                 | `array`   | **Required** | No       | (this schema)                              |
 | [titleFrom](#titlefrom)                   | complex   | Optional     | No       | (this schema)                              |
@@ -502,21 +451,21 @@ All items must be of the type:
 
 - []() – `#/definitions/PipelineInput`
 
-## orderInfoPoints
+## orderOutputs
 
-`orderInfoPoints`
+`orderOutputs`
 
 - is **required**
 - type: reference
 - defined in this schema
 
-### orderInfoPoints Type
+### orderOutputs Type
 
 Array type: reference
 
 All items must be of the type:
 
-- []() – `#/definitions/YieldPipelineInfoPoint`
+- []() – `#/definitions/PipelineOutput`
 
 ## orderSteps
 
@@ -634,21 +583,21 @@ All items must be of the type:
 
 - []() – `#/definitions/SkipUnlessPipelineValues`
 
-## quoteInfoPoints
+## quoteOutputs
 
-`quoteInfoPoints`
+`quoteOutputs`
 
 - is **required**
 - type: reference
 - defined in this schema
 
-### quoteInfoPoints Type
+### quoteOutputs Type
 
 Array type: reference
 
 All items must be of the type:
 
-- []() – `#/definitions/YieldPipelineInfoPoint`
+- []() – `#/definitions/PipelineOutput`
 
 ## quotePriceSequence
 

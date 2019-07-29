@@ -1,16 +1,13 @@
-import { FullDataShape } from '../data-shape';
 import {
   AssertPipelineStep,
   BasePipelineBody,
   EffectBlock_PipelineStep,
   PipelineInput,
-  PipelineStepInFromInlineValue,
+  PipelineOutput,
   PipelineStepInFromInlineValueOrPipelineValue,
-  PipelineStepInTo,
-  SourceBlock_PipelineStep,
-  SubProcessPipeline_PipelineStep,
   SkipUnlessPipelineValues,
-  PipelineOutput
+  SourceBlock_PipelineStep,
+  SubProcessPipeline_PipelineStep
 } from './shared';
 
 export type SourceBlock_YieldPipelineStep = SourceBlock_PipelineStep & SkipUnlessPipelineValues;
@@ -39,12 +36,11 @@ export type YieldPipelineOrderStep =
 export interface YieldPipelineBody extends BasePipelineBody {
   type: 'YIELD';
   inputs: PipelineInput[];
-  outputs: PipelineOutput[];
+  quoteOutputs: PipelineOutput[];
+  orderOutputs: PipelineOutput[];
   titleFrom?: PipelineStepInFromInlineValueOrPipelineValue;
-  quoteInfoPoints: YieldPipelineInfoPoint[];
   quotePriceSequence: YieldPipelineQuotePriceSequenceStep[];
   quoteSteps: YieldPipelineQuoteStep[];
-  orderInfoPoints: YieldPipelineInfoPoint[];
   orderSteps: YieldPipelineOrderStep[];
 }
 
@@ -62,25 +58,6 @@ export interface YieldPipelineQuotePriceSequenceStep {
   }>;
   /** @pattern "^[a-z0-9-]*$" */
   name: string;
-}
-
-/**
- * Not fully implemented yet
- *
- * This provides information about the product. It's a payloadlet that is stored
- * permanently. You can also provide an element block to view the data with, along
- * with configuration for it
- */
-export interface YieldPipelineInfoPoint {
-  title: string;
-  /** @pattern "^[a-z0-9-]*$" */
-  name: string;
-
-  dataShape: FullDataShape;
-
-  elementBlock: string;
-  elementBlockInput: string;
-  elementBlockConfiguration: Array<PipelineStepInFromInlineValue & PipelineStepInTo>;
 }
 
 /*
@@ -120,13 +97,13 @@ export interface OrderSubYieldPipeline_PipelineStep extends SubYieldPipeline_Pip
 export interface BaseYieldPipelineResultOutcome {
   type: 'QUOTE_RUN_YIELD_PIPELINE_OUTCOME' | 'ORDER_RUN_YIELD_PIPELINE_OUTCOME';
   title: string;
-  infoPointResults: InfoPointResult[];
   priceSequenceResults: PriceSequenceStepResult[];
   totalPriceResult: number;
 }
 
 export interface QuoteRunYieldPipelineResultOutcome extends BaseYieldPipelineResultOutcome {
   type: 'QUOTE_RUN_YIELD_PIPELINE_OUTCOME';
+  quoteResult: Record<string, any[]>;
 }
 
 export interface OrderRunYieldPipelineResultOutcome extends BaseYieldPipelineResultOutcome {
@@ -140,10 +117,4 @@ export interface PriceSequenceStepResult {
   title: string;
   specification?: string;
   value: number;
-}
-
-export interface InfoPointResult {
-  name: string;
-  title: string;
-  data: any[];
 }
