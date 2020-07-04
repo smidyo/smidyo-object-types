@@ -171,13 +171,15 @@ type InternalSourceBlockName =
 /**
  * Gets a constant
  */
+export type InternalSourceBlockConstant_PipelineStep_Out = PipelineStepOutFrom<'constant'> &
+  PipelineStepOutToPipelineValue;
 export interface InternalSourceBlockConstant_PipelineStep
   extends InternalSourceBlock_PipelineStep {
   type: 'INTERNAL_SOURCE_BLOCK';
 
   sourceBlock: 'CONSTANT';
   constantSlug: string;
-  out: PipelineStepOutToPipelineValue;
+  out: [InternalSourceBlockConstant_PipelineStep_Out];
 }
 
 /**

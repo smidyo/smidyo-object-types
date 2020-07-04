@@ -603,13 +603,39 @@
             "type": "object"
         },
         "InternalSourceBlockConstant_PipelineStep": {
-            "description": "Gets a constant",
             "properties": {
                 "constantSlug": {
                     "type": "string"
                 },
                 "out": {
-                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                    "additionalItems": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepOutFrom<\"constant\">"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "items": [
+                        {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/PipelineStepOutFrom<\"constant\">"
+                                },
+                                {
+                                    "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                                }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "type": "array"
                 },
                 "sourceBlock": {
                     "enum": [
@@ -1260,6 +1286,20 @@
                 "outFrom": {
                     "enum": [
                         "cell"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "outFrom"
+            ],
+            "type": "object"
+        },
+        "PipelineStepOutFrom<\"constant\">": {
+            "properties": {
+                "outFrom": {
+                    "enum": [
+                        "constant"
                     ],
                     "type": "string"
                 }
