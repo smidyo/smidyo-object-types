@@ -529,7 +529,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/ExternalSystemSourceBlock_PipelineStep`
+- []() – `#/definitions/InternalSourceBlockTableCell_PipelineStep`
 
 #### Requirement 2
 
@@ -541,7 +541,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalEffectBlockTableDeleteRow_PipelineStep`
+- []() – `#/definitions/ExternalSystemSourceBlock_PipelineStep`
 
 #### Requirement 2
 
@@ -553,7 +553,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalEffectBlockTableUpdateCell_PipelineStep`
+- []() – `#/definitions/InternalEffectBlockTableDeleteRow_PipelineStep`
 
 #### Requirement 2
 
@@ -565,13 +565,25 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/ExternalSystemEffectBlock_PipelineStep`
+- []() – `#/definitions/InternalEffectBlockTableUpdateCell_PipelineStep`
 
 #### Requirement 2
 
 - []() – `#/definitions/SkipUnlessPipelineValues`
 
 #### Option 9
+
+**All** of the following _requirements_ need to be fulfilled.
+
+#### Requirement 1
+
+- []() – `#/definitions/ExternalSystemEffectBlock_PipelineStep`
+
+#### Requirement 2
+
+- []() – `#/definitions/SkipUnlessPipelineValues`
+
+#### Option 10
 
 **All** of the following _requirements_ need to be fulfilled.
 
@@ -677,13 +689,25 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/ExternalSystemSourceBlock_PipelineStep`
+- []() – `#/definitions/InternalSourceBlockTableCell_PipelineStep`
 
 #### Requirement 2
 
 - []() – `#/definitions/SkipUnlessPipelineValues`
 
 #### Option 6
+
+**All** of the following _requirements_ need to be fulfilled.
+
+#### Requirement 1
+
+- []() – `#/definitions/ExternalSystemSourceBlock_PipelineStep`
+
+#### Requirement 2
+
+- []() – `#/definitions/SkipUnlessPipelineValues`
+
+#### Option 7
 
 **All** of the following _requirements_ need to be fulfilled.
 

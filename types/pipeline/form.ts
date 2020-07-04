@@ -12,8 +12,10 @@ import {
   SkipUnlessPipelineValues
 } from './shared';
 
-export type ElementBlock_FormPipelineStep = ElementBlock_PipelineStep & SkipUnlessPipelineValues;
-export type SourceBlock_FormPipelineStep = SourceBlock_PipelineStep & SkipUnlessPipelineValues;
+export type ElementBlock_FormPipelineStep = ElementBlock_PipelineStep &
+  SkipUnlessPipelineValues;
+export type SourceBlock_FormPipelineStep = SourceBlock_PipelineStep &
+  SkipUnlessPipelineValues;
 export type SubFormPipeline_FormPipelineStep = SubFormPipeline_PipelineStep &
   SkipUnlessPipelineValues;
 export type SubProcessPipeline_FormPipelineStep = SubProcessPipeline_PipelineStep &
@@ -38,7 +40,8 @@ export interface FormPipelineBody extends BasePipelineBody {
 
 export type SubFormPipeline_PipelineStep_In = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo;
-export type SubFormPipeline_PipelineStep_Out = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
+export type SubFormPipeline_PipelineStep_Out = PipelineStepOutFrom &
+  PipelineStepOutToPipelineValue;
 
 /**
  * A form pipeline can have other form pipelines within itself. This is useful for
@@ -54,7 +57,8 @@ export interface SubFormPipeline_PipelineStep extends BasePipelineStep {
 
 export type ElementBlock_PipelineStep_In = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo;
-export type ElementBlock_PipelineStep_Out = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
+export type ElementBlock_PipelineStep_Out = PipelineStepOutFrom &
+  PipelineStepOutToPipelineValue;
 
 /**
  * An element block rendered for the user. You can provide a label to describe what

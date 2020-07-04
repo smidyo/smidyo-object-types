@@ -447,7 +447,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/ExternalSystemSourceBlock_PipelineStep`
+- []() – `#/definitions/InternalSourceBlockTableCell_PipelineStep`
 
 #### Requirement 2
 
@@ -459,13 +459,25 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/SubFormPipeline_PipelineStep`
+- []() – `#/definitions/ExternalSystemSourceBlock_PipelineStep`
 
 #### Requirement 2
 
 - []() – `#/definitions/SkipUnlessPipelineValues`
 
 #### Option 7
+
+**All** of the following _requirements_ need to be fulfilled.
+
+#### Requirement 1
+
+- []() – `#/definitions/SubFormPipeline_PipelineStep`
+
+#### Requirement 2
+
+- []() – `#/definitions/SkipUnlessPipelineValues`
+
+#### Option 8
 
 **All** of the following _requirements_ need to be fulfilled.
 

@@ -10,8 +10,10 @@ import {
   SubProcessPipeline_PipelineStep
 } from './shared';
 
-export type SourceBlock_YieldPipelineStep = SourceBlock_PipelineStep & SkipUnlessPipelineValues;
-export type EffectBlock_YieldPipelineStep = EffectBlock_PipelineStep & SkipUnlessPipelineValues;
+export type SourceBlock_YieldPipelineStep = SourceBlock_PipelineStep &
+  SkipUnlessPipelineValues;
+export type EffectBlock_YieldPipelineStep = EffectBlock_PipelineStep &
+  SkipUnlessPipelineValues;
 
 export type SubProcessPipeline_YieldPipelineStep = SubProcessPipeline_PipelineStep &
   SkipUnlessPipelineValues;
@@ -101,12 +103,14 @@ export interface BaseYieldPipelineResultOutcome {
   totalPriceResult: number;
 }
 
-export interface QuoteRunYieldPipelineResultOutcome extends BaseYieldPipelineResultOutcome {
+export interface QuoteRunYieldPipelineResultOutcome
+  extends BaseYieldPipelineResultOutcome {
   type: 'QUOTE_RUN_YIELD_PIPELINE_OUTCOME';
   quoteResult: Record<string, any[]>;
 }
 
-export interface OrderRunYieldPipelineResultOutcome extends BaseYieldPipelineResultOutcome {
+export interface OrderRunYieldPipelineResultOutcome
+  extends BaseYieldPipelineResultOutcome {
   type: 'ORDER_RUN_YIELD_PIPELINE_OUTCOME';
   quoteResult: Record<string, any[]>;
   orderResult: Record<string, any[]>;

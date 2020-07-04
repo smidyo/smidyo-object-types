@@ -70,7 +70,8 @@ export interface InlineValue<DS = FullDataShape> {
   data: any;
 }
 
-export interface PipelineStepInFromInlineValue<DS = FullDataShape> extends PipelineStepInFrom<DS> {
+export interface PipelineStepInFromInlineValue<DS = FullDataShape>
+  extends PipelineStepInFrom<DS> {
   type: 'INLINE_VALUE';
   inFrom: InlineValue<DS>;
 }
@@ -97,7 +98,9 @@ export interface PipelineStepOutToPipelineValue {
 //
 //
 
-export type SourceOrEffectBlock_PipelineStep = SourceBlock_PipelineStep | EffectBlock_PipelineStep;
+export type SourceOrEffectBlock_PipelineStep =
+  | SourceBlock_PipelineStep
+  | EffectBlock_PipelineStep;
 
 /**
  * External systems are not yet implemented, this may change
@@ -106,6 +109,7 @@ export type SourceBlock_PipelineStep =
   | InternalSourceBlockConstant_PipelineStep
   | InternalSourceBlockTableColumns_PipelineStep
   | InternalSourceBlockTableCells_PipelineStep
+  | InternalSourceBlockTableCell_PipelineStep
   | ExternalSystemSourceBlock_PipelineStep;
 
 /**
@@ -119,9 +123,10 @@ export type EffectBlock_PipelineStep =
 /**
  * External systems are not yet implemented, this may change
  */
-abstract class ExternalSystemSourceOrEffectBlock_PipelineStep implements BasePipelineStep {
+abstract class ExternalSystemSourceOrEffectBlock_PipelineStep
+  implements BasePipelineStep {
   type: 'EXTERNAL_SYSTEM_SOURCE_BLOCK' | 'EXTERNAL_SYSTEM_EFFECT_BLOCK';
-  in: Array<(PipelineStepInFromInlineValueOrPipelineValue) & PipelineStepInTo>;
+  in: Array<PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo>;
   out: Array<PipelineStepOutFrom & PipelineStepOutToPipelineValue>;
 }
 
@@ -157,12 +162,17 @@ abstract class InternalSourceBlock_PipelineStep extends InternalSourceOrEffectBl
   sourceBlock: InternalSourceBlockName;
 }
 
-type InternalSourceBlockName = 'CONSTANT' | 'TABLE_COLUMNS' | 'TABLE_CELLS';
+type InternalSourceBlockName =
+  | 'CONSTANT'
+  | 'TABLE_COLUMNS'
+  | 'TABLE_CELLS'
+  | 'TABLE_CELL';
 
 /**
  * Gets a constant
  */
-export interface InternalSourceBlockConstant_PipelineStep extends InternalSourceBlock_PipelineStep {
+export interface InternalSourceBlockConstant_PipelineStep
+  extends InternalSourceBlock_PipelineStep {
   type: 'INTERNAL_SOURCE_BLOCK';
 
   sourceBlock: 'CONSTANT';
@@ -202,6 +212,32 @@ export interface InternalSourceBlockTableCells_PipelineStep
   out: InternalSourceBlockTableCells_PipelineStep_Out[];
 }
 
+/**
+ * Gets one cell
+ */
+export type InternalSourceBlockTableCell_PipelineStep_In<
+  T
+> = PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<T>;
+export type InternalSourceBlockTableCell_PipelineStep_Out = PipelineStepOutFrom<'cell'> &
+  PipelineStepOutToPipelineValue;
+export interface InternalSourceBlockTableCell_PipelineStep
+  extends InternalSourceBlock_PipelineStep {
+  type: 'INTERNAL_SOURCE_BLOCK';
+
+  sourceBlock: 'TABLE_CELL';
+  tableSlug: string;
+  in:
+    | [
+        InternalSourceBlockTableCell_PipelineStep_In<'row-name'>,
+        InternalSourceBlockTableCell_PipelineStep_In<'column-name'>
+      ]
+    | [
+        InternalSourceBlockTableCell_PipelineStep_In<'column-name'>,
+        InternalSourceBlockTableCell_PipelineStep_In<'row-name'>
+      ];
+  out: [InternalSourceBlockTableCell_PipelineStep_Out];
+}
+
 //
 
 /**
@@ -235,13 +271,13 @@ export interface InternalEffectBlockTableDeleteRow_PipelineStep
  * Not yet implemented
  */
 type InternalEffectBlockTableUpdateCellOptionIn =
-  | PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'data'>
-  | PipelineStepInFromInlineValueOrPipelineValue<{
+  | (PipelineStepInFromInlineValueOrPipelineValue & PipelineStepInTo<'data'>)
+  | (PipelineStepInFromInlineValueOrPipelineValue<{
       type: string;
       nullable: false;
       list: false;
     }> &
-      PipelineStepInTo<'row-name'>;
+      PipelineStepInTo<'row-name'>);
 
 /**
  * Not yet implemented
@@ -306,7 +342,8 @@ export interface AssertPipelineStepRejectFallback extends AssertPipelineStepFall
 /**
  * A fallback value to use. The data's data shape can not be nullable.
  */
-export interface AssertPipelineStepFallbackDataFallback extends AssertPipelineStepFallback {
+export interface AssertPipelineStepFallbackDataFallback
+  extends AssertPipelineStepFallback {
   type: 'FALLBACK_DATA';
   data: PipelineStepInFromInlineValueOrPipelineValue<{
     type: string;

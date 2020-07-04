@@ -35,7 +35,8 @@ export interface ProcessPipelineBody extends BasePipelineBody {
 
 export type OperationBlock_PipelineStep_In = PipelineStepInFromInlineValueOrPipelineValue &
   PipelineStepInTo;
-export type OperationBlock_PipelineStep_Out = PipelineStepOutFrom & PipelineStepOutToPipelineValue;
+export type OperationBlock_PipelineStep_Out = PipelineStepOutFrom &
+  PipelineStepOutToPipelineValue;
 export interface OperationBlock_PipelineStep extends BasePipelineStep {
   type: 'OPERATION_BLOCK';
   operationBlockSlug: string;
