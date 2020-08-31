@@ -85,7 +85,7 @@
                             "$ref": "#/definitions/PipelineStepInFromPipelineValue"
                         },
                         {
-                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>_1"
+                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>"
                         }
                     ]
                 },
@@ -259,46 +259,6 @@
             "type": "object"
         },
         "InlineValue<{type:\"text\";nullable:false;list:false;}>": {
-            "description": "An inline value needs to define both its data and the data shape of the data.",
-            "properties": {
-                "data": {
-                },
-                "dataShape": {
-                    "properties": {
-                        "list": {
-                            "enum": [
-                                false
-                            ],
-                            "type": "boolean"
-                        },
-                        "nullable": {
-                            "enum": [
-                                false
-                            ],
-                            "type": "boolean"
-                        },
-                        "type": {
-                            "enum": [
-                                "text"
-                            ],
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "list",
-                        "nullable",
-                        "type"
-                    ],
-                    "type": "object"
-                }
-            },
-            "required": [
-                "data",
-                "dataShape"
-            ],
-            "type": "object"
-        },
-        "InlineValue<{type:\"text\";nullable:false;list:false;}>_1": {
             "description": "An inline value needs to define both its data and the data shape of the data.",
             "properties": {
                 "data": {
@@ -1144,24 +1104,6 @@
             ],
             "type": "object"
         },
-        "PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>_1": {
-            "properties": {
-                "inFrom": {
-                    "$ref": "#/definitions/InlineValue<{type:\"text\";nullable:false;list:false;}>_1"
-                },
-                "type": {
-                    "enum": [
-                        "INLINE_VALUE"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "inFrom",
-                "type"
-            ],
-            "type": "object"
-        },
         "PipelineStepInFromInlineValue<{type:string;nullable:false;list:boolean;}>": {
             "properties": {
                 "inFrom": {
@@ -1411,45 +1353,6 @@
                 "type"
             ],
             "type": "object"
-        },
-        "YieldPipelineQuotePriceSequenceStep": {
-            "description": "You can provide an additional text regarding the specification of this\nspecific price sequence step",
-            "properties": {
-                "name": {
-                    "pattern": "^[a-z0-9-]*$",
-                    "type": "string"
-                },
-                "specification": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                        },
-                        {
-                            "$ref": "#/definitions/PipelineStepInFromInlineValue<{type:\"text\";nullable:false;list:false;}>"
-                        }
-                    ]
-                },
-                "title": {
-                    "type": "string"
-                },
-                "type": {
-                    "enum": [
-                        "ADD",
-                        "MINIMUM",
-                        "MULTIPLY",
-                        "PERCENTAGE_OFF",
-                        "PERCENTAGE_ON",
-                        "SUBTRACT"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "name",
-                "title",
-                "type"
-            ],
-            "type": "object"
         }
     },
     "description": "The price is calculated in the order defined in quotePriceSequence",
@@ -1572,12 +1475,6 @@
             },
             "type": "array"
         },
-        "quotePriceSequence": {
-            "items": {
-                "$ref": "#/definitions/YieldPipelineQuotePriceSequenceStep"
-            },
-            "type": "array"
-        },
         "quoteSteps": {
             "items": {
                 "anyOf": [
@@ -1670,7 +1567,6 @@
         "orderOutputs",
         "orderSteps",
         "quoteOutputs",
-        "quotePriceSequence",
         "quoteSteps",
         "type"
     ],

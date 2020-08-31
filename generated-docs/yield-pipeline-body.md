@@ -26,17 +26,15 @@ The price is calculated in the order defined in quotePriceSequence
 | [inTo](#into)                                         | `string`   | `#/definitions/PipelineStepInTo&lt;string&gt;`                                |
 | [list](#list)                                         | `boolean`  | `#/definitions/FullDataShape`                                                 |
 | [message](#message)                                   | complex    | `#/definitions/AssertPipelineStepRejectFallback`                              |
-| [name](#name)                                         | `string`   | `#/definitions/YieldPipelineQuotePriceSequenceStep`                           |
+| [name](#name)                                         | `string`   | `#/definitions/PipelineOutput`                                                |
 | [nullable](#nullable)                                 | `boolean`  | `#/definitions/FullDataShape`                                                 |
 | [out](#out)                                           | `array`    | `#/definitions/SubProcessPipeline_PipelineStep`                               |
 | [outFrom](#outfrom)                                   | `string`   | `#/definitions/PipelineStepOutFrom&lt;string&gt;`                             |
 | [outTo](#outto)                                       | `string`   | `#/definitions/PipelineStepOutToPipelineValue`                                |
 | [skipUnlessPipelineValues](#skipunlesspipelinevalues) | `string[]` | `#/definitions/SkipUnlessPipelineValues`                                      |
 | [sourceBlock](#sourceblock)                           | `enum`     | `#/definitions/InternalSourceBlockTableColumns_PipelineStep`                  |
-| [specification](#specification)                       | complex    | `#/definitions/YieldPipelineQuotePriceSequenceStep`                           |
 | [subProcessPipelineSlug](#subprocesspipelineslug)     | `string`   | `#/definitions/SubProcessPipeline_PipelineStep`                               |
 | [tableSlug](#tableslug)                               | `string`   | `#/definitions/InternalSourceBlockTableColumns_PipelineStep`                  |
-| [title](#title)                                       | `string`   | `#/definitions/YieldPipelineQuotePriceSequenceStep`                           |
 
 ## column
 
@@ -240,7 +238,7 @@ All items must be of the type:
 
 #### Option 2
 
-- []() – `#/definitions/PipelineStepInFromInlineValue&lt;{type:&#34;text&#34;;nullable:false;list:false;}&gt;_1`
+- []() – `#/definitions/PipelineStepInFromInlineValue&lt;{type:&#34;text&#34;;nullable:false;list:false;}&gt;`
 
 ## name
 
@@ -358,26 +356,6 @@ The value of this property **must** be equal to one of the [known values below](
 | --------------- | ----------- |
 | `TABLE_COLUMNS` |             |
 
-## specification
-
-`specification`
-
-- is optional
-- type: complex
-- defined in this schema
-
-### specification Type
-
-**Any** following _options_ needs to be fulfilled.
-
-#### Option 1
-
-- []() – `#/definitions/PipelineStepInFromPipelineValue`
-
-#### Option 2
-
-- []() – `#/definitions/PipelineStepInFromInlineValue&lt;{type:&#34;text&#34;;nullable:false;list:false;}&gt;`
-
 ## subProcessPipelineSlug
 
 `subProcessPipelineSlug`
@@ -409,31 +387,18 @@ All instances must conform to this regular expression (test examples
 
 `string`
 
-## title
-
-`title`
-
-- is **required**
-- type: `string`
-- defined in this schema
-
-### title Type
-
-`string`
-
 # Properties
 
-| Property                                  | Type      | Required     | Nullable | Defined by                                 |
-| ----------------------------------------- | --------- | ------------ | -------- | ------------------------------------------ |
-| [inputs](#inputs)                         | reference | **Required** | No       | (this schema)                              |
-| [orderOutputs](#orderoutputs)             | reference | **Required** | No       | (this schema)                              |
-| [orderSteps](#ordersteps)                 | `array`   | **Required** | No       | (this schema)                              |
-| [quoteOutputs](#quoteoutputs)             | reference | **Required** | No       | (this schema)                              |
-| [quotePriceSequence](#quotepricesequence) | reference | **Required** | No       | (this schema)                              |
-| [quoteSteps](#quotesteps)                 | `array`   | **Required** | No       | (this schema)                              |
-| [titleFrom](#titlefrom)                   | complex   | Optional     | No       | (this schema)                              |
-| [type](#type)                             | `enum`    | **Required** | No       | (this schema)                              |
-| `*`                                       | any       | Additional   | Yes      | this schema _allows_ additional properties |
+| Property                      | Type      | Required     | Nullable | Defined by                                 |
+| ----------------------------- | --------- | ------------ | -------- | ------------------------------------------ |
+| [inputs](#inputs)             | reference | **Required** | No       | (this schema)                              |
+| [orderOutputs](#orderoutputs) | reference | **Required** | No       | (this schema)                              |
+| [orderSteps](#ordersteps)     | `array`   | **Required** | No       | (this schema)                              |
+| [quoteOutputs](#quoteoutputs) | reference | **Required** | No       | (this schema)                              |
+| [quoteSteps](#quotesteps)     | `array`   | **Required** | No       | (this schema)                              |
+| [titleFrom](#titlefrom)       | complex   | Optional     | No       | (this schema)                              |
+| [type](#type)                 | `enum`    | **Required** | No       | (this schema)                              |
+| `*`                           | any       | Additional   | Yes      | this schema _allows_ additional properties |
 
 ## inputs
 
@@ -610,22 +575,6 @@ Array type: reference
 All items must be of the type:
 
 - []() – `#/definitions/PipelineOutput`
-
-## quotePriceSequence
-
-`quotePriceSequence`
-
-- is **required**
-- type: reference
-- defined in this schema
-
-### quotePriceSequence Type
-
-Array type: reference
-
-All items must be of the type:
-
-- []() – `#/definitions/YieldPipelineQuotePriceSequenceStep`
 
 ## quoteSteps
 
