@@ -3,66 +3,6 @@
     "definitions": {
         "OfferingSubRow": {
             "properties": {
-                "price": {
-                    "properties": {
-                        "from": {
-                            "anyOf": [
-                                {
-                                    "properties": {
-                                        "price": {
-                                            "type": "number"
-                                        },
-                                        "type": {
-                                            "enum": [
-                                                "STATIC"
-                                            ],
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "price",
-                                        "type"
-                                    ],
-                                    "type": "object"
-                                },
-                                {
-                                    "properties": {
-                                        "pipelineValue": {
-                                            "type": "string"
-                                        },
-                                        "type": {
-                                            "enum": [
-                                                "PIPELINE_VALUE"
-                                            ],
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "pipelineValue",
-                                        "type"
-                                    ],
-                                    "type": "object"
-                                }
-                            ]
-                        },
-                        "type": {
-                            "enum": [
-                                "ADD",
-                                "MINIMUM",
-                                "MULTIPLY",
-                                "PERCENTAGE_OFF",
-                                "PERCENTAGE_ON",
-                                "SUBTRACT"
-                            ],
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "from",
-                        "type"
-                    ],
-                    "type": "object"
-                },
                 "skipUnlessPipelineValue": {
                     "type": "string"
                 },
@@ -105,13 +45,75 @@
                             "type": "object"
                         }
                     ]
+                },
+                "value": {
+                    "properties": {
+                        "from": {
+                            "anyOf": [
+                                {
+                                    "properties": {
+                                        "type": {
+                                            "enum": [
+                                                "STATIC"
+                                            ],
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "type",
+                                        "value"
+                                    ],
+                                    "type": "object"
+                                },
+                                {
+                                    "properties": {
+                                        "pipelineValue": {
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "enum": [
+                                                "PIPELINE_VALUE"
+                                            ],
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "pipelineValue",
+                                        "type"
+                                    ],
+                                    "type": "object"
+                                }
+                            ]
+                        },
+                        "type": {
+                            "$ref": "#/definitions/OfferingSubRowValueType"
+                        }
+                    },
+                    "required": [
+                        "from",
+                        "type"
+                    ],
+                    "type": "object"
                 }
             },
             "required": [
-                "skipUnlessPipelineValue",
                 "titleFrom"
             ],
             "type": "object"
+        },
+        "OfferingSubRowValueType": {
+            "enum": [
+                "ADD",
+                "MINIMUM",
+                "MULTIPLY",
+                "PERCENTAGE_OFF",
+                "PERCENTAGE_ON",
+                "SUBTRACT"
+            ],
+            "type": "string"
         },
         "Record<string,string>": {
             "description": "Construct a type with a set of properties K of type T",

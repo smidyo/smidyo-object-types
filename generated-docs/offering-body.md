@@ -12,133 +12,15 @@
 
 | Property                                            | Type     | Group                          |
 | --------------------------------------------------- | -------- | ------------------------------ |
-| [price](#price)                                     | `object` | `#/definitions/OfferingSubRow` |
 | [skipUnlessPipelineValue](#skipunlesspipelinevalue) | `string` | `#/definitions/OfferingSubRow` |
 | [titleFrom](#titlefrom)                             | complex  | `#/definitions/OfferingSubRow` |
-
-## price
-
-`price`
-
-- is optional
-- type: `object`
-- defined in this schema
-
-### price Type
-
-`object` with following properties:
-
-| Property | Type   | Required     |
-| -------- | ------ | ------------ |
-| `from`   |        | **Required** |
-| `type`   | string | **Required** |
-
-#### from
-
-`from`
-
-- is **required**
-- type: complex
-
-##### from Type
-
-**Any** following _options_ needs to be fulfilled.
-
-#### Option 1
-
-`object` with following properties:
-
-| Property | Type   | Required     |
-| -------- | ------ | ------------ |
-| `price`  | number | **Required** |
-| `type`   | string | **Required** |
-
-#### price
-
-`price`
-
-- is **required**
-- type: `number`
-
-##### price Type
-
-`number`
-
-#### type
-
-`type`
-
-- is **required**
-- type: `enum`
-
-The value of this property **must** be equal to one of the [known values below](#-known-values).
-
-##### type Known Values
-
-| Value    | Description |
-| -------- | ----------- |
-| `STATIC` |             |
-
-#### Option 2
-
-`object` with following properties:
-
-| Property        | Type   | Required     |
-| --------------- | ------ | ------------ |
-| `pipelineValue` | string | **Required** |
-| `type`          | string | **Required** |
-
-#### pipelineValue
-
-`pipelineValue`
-
-- is **required**
-- type: `string`
-
-##### pipelineValue Type
-
-`string`
-
-#### type
-
-`type`
-
-- is **required**
-- type: `enum`
-
-The value of this property **must** be equal to one of the [known values below](#-known-values).
-
-##### type Known Values
-
-| Value            | Description |
-| ---------------- | ----------- |
-| `PIPELINE_VALUE` |             |
-
-#### type
-
-`type`
-
-- is **required**
-- type: `enum`
-
-The value of this property **must** be equal to one of the [known values below](#price-known-values).
-
-##### type Known Values
-
-| Value            | Description |
-| ---------------- | ----------- |
-| `ADD`            |             |
-| `MINIMUM`        |             |
-| `MULTIPLY`       |             |
-| `PERCENTAGE_OFF` |             |
-| `PERCENTAGE_ON`  |             |
-| `SUBTRACT`       |             |
+| [value](#value)                                     | `object` | `#/definitions/OfferingSubRow` |
 
 ## skipUnlessPipelineValue
 
 `skipUnlessPipelineValue`
 
-- is **required**
+- is optional
 - type: `string`
 - defined in this schema
 
@@ -227,6 +109,115 @@ The value of this property **must** be equal to one of the [known values below](
 | Value            | Description |
 | ---------------- | ----------- |
 | `PIPELINE_VALUE` |             |
+
+## value
+
+`value`
+
+- is optional
+- type: `object`
+- defined in this schema
+
+### value Type
+
+`object` with following properties:
+
+| Property | Type | Required     |
+| -------- | ---- | ------------ |
+| `from`   |      | **Required** |
+| `type`   |      | **Required** |
+
+#### from
+
+`from`
+
+- is **required**
+- type: complex
+
+##### from Type
+
+**Any** following _options_ needs to be fulfilled.
+
+#### Option 1
+
+`object` with following properties:
+
+| Property | Type   | Required     |
+| -------- | ------ | ------------ |
+| `type`   | string | **Required** |
+| `value`  | number | **Required** |
+
+#### type
+
+`type`
+
+- is **required**
+- type: `enum`
+
+The value of this property **must** be equal to one of the [known values below](#-known-values).
+
+##### type Known Values
+
+| Value    | Description |
+| -------- | ----------- |
+| `STATIC` |             |
+
+#### value
+
+`value`
+
+- is **required**
+- type: `number`
+
+##### value Type
+
+`number`
+
+#### Option 2
+
+`object` with following properties:
+
+| Property        | Type   | Required     |
+| --------------- | ------ | ------------ |
+| `pipelineValue` | string | **Required** |
+| `type`          | string | **Required** |
+
+#### pipelineValue
+
+`pipelineValue`
+
+- is **required**
+- type: `string`
+
+##### pipelineValue Type
+
+`string`
+
+#### type
+
+`type`
+
+- is **required**
+- type: `enum`
+
+The value of this property **must** be equal to one of the [known values below](#-known-values).
+
+##### type Known Values
+
+| Value            | Description |
+| ---------------- | ----------- |
+| `PIPELINE_VALUE` |             |
+
+#### type
+
+`type`
+
+- is **required**
+- type: reference
+
+##### type Type
+
+- []() – `#/definitions/OfferingSubRowValueType`
 
 # Properties
 

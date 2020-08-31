@@ -10,21 +10,32 @@ export interface OfferingBody {
   titleFromPipelineValue?: string;
 }
 
+export type OfferingSubRowValueType =
+| 'ADD'
+| 'SUBTRACT'
+| 'MINIMUM'
+| 'PERCENTAGE_OFF'
+| 'PERCENTAGE_ON'
+| 'MULTIPLY';
+
 export interface OfferingSubRow {
   titleFrom:
     | { type: 'STATIC'; title: string }
     | { type: 'PIPELINE_VALUE'; pipelineValue: string };
-  skipUnlessPipelineValue: string;
-  price?: {
-    type:
-      | 'ADD'
-      | 'SUBTRACT'
-      | 'MINIMUM'
-      | 'PERCENTAGE_OFF'
-      | 'PERCENTAGE_ON'
-      | 'MULTIPLY';
+  skipUnlessPipelineValue?: string;
+  value?: {
+    type: OfferingSubRowValueType;
     from:
-      | { type: 'STATIC'; price: number }
+      | { type: 'STATIC'; value: number }
       | { type: 'PIPELINE_VALUE'; pipelineValue: string };
   };
+}
+
+export interface OfferingResult {
+  totalPrice: number;
+  subRows: [{
+    type: OfferingSubRowValueType;
+    title: string;
+    value: number;
+  }]
 }
