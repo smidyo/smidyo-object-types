@@ -119,16 +119,16 @@
         }
     },
     "properties": {
-        "orderResultFormPipeline": {
+        "orderResultFormPipelineSlug": {
             "type": "string"
         },
-        "payloadFormPipeline": {
+        "payloadFormPipelineSlug": {
             "type": "string"
         },
         "payloadFormPipelineToYieldPipelineConnections": {
             "$ref": "#/definitions/Record<string,string>"
         },
-        "quoteResultFormPipeline": {
+        "quoteResultFormPipelineSlug": {
             "type": "string"
         },
         "subRows": {
@@ -140,7 +140,7 @@
         "titleFromPipelineValue": {
             "type": "string"
         },
-        "yieldPipeline": {
+        "yieldPipelineSlug": {
             "type": "string"
         },
         "yieldPipelineToOrderResultFormPipelineConnections": {
@@ -153,7 +153,7 @@
     "required": [
         "payloadFormPipelineToYieldPipelineConnections",
         "subRows",
-        "yieldPipeline",
+        "yieldPipelineSlug",
         "yieldPipelineToOrderResultFormPipelineConnections",
         "yieldPipelineToQuoteResultFormPipelineConnections"
     ],

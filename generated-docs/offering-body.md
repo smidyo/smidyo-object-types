@@ -232,38 +232,38 @@ The value of this property **must** be equal to one of the [known values below](
 
 | Property                                                                                                | Type      | Required     | Nullable | Defined by                                 |
 | ------------------------------------------------------------------------------------------------------- | --------- | ------------ | -------- | ------------------------------------------ |
-| [orderResultFormPipeline](#orderresultformpipeline)                                                     | `string`  | Optional     | No       | (this schema)                              |
-| [payloadFormPipeline](#payloadformpipeline)                                                             | `string`  | Optional     | No       | (this schema)                              |
+| [orderResultFormPipelineSlug](#orderresultformpipelineslug)                                             | `string`  | Optional     | No       | (this schema)                              |
+| [payloadFormPipelineSlug](#payloadformpipelineslug)                                                     | `string`  | Optional     | No       | (this schema)                              |
 | [payloadFormPipelineToYieldPipelineConnections](#payloadformpipelinetoyieldpipelineconnections)         | reference | **Required** | No       | (this schema)                              |
-| [quoteResultFormPipeline](#quoteresultformpipeline)                                                     | `string`  | Optional     | No       | (this schema)                              |
+| [quoteResultFormPipelineSlug](#quoteresultformpipelineslug)                                             | `string`  | Optional     | No       | (this schema)                              |
 | [subRows](#subrows)                                                                                     | reference | **Required** | No       | (this schema)                              |
 | [titleFromPipelineValue](#titlefrompipelinevalue)                                                       | `string`  | Optional     | No       | (this schema)                              |
-| [yieldPipeline](#yieldpipeline)                                                                         | `string`  | **Required** | No       | (this schema)                              |
+| [yieldPipelineSlug](#yieldpipelineslug)                                                                 | `string`  | **Required** | No       | (this schema)                              |
 | [yieldPipelineToOrderResultFormPipelineConnections](#yieldpipelinetoorderresultformpipelineconnections) | reference | **Required** | No       | (this schema)                              |
 | [yieldPipelineToQuoteResultFormPipelineConnections](#yieldpipelinetoquoteresultformpipelineconnections) | reference | **Required** | No       | (this schema)                              |
 | `*`                                                                                                     | any       | Additional   | Yes      | this schema _allows_ additional properties |
 
-## orderResultFormPipeline
+## orderResultFormPipelineSlug
 
-`orderResultFormPipeline`
+`orderResultFormPipelineSlug`
 
 - is optional
 - type: `string`
 - defined in this schema
 
-### orderResultFormPipeline Type
+### orderResultFormPipelineSlug Type
 
 `string`
 
-## payloadFormPipeline
+## payloadFormPipelineSlug
 
-`payloadFormPipeline`
+`payloadFormPipelineSlug`
 
 - is optional
 - type: `string`
 - defined in this schema
 
-### payloadFormPipeline Type
+### payloadFormPipelineSlug Type
 
 `string`
 
@@ -279,15 +279,15 @@ The value of this property **must** be equal to one of the [known values below](
 
 - []() – `#/definitions/Record&lt;string,string&gt;`
 
-## quoteResultFormPipeline
+## quoteResultFormPipelineSlug
 
-`quoteResultFormPipeline`
+`quoteResultFormPipelineSlug`
 
 - is optional
 - type: `string`
 - defined in this schema
 
-### quoteResultFormPipeline Type
+### quoteResultFormPipelineSlug Type
 
 `string`
 
@@ -319,15 +319,15 @@ All items must be of the type:
 
 `string`
 
-## yieldPipeline
+## yieldPipelineSlug
 
-`yieldPipeline`
+`yieldPipelineSlug`
 
 - is **required**
 - type: `string`
 - defined in this schema
 
-### yieldPipeline Type
+### yieldPipelineSlug Type
 
 `string`
 
