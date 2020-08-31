@@ -1,0 +1,161 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "OfferingSubRow": {
+            "properties": {
+                "price": {
+                    "properties": {
+                        "from": {
+                            "anyOf": [
+                                {
+                                    "properties": {
+                                        "price": {
+                                            "type": "number"
+                                        },
+                                        "type": {
+                                            "enum": [
+                                                "STATIC"
+                                            ],
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "price",
+                                        "type"
+                                    ],
+                                    "type": "object"
+                                },
+                                {
+                                    "properties": {
+                                        "pipelineValue": {
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "enum": [
+                                                "PIPELINE_VALUE"
+                                            ],
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "pipelineValue",
+                                        "type"
+                                    ],
+                                    "type": "object"
+                                }
+                            ]
+                        },
+                        "type": {
+                            "enum": [
+                                "ADD",
+                                "MINIMUM",
+                                "MULTIPLY",
+                                "PERCENTAGE_OFF",
+                                "PERCENTAGE_ON",
+                                "SUBTRACT"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "from",
+                        "type"
+                    ],
+                    "type": "object"
+                },
+                "skipUnlessPipelineValue": {
+                    "type": "string"
+                },
+                "titleFrom": {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "title": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "enum": [
+                                        "STATIC"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "title",
+                                "type"
+                            ],
+                            "type": "object"
+                        },
+                        {
+                            "properties": {
+                                "pipelineValue": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "enum": [
+                                        "PIPELINE_VALUE"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "pipelineValue",
+                                "type"
+                            ],
+                            "type": "object"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "skipUnlessPipelineValue",
+                "titleFrom"
+            ],
+            "type": "object"
+        },
+        "Record<string,string>": {
+            "description": "Construct a type with a set of properties K of type T",
+            "type": "object"
+        }
+    },
+    "properties": {
+        "orderResultFormPipeline": {
+            "type": "string"
+        },
+        "payloadFormPipeline": {
+            "type": "string"
+        },
+        "payloadFormPipelineToYieldPipelineConnections": {
+            "$ref": "#/definitions/Record<string,string>"
+        },
+        "quoteResultFormPipeline": {
+            "type": "string"
+        },
+        "subRows": {
+            "items": {
+                "$ref": "#/definitions/OfferingSubRow"
+            },
+            "type": "array"
+        },
+        "titleFromPipelineValue": {
+            "type": "string"
+        },
+        "yieldPipeline": {
+            "type": "string"
+        },
+        "yieldPipelineToOrderResultFormPipelineConnections": {
+            "$ref": "#/definitions/Record<string,string>"
+        },
+        "yieldPipelineToQuoteResultFormPipelineConnections": {
+            "$ref": "#/definitions/Record<string,string>"
+        }
+    },
+    "required": [
+        "payloadFormPipelineToYieldPipelineConnections",
+        "subRows",
+        "yieldPipeline",
+        "yieldPipelineToOrderResultFormPipelineConnections",
+        "yieldPipelineToQuoteResultFormPipelineConnections"
+    ],
+    "type": "object"
+}
