@@ -45,49 +45,19 @@ export interface YieldPipelineBody extends BasePipelineBody {
   orderSteps: YieldPipelineOrderStep[];
 }
 
-/*
-
-(ignore this)
-
-Should replace this with internal effect and source blocks.
-
-Quote an offering with an internal source block, and order using an internal effect block.
-
-export interface QuoteSubYieldPipeline_PipelineStep extends SubYieldPipeline_PipelineStep {
-  type: 'QUOTING_SUB_YIELD_PIPELINE';
-}
-
-export interface OrderSubYieldPipeline_PipelineStep extends SubYieldPipeline_PipelineStep {
-  type: 'ORDERING_SUB_YIELD_PIPELINE';
-
-  proposalNameIn?: PipelineStepInFromInlineValueOrPipelineValue<{
-    type: 'text';
-    nullable: false;
-    list: false;
-  }>;
-  proposalTitleIn?: PipelineStepInFromInlineValueOrPipelineValue<{
-    type: 'text';
-    nullable: false;
-    list: false;
-  }>;
-
-  proposalSlugOut?: PipelineStepOutToPipelineValue;
-}
-*/
-
-export interface BaseYieldPipelineResultOutcome_Deprecated {
+export interface BaseYieldPipelineResultOutcome {
   type: 'QUOTE_RUN_YIELD_PIPELINE_OUTCOME' | 'ORDER_RUN_YIELD_PIPELINE_OUTCOME';
   title: string;
 }
 
 export interface QuoteRunYieldPipelineResultOutcome
-  extends BaseYieldPipelineResultOutcome_Deprecated {
+  extends BaseYieldPipelineResultOutcome {
   type: 'QUOTE_RUN_YIELD_PIPELINE_OUTCOME';
   quoteResult: Record<string, any[]>;
 }
 
 export interface OrderRunYieldPipelineResultOutcome
-  extends BaseYieldPipelineResultOutcome_Deprecated {
+  extends BaseYieldPipelineResultOutcome {
   type: 'ORDER_RUN_YIELD_PIPELINE_OUTCOME';
   quoteResult: Record<string, any[]>;
   orderResult: Record<string, any[]>;
