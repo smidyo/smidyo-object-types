@@ -41,25 +41,8 @@ export interface YieldPipelineBody extends BasePipelineBody {
   quoteOutputs: PipelineOutput[];
   orderOutputs: PipelineOutput[];
   titleFrom?: PipelineStepInFromInlineValueOrPipelineValue;
-  quotePriceSequence: YieldPipelineQuotePriceSequenceStep[];
   quoteSteps: YieldPipelineQuoteStep[];
   orderSteps: YieldPipelineOrderStep[];
-}
-
-/**
- * You can provide an additional text regarding the specification of this
- * specific price sequence step
- */
-export interface YieldPipelineQuotePriceSequenceStep {
-  type: 'ADD' | 'SUBTRACT' | 'MINIMUM' | 'PERCENTAGE_OFF' | 'PERCENTAGE_ON' | 'MULTIPLY';
-  title: string;
-  specification?: PipelineStepInFromInlineValueOrPipelineValue<{
-    type: 'text';
-    nullable: false;
-    list: false;
-  }>;
-  /** @pattern "^[a-z0-9-]*$" */
-  name: string;
 }
 
 /*
@@ -93,7 +76,33 @@ export interface OrderSubYieldPipeline_PipelineStep extends SubYieldPipeline_Pip
 */
 
 /**
+ * FOLLOWING IS DEPRECATED!
+ * FOLLOWING IS DEPRECATED!
+ * FOLLOWING IS DEPRECATED!
+ *
+ * Backwards compatible, but Quote Sub-row's should be used instead.
+ */
+
+/**
+ * You can provide an additional text regarding the specification of this
+ * specific price sequence step
+ */
+export interface YieldPipelineQuotePriceSequenceStep {
+  type: 'ADD' | 'SUBTRACT' | 'MINIMUM' | 'PERCENTAGE_OFF' | 'PERCENTAGE_ON' | 'MULTIPLY';
+  title: string;
+  specification?: PipelineStepInFromInlineValueOrPipelineValue<{
+    type: 'text';
+    nullable: false;
+    list: false;
+  }>;
+  /** @pattern "^[a-z0-9-]*$" */
+  name: string;
+}
+
+/**
  * What a yield pipeline outputs in case of a successful outcome
+ *
+ *
  */
 
 export interface BaseYieldPipelineResultOutcome {
