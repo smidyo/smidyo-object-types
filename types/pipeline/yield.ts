@@ -130,13 +130,13 @@ export interface BaseYieldPipelineResultOutcome_Deprecated {
   totalPriceResult: number;
 }
 
-export interface QuoteRunYieldPipelineResultOutcome
+export interface QuoteRunYieldPipelineResultOutcome_Deprecated
   extends BaseYieldPipelineResultOutcome_Deprecated {
   type: 'QUOTE_RUN_YIELD_PIPELINE_OUTCOME';
   quoteResult: Record<string, any[]>;
 }
 
-export interface OrderRunYieldPipelineResultOutcome
+export interface OrderRunYieldPipelineResultOutcome_Deprecated
   extends BaseYieldPipelineResultOutcome_Deprecated {
   type: 'ORDER_RUN_YIELD_PIPELINE_OUTCOME';
   quoteResult: Record<string, any[]>;

@@ -1,6 +1,6 @@
 {
   "name": "@smidyo/smidyo-object-types",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "",
   "scripts": {
     "json": "sh json.sh",
