@@ -1,6 +1,7 @@
 export interface OfferingBody {
-  payloadFormPipeline: string;
+  payloadFormPipeline?: string;
   payloadFormPipelineToYieldPipelineConnections: Record<string, string>;
+  yieldPipeline: string;
   quoteResultFormPipeline?: string;
   yieldPipelineToQuoteResultFormPipelineConnections: Record<string, string>;
   orderResultFormPipeline?: string;
