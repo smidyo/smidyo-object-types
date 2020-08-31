@@ -47,7 +47,6 @@ export interface YieldPipelineBody extends BasePipelineBody {
 
 export interface BaseYieldPipelineResultOutcome {
   type: 'QUOTE_RUN_YIELD_PIPELINE_OUTCOME' | 'ORDER_RUN_YIELD_PIPELINE_OUTCOME';
-  title: string;
 }
 
 export interface QuoteRunYieldPipelineResultOutcome
