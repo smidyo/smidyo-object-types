@@ -1,6 +1,9 @@
 export interface OfferingBody {
+  payloadFormPipeline: string;
   payloadFormPipelineToYieldPipelineConnections: Record<string, string>;
+  quoteResultFormPipeline?: string;
   yieldPipelineToQuoteResultFormPipelineConnections: Record<string, string>;
+  orderResultFormPipeline?: string;
   yieldPipelineToOrderResultFormPipelineConnections: Record<string, string>;
   subRows: Array<OfferingSubRow>;
   titleFromPipelineValue?: string;
