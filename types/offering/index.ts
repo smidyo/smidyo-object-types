@@ -11,12 +11,12 @@ export interface OfferingBody {
 }
 
 export type OfferingSubRowValueType =
-| 'ADD'
-| 'SUBTRACT'
-| 'MINIMUM'
-| 'PERCENTAGE_OFF'
-| 'PERCENTAGE_ON'
-| 'MULTIPLY';
+  | 'ADD'
+  | 'SUBTRACT'
+  | 'MINIMUM'
+  | 'PERCENTAGE_OFF'
+  | 'PERCENTAGE_ON'
+  | 'MULTIPLY';
 
 export interface OfferingSubRow {
   titleFrom:
@@ -34,9 +34,8 @@ export interface OfferingSubRow {
 export interface OfferingResult {
   title: string;
   totalPrice: number;
-  subRows: [{
-    type: OfferingSubRowValueType;
+  subRows: Array<{
     title: string;
-    value: number;
-  }]
+    value?: { type: OfferingSubRowValueType; value: number };
+  }>;
 }
