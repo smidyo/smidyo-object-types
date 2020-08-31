@@ -75,6 +75,24 @@ export interface OrderSubYieldPipeline_PipelineStep extends SubYieldPipeline_Pip
 }
 */
 
+export interface BaseYieldPipelineResultOutcome_Deprecated {
+  type: 'QUOTE_RUN_YIELD_PIPELINE_OUTCOME' | 'ORDER_RUN_YIELD_PIPELINE_OUTCOME';
+  title: string;
+}
+
+export interface QuoteRunYieldPipelineResultOutcome
+  extends BaseYieldPipelineResultOutcome_Deprecated {
+  type: 'QUOTE_RUN_YIELD_PIPELINE_OUTCOME';
+  quoteResult: Record<string, any[]>;
+}
+
+export interface OrderRunYieldPipelineResultOutcome
+  extends BaseYieldPipelineResultOutcome_Deprecated {
+  type: 'ORDER_RUN_YIELD_PIPELINE_OUTCOME';
+  quoteResult: Record<string, any[]>;
+  orderResult: Record<string, any[]>;
+}
+
 /**
  * FOLLOWING IS DEPRECATED!
  * FOLLOWING IS DEPRECATED!
@@ -87,7 +105,7 @@ export interface OrderSubYieldPipeline_PipelineStep extends SubYieldPipeline_Pip
  * You can provide an additional text regarding the specification of this
  * specific price sequence step
  */
-export interface YieldPipelineQuotePriceSequenceStep {
+export interface YieldPipelineQuotePriceSequenceStep_Deprecated {
   type: 'ADD' | 'SUBTRACT' | 'MINIMUM' | 'PERCENTAGE_OFF' | 'PERCENTAGE_ON' | 'MULTIPLY';
   title: string;
   specification?: PipelineStepInFromInlineValueOrPipelineValue<{
@@ -105,27 +123,27 @@ export interface YieldPipelineQuotePriceSequenceStep {
  *
  */
 
-export interface BaseYieldPipelineResultOutcome {
+export interface BaseYieldPipelineResultOutcome_Deprecated {
   type: 'QUOTE_RUN_YIELD_PIPELINE_OUTCOME' | 'ORDER_RUN_YIELD_PIPELINE_OUTCOME';
   title: string;
-  priceSequenceResults: PriceSequenceStepResult[];
+  priceSequenceResults: PriceSequenceStepResult_Deprecated[];
   totalPriceResult: number;
 }
 
 export interface QuoteRunYieldPipelineResultOutcome
-  extends BaseYieldPipelineResultOutcome {
+  extends BaseYieldPipelineResultOutcome_Deprecated {
   type: 'QUOTE_RUN_YIELD_PIPELINE_OUTCOME';
   quoteResult: Record<string, any[]>;
 }
 
 export interface OrderRunYieldPipelineResultOutcome
-  extends BaseYieldPipelineResultOutcome {
+  extends BaseYieldPipelineResultOutcome_Deprecated {
   type: 'ORDER_RUN_YIELD_PIPELINE_OUTCOME';
   quoteResult: Record<string, any[]>;
   orderResult: Record<string, any[]>;
 }
 
-export interface PriceSequenceStepResult {
+export interface PriceSequenceStepResult_Deprecated {
   type: 'ADD' | 'SUBTRACT' | 'MINIMUM' | 'PERCENTAGE_OFF' | 'PERCENTAGE_ON' | 'MULTIPLY';
   name: string;
   title: string;
