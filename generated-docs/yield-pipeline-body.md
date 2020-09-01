@@ -396,7 +396,6 @@ All instances must conform to this regular expression (test examples
 | [orderSteps](#ordersteps)     | `array`   | **Required** | No       | (this schema)                              |
 | [quoteOutputs](#quoteoutputs) | reference | **Required** | No       | (this schema)                              |
 | [quoteSteps](#quotesteps)     | `array`   | **Required** | No       | (this schema)                              |
-| [titleFrom](#titlefrom)       | complex   | Optional     | No       | (this schema)                              |
 | [type](#type)                 | `enum`    | **Required** | No       | (this schema)                              |
 | `*`                           | any       | Additional   | Yes      | this schema _allows_ additional properties |
 
@@ -667,26 +666,6 @@ All items must be of the type:
 #### Requirement 2
 
 - []() – `#/definitions/SkipUnlessPipelineValues`
-
-## titleFrom
-
-`titleFrom`
-
-- is optional
-- type: complex
-- defined in this schema
-
-### titleFrom Type
-
-**Any** following _options_ needs to be fulfilled.
-
-#### Option 1
-
-- []() – `#/definitions/PipelineStepInFromPipelineValue`
-
-#### Option 2
-
-- []() – `#/definitions/PipelineStepInFromInlineValue&lt;FullDataShape&gt;`
 
 ## type
 

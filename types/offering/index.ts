@@ -32,6 +32,7 @@ export interface OfferingSubRow {
 }
 
 export interface OfferingResult {
+  type: 'OFFERING_RESULT',
   title: string;
   totalPrice: number;
   subRows: Array<{

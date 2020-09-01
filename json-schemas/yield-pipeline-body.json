@@ -1545,16 +1545,6 @@
             },
             "type": "array"
         },
-        "titleFrom": {
-            "anyOf": [
-                {
-                    "$ref": "#/definitions/PipelineStepInFromPipelineValue"
-                },
-                {
-                    "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
-                }
-            ]
-        },
         "type": {
             "enum": [
                 "YIELD"

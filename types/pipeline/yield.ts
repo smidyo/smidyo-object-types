@@ -40,7 +40,6 @@ export interface YieldPipelineBody extends BasePipelineBody {
   inputs: PipelineInput[];
   quoteOutputs: PipelineOutput[];
   orderOutputs: PipelineOutput[];
-  titleFrom?: PipelineStepInFromInlineValueOrPipelineValue;
   quoteSteps: YieldPipelineQuoteStep[];
   orderSteps: YieldPipelineOrderStep[];
 }
