@@ -1,0 +1,211 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "ElementBlockFollowerInput": {
+            "properties": {
+                "dataShapeConstraint": {
+                    "$ref": "#/definitions/PartialDataShape"
+                },
+                "defaultInlineValue": {
+                    "$ref": "#/definitions/InlineValue<FullDataShape>"
+                },
+                "followInput": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "FOLLOWER"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataShapeConstraint",
+                "followInput",
+                "name",
+                "title",
+                "type"
+            ],
+            "type": "object"
+        },
+        "ElementBlockFollowerOutput": {
+            "properties": {
+                "dataShapeConstraint": {
+                    "$ref": "#/definitions/PartialDataShape"
+                },
+                "followInput": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "FOLLOWER"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataShapeConstraint",
+                "followInput",
+                "name",
+                "title",
+                "type"
+            ],
+            "type": "object"
+        },
+        "ElementBlockStandardInput": {
+            "properties": {
+                "dataShapeConstraint": {
+                    "$ref": "#/definitions/PartialDataShape"
+                },
+                "defaultInlineValue": {
+                    "$ref": "#/definitions/InlineValue<FullDataShape>"
+                },
+                "limitToTextOptions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "STANDARD"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataShapeConstraint",
+                "name",
+                "title",
+                "type"
+            ],
+            "type": "object"
+        },
+        "ElementBlockStandardOutput": {
+            "properties": {
+                "dataShape": {
+                    "$ref": "#/definitions/FullDataShape"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "STANDARD"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataShape",
+                "name",
+                "title",
+                "type"
+            ],
+            "type": "object"
+        },
+        "FullDataShape": {
+            "properties": {
+                "list": {
+                    "type": "boolean"
+                },
+                "nullable": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "list",
+                "nullable",
+                "type"
+            ],
+            "type": "object"
+        },
+        "InlineValue<FullDataShape>": {
+            "description": "An inline value needs to define both its data and the data shape of the data.",
+            "properties": {
+                "data": {
+                },
+                "dataShape": {
+                    "$ref": "#/definitions/FullDataShape"
+                }
+            },
+            "required": [
+                "data",
+                "dataShape"
+            ],
+            "type": "object"
+        },
+        "PartialDataShape": {
+            "properties": {
+                "list": {
+                    "type": "boolean"
+                },
+                "nullable": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "properties": {
+        "inputs": {
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/ElementBlockStandardInput"
+                    },
+                    {
+                        "$ref": "#/definitions/ElementBlockFollowerInput"
+                    }
+                ]
+            },
+            "type": "array"
+        },
+        "outputs": {
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/ElementBlockStandardOutput"
+                    },
+                    {
+                        "$ref": "#/definitions/ElementBlockFollowerOutput"
+                    }
+                ]
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "inputs",
+        "outputs"
+    ],
+    "type": "object"
+}
+
