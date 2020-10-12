@@ -1,4 +1,5 @@
 import { FullDataShape } from '../data-shape';
+import { InlineValue } from '../inline-value';
 
 export type PipelineType = 'PROCESS' | 'FORM' | 'YIELD';
 
@@ -60,14 +61,6 @@ abstract class PipelineStepInFrom<DS = FullDataShape> {
 
 export interface PipelineStepInTo<T = string> {
   inTo: T;
-}
-
-/**
- * An inline value needs to define both its data and the data shape of the data.
- */
-export interface InlineValue<DS = FullDataShape> {
-  dataShape: DS;
-  data: any;
 }
 
 export interface PipelineStepInFromInlineValue<DS = FullDataShape>
@@ -171,7 +164,9 @@ type InternalSourceBlockName =
 /**
  * Gets a constant
  */
-export type InternalSourceBlockConstant_PipelineStep_Out = PipelineStepOutFrom<'constant'> &
+export type InternalSourceBlockConstant_PipelineStep_Out = PipelineStepOutFrom<
+  'constant'
+> &
   PipelineStepOutToPipelineValue;
 export interface InternalSourceBlockConstant_PipelineStep
   extends InternalSourceBlock_PipelineStep {
