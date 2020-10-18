@@ -24,6 +24,15 @@ interface ElementBlockOutput {
   type: 'STANDARD' | 'FOLLOWER';
   name: string;
   title: string;
+  forwardInputPayloadlet?:
+    | {
+        type: 'FULL';
+        input: string;
+      }
+    | {
+        type: 'FIRST_ITEM';
+        input: string;
+      };
 }
 
 export interface ElementBlockStandardOutput extends ElementBlockOutput {
