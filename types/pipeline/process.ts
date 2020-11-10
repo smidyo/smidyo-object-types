@@ -2,14 +2,10 @@ import {
   BasePipelineBody,
   PipelineInput,
   PipelineOutput,
-  PipelineStepInFromInlineValueOrPipelineValue,
-  PipelineStepInTo,
-  PipelineStepOutFrom,
-  PipelineStepOutToPipelineValue,
-  BasePipelineStep,
   SubProcessPipeline_PipelineStep,
   AssertPipelineStep,
-  SkipUnlessPipelineValues
+  SkipUnlessPipelineValues,
+  OperationBlock_PipelineStep
 } from './shared';
 
 export type OperationBlock_ProcessPipelineStep = OperationBlock_PipelineStep &
@@ -27,21 +23,6 @@ export interface ProcessPipelineBody extends BasePipelineBody {
   inputs: PipelineInput[];
   outputs: PipelineOutput[];
   steps: ProcessPipelineStep[];
-}
-
-//
-//
-//
-
-export type OperationBlock_PipelineStep_In = PipelineStepInFromInlineValueOrPipelineValue &
-  PipelineStepInTo;
-export type OperationBlock_PipelineStep_Out = PipelineStepOutFrom &
-  PipelineStepOutToPipelineValue;
-export interface OperationBlock_PipelineStep extends BasePipelineStep {
-  type: 'OPERATION_BLOCK';
-  operationBlockSlug: string;
-  in: OperationBlock_PipelineStep_In[];
-  out: OperationBlock_PipelineStep_Out[];
 }
 
 //

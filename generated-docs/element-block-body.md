@@ -10,19 +10,20 @@
 
 # Definitions
 
-| Property                                    | Type       | Group                                            |
-| ------------------------------------------- | ---------- | ------------------------------------------------ |
-| [data](#data)                               | complex    | `#/definitions/InlineValue&lt;FullDataShape&gt;` |
-| [dataShape](#datashape)                     | reference  | `#/definitions/InlineValue&lt;FullDataShape&gt;` |
-| [dataShapeConstraint](#datashapeconstraint) | reference  | `#/definitions/ElementBlockStandardInput`        |
-| [defaultInlineValue](#defaultinlinevalue)   | reference  | `#/definitions/ElementBlockStandardInput`        |
-| [followInput](#followinput)                 | `string`   | `#/definitions/ElementBlockFollowerOutput`       |
-| [limitToTextOptions](#limittotextoptions)   | `string[]` | `#/definitions/ElementBlockStandardInput`        |
-| [list](#list)                               | `boolean`  | `#/definitions/PartialDataShape`                 |
-| [name](#name)                               | `string`   | `#/definitions/ElementBlockStandardOutput`       |
-| [nullable](#nullable)                       | `boolean`  | `#/definitions/PartialDataShape`                 |
-| [title](#title)                             | `string`   | `#/definitions/ElementBlockStandardOutput`       |
-| [type](#type)                               | `string`   | `#/definitions/PartialDataShape`                 |
+| Property                                          | Type       | Group                                            |
+| ------------------------------------------------- | ---------- | ------------------------------------------------ |
+| [data](#data)                                     | complex    | `#/definitions/InlineValue&lt;FullDataShape&gt;` |
+| [dataShape](#datashape)                           | reference  | `#/definitions/InlineValue&lt;FullDataShape&gt;` |
+| [dataShapeConstraint](#datashapeconstraint)       | reference  | `#/definitions/ElementBlockStandardInput`        |
+| [defaultInlineValue](#defaultinlinevalue)         | reference  | `#/definitions/ElementBlockStandardInput`        |
+| [followInput](#followinput)                       | `string`   | `#/definitions/ElementBlockFollowerOutput`       |
+| [forwardInputPayloadlet](#forwardinputpayloadlet) | complex    | `#/definitions/ElementBlockStandardOutput`       |
+| [limitToTextOptions](#limittotextoptions)         | `string[]` | `#/definitions/ElementBlockStandardInput`        |
+| [list](#list)                                     | `boolean`  | `#/definitions/PartialDataShape`                 |
+| [name](#name)                                     | `string`   | `#/definitions/ElementBlockStandardOutput`       |
+| [nullable](#nullable)                             | `boolean`  | `#/definitions/PartialDataShape`                 |
+| [title](#title)                                   | `string`   | `#/definitions/ElementBlockStandardOutput`       |
+| [type](#type)                                     | `string`   | `#/definitions/PartialDataShape`                 |
 
 ## data
 
@@ -91,6 +92,88 @@ Unknown type ``.
 ### followInput Type
 
 `string`
+
+## forwardInputPayloadlet
+
+`forwardInputPayloadlet`
+
+- is optional
+- type: complex
+- defined in this schema
+
+### forwardInputPayloadlet Type
+
+**Any** following _options_ needs to be fulfilled.
+
+#### Option 1
+
+`object` with following properties:
+
+| Property | Type   | Required     |
+| -------- | ------ | ------------ |
+| `input`  | string | **Required** |
+| `type`   | string | **Required** |
+
+#### input
+
+`input`
+
+- is **required**
+- type: `string`
+
+##### input Type
+
+`string`
+
+#### type
+
+`type`
+
+- is **required**
+- type: `enum`
+
+The value of this property **must** be equal to one of the [known values below](#-known-values).
+
+##### type Known Values
+
+| Value  | Description |
+| ------ | ----------- |
+| `FULL` |             |
+
+#### Option 2
+
+`object` with following properties:
+
+| Property | Type   | Required     |
+| -------- | ------ | ------------ |
+| `input`  | string | **Required** |
+| `type`   | string | **Required** |
+
+#### input
+
+`input`
+
+- is **required**
+- type: `string`
+
+##### input Type
+
+`string`
+
+#### type
+
+`type`
+
+- is **required**
+- type: `enum`
+
+The value of this property **must** be equal to one of the [known values below](#-known-values).
+
+##### type Known Values
+
+| Value        | Description |
+| ------------ | ----------- |
+| `FIRST_ITEM` |             |
 
 ## limitToTextOptions
 

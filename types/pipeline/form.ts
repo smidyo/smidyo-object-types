@@ -9,9 +9,12 @@ import {
   PipelineStepOutToPipelineValue,
   SourceBlock_PipelineStep,
   SubProcessPipeline_PipelineStep,
-  SkipUnlessPipelineValues
+  SkipUnlessPipelineValues,
+  OperationBlock_PipelineStep
 } from './shared';
 
+export type OperationBlock_FormPipelineStep = OperationBlock_PipelineStep &
+  SkipUnlessPipelineValues;
 export type ElementBlock_FormPipelineStep = ElementBlock_PipelineStep &
   SkipUnlessPipelineValues;
 export type SourceBlock_FormPipelineStep = SourceBlock_PipelineStep &
@@ -22,6 +25,7 @@ export type SubProcessPipeline_FormPipelineStep = SubProcessPipeline_PipelineSte
   SkipUnlessPipelineValues;
 
 export type FormPipelineStep =
+  | OperationBlock_FormPipelineStep
   | ElementBlock_FormPipelineStep
   | SubFormPipeline_FormPipelineStep
   | SubProcessPipeline_FormPipelineStep

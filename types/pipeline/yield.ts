@@ -2,6 +2,7 @@ import {
   AssertPipelineStep,
   BasePipelineBody,
   EffectBlock_PipelineStep,
+  OperationBlock_PipelineStep,
   PipelineInput,
   PipelineOutput,
   PipelineStepInFromInlineValueOrPipelineValue,
@@ -10,15 +11,17 @@ import {
   SubProcessPipeline_PipelineStep
 } from './shared';
 
+export type OperationBlock_YieldPipelineStep = OperationBlock_PipelineStep &
+  SkipUnlessPipelineValues;
 export type SourceBlock_YieldPipelineStep = SourceBlock_PipelineStep &
   SkipUnlessPipelineValues;
 export type EffectBlock_YieldPipelineStep = EffectBlock_PipelineStep &
   SkipUnlessPipelineValues;
-
 export type SubProcessPipeline_YieldPipelineStep = SubProcessPipeline_PipelineStep &
   SkipUnlessPipelineValues;
 
 export type YieldPipelineQuoteStep =
+  | OperationBlock_YieldPipelineStep
   | SubProcessPipeline_YieldPipelineStep
   | SourceBlock_YieldPipelineStep
   | AssertPipelineStep;
@@ -27,6 +30,7 @@ export type YieldPipelineQuoteStep =
  * Order steps are not yet implemented, this may change
  */
 export type YieldPipelineOrderStep =
+  | OperationBlock_YieldPipelineStep
   | SubProcessPipeline_YieldPipelineStep
   | SourceBlock_YieldPipelineStep
   | EffectBlock_YieldPipelineStep

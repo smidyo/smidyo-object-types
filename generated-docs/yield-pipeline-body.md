@@ -28,6 +28,7 @@ The price is calculated in the order defined in quotePriceSequence
 | [message](#message)                                   | complex    | `#/definitions/AssertPipelineStepRejectFallback`                              |
 | [name](#name)                                         | `string`   | `#/definitions/PipelineOutput`                                                |
 | [nullable](#nullable)                                 | `boolean`  | `#/definitions/FullDataShape`                                                 |
+| [operationBlockSlug](#operationblockslug)             | `string`   | `#/definitions/OperationBlock_PipelineStep`                                   |
 | [out](#out)                                           | `array`    | `#/definitions/SubProcessPipeline_PipelineStep`                               |
 | [outFrom](#outfrom)                                   | `string`   | `#/definitions/PipelineStepOutFrom&lt;string&gt;`                             |
 | [outTo](#outto)                                       | `string`   | `#/definitions/PipelineStepOutToPipelineValue`                                |
@@ -271,6 +272,18 @@ All instances must conform to this regular expression (test examples
 
 `boolean`
 
+## operationBlockSlug
+
+`operationBlockSlug`
+
+- is **required**
+- type: `string`
+- defined in this schema
+
+### operationBlockSlug Type
+
+`string`
+
 ## out
 
 `out`
@@ -457,7 +470,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalSourceBlockConstant_PipelineStep`
+- []() – `#/definitions/OperationBlock_PipelineStep`
 
 #### Requirement 2
 
@@ -469,7 +482,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalSourceBlockTableColumns_PipelineStep`
+- []() – `#/definitions/InternalSourceBlockConstant_PipelineStep`
 
 #### Requirement 2
 
@@ -481,7 +494,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalSourceBlockTableCells_PipelineStep`
+- []() – `#/definitions/InternalSourceBlockTableColumns_PipelineStep`
 
 #### Requirement 2
 
@@ -493,7 +506,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalSourceBlockTableCell_PipelineStep`
+- []() – `#/definitions/InternalSourceBlockTableCells_PipelineStep`
 
 #### Requirement 2
 
@@ -505,7 +518,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/ExternalSystemSourceBlock_PipelineStep`
+- []() – `#/definitions/InternalSourceBlockTableCell_PipelineStep`
 
 #### Requirement 2
 
@@ -517,7 +530,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalEffectBlockTableDeleteRow_PipelineStep`
+- []() – `#/definitions/ExternalSystemSourceBlock_PipelineStep`
 
 #### Requirement 2
 
@@ -529,7 +542,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalEffectBlockTableUpdateCell_PipelineStep`
+- []() – `#/definitions/InternalEffectBlockTableDeleteRow_PipelineStep`
 
 #### Requirement 2
 
@@ -541,13 +554,25 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/ExternalSystemEffectBlock_PipelineStep`
+- []() – `#/definitions/InternalEffectBlockTableUpdateCell_PipelineStep`
 
 #### Requirement 2
 
 - []() – `#/definitions/SkipUnlessPipelineValues`
 
 #### Option 10
+
+**All** of the following _requirements_ need to be fulfilled.
+
+#### Requirement 1
+
+- []() – `#/definitions/ExternalSystemEffectBlock_PipelineStep`
+
+#### Requirement 2
+
+- []() – `#/definitions/SkipUnlessPipelineValues`
+
+#### Option 11
 
 **All** of the following _requirements_ need to be fulfilled.
 
@@ -601,7 +626,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalSourceBlockConstant_PipelineStep`
+- []() – `#/definitions/OperationBlock_PipelineStep`
 
 #### Requirement 2
 
@@ -613,7 +638,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalSourceBlockTableColumns_PipelineStep`
+- []() – `#/definitions/InternalSourceBlockConstant_PipelineStep`
 
 #### Requirement 2
 
@@ -625,7 +650,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalSourceBlockTableCells_PipelineStep`
+- []() – `#/definitions/InternalSourceBlockTableColumns_PipelineStep`
 
 #### Requirement 2
 
@@ -637,7 +662,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalSourceBlockTableCell_PipelineStep`
+- []() – `#/definitions/InternalSourceBlockTableCells_PipelineStep`
 
 #### Requirement 2
 
@@ -649,13 +674,25 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/ExternalSystemSourceBlock_PipelineStep`
+- []() – `#/definitions/InternalSourceBlockTableCell_PipelineStep`
 
 #### Requirement 2
 
 - []() – `#/definitions/SkipUnlessPipelineValues`
 
 #### Option 7
+
+**All** of the following _requirements_ need to be fulfilled.
+
+#### Requirement 1
+
+- []() – `#/definitions/ExternalSystemSourceBlock_PipelineStep`
+
+#### Requirement 2
+
+- []() – `#/definitions/SkipUnlessPipelineValues`
+
+#### Option 8
 
 **All** of the following _requirements_ need to be fulfilled.
 

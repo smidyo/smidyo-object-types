@@ -91,6 +91,21 @@ export interface PipelineStepOutToPipelineValue {
 //
 //
 
+export type OperationBlock_PipelineStep_In = PipelineStepInFromInlineValueOrPipelineValue &
+  PipelineStepInTo;
+export type OperationBlock_PipelineStep_Out = PipelineStepOutFrom &
+  PipelineStepOutToPipelineValue;
+export interface OperationBlock_PipelineStep extends BasePipelineStep {
+  type: 'OPERATION_BLOCK';
+  operationBlockSlug: string;
+  in: OperationBlock_PipelineStep_In[];
+  out: OperationBlock_PipelineStep_Out[];
+}
+
+//
+//
+//
+
 export type SourceOrEffectBlock_PipelineStep =
   | SourceBlock_PipelineStep
   | EffectBlock_PipelineStep;

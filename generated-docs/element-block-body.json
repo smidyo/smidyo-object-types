@@ -42,6 +42,46 @@
                 "followInput": {
                     "type": "string"
                 },
+                "forwardInputPayloadlet": {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "input": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "enum": [
+                                        "FULL"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "input",
+                                "type"
+                            ],
+                            "type": "object"
+                        },
+                        {
+                            "properties": {
+                                "input": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "enum": [
+                                        "FIRST_ITEM"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "input",
+                                "type"
+                            ],
+                            "type": "object"
+                        }
+                    ]
+                },
                 "name": {
                     "type": "string"
                 },
@@ -103,6 +143,46 @@
             "properties": {
                 "dataShape": {
                     "$ref": "#/definitions/FullDataShape"
+                },
+                "forwardInputPayloadlet": {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "input": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "enum": [
+                                        "FULL"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "input",
+                                "type"
+                            ],
+                            "type": "object"
+                        },
+                        {
+                            "properties": {
+                                "input": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "enum": [
+                                        "FIRST_ITEM"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "input",
+                                "type"
+                            ],
+                            "type": "object"
+                        }
+                    ]
                 },
                 "name": {
                     "type": "string"

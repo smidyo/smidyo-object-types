@@ -1029,6 +1029,66 @@
             ],
             "type": "object"
         },
+        "OperationBlock_PipelineStep": {
+            "properties": {
+                "in": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromPipelineValue"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInFromInlineValue<FullDataShape>"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/PipelineStepInTo<string>"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "operationBlockSlug": {
+                    "type": "string"
+                },
+                "out": {
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/PipelineStepOutFrom<string>"
+                            },
+                            {
+                                "$ref": "#/definitions/PipelineStepOutToPipelineValue"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "enum": [
+                        "OPERATION_BLOCK"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "in",
+                "operationBlockSlug",
+                "out",
+                "type"
+            ],
+            "type": "object"
+        },
         "PipelineInput": {
             "description": "Defines a pipeline input",
             "properties": {
@@ -1373,6 +1433,16 @@
                     {
                         "allOf": [
                             {
+                                "$ref": "#/definitions/OperationBlock_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
                                 "$ref": "#/definitions/InternalSourceBlockConstant_PipelineStep"
                             },
                             {
@@ -1475,6 +1545,16 @@
                 "anyOf": [
                     {
                         "$ref": "#/definitions/AssertPipelineStep"
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "$ref": "#/definitions/OperationBlock_PipelineStep"
+                            },
+                            {
+                                "$ref": "#/definitions/SkipUnlessPipelineValues"
+                            }
+                        ]
                     },
                     {
                         "allOf": [

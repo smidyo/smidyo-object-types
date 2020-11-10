@@ -23,6 +23,7 @@
 | [list](#list)                                         | `boolean`  | `#/definitions/FullDataShape`                                |
 | [name](#name)                                         | `string`   | `#/definitions/PipelineOutput`                               |
 | [nullable](#nullable)                                 | `boolean`  | `#/definitions/FullDataShape`                                |
+| [operationBlockSlug](#operationblockslug)             | `string`   | `#/definitions/OperationBlock_PipelineStep`                  |
 | [out](#out)                                           | `array`    | `#/definitions/SubProcessPipeline_PipelineStep`              |
 | [outFrom](#outfrom)                                   | `string`   | `#/definitions/PipelineStepOutFrom&lt;string&gt;`            |
 | [outTo](#outto)                                       | `string`   | `#/definitions/PipelineStepOutToPipelineValue`               |
@@ -206,6 +207,18 @@ All instances must conform to this regular expression (test examples
 ### nullable Type
 
 `boolean`
+
+## operationBlockSlug
+
+`operationBlockSlug`
+
+- is **required**
+- type: `string`
+- defined in this schema
+
+### operationBlockSlug Type
+
+`string`
 
 ## out
 
@@ -399,7 +412,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/ElementBlock_PipelineStep`
+- []() – `#/definitions/OperationBlock_PipelineStep`
 
 #### Requirement 2
 
@@ -411,7 +424,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalSourceBlockConstant_PipelineStep`
+- []() – `#/definitions/ElementBlock_PipelineStep`
 
 #### Requirement 2
 
@@ -423,7 +436,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalSourceBlockTableColumns_PipelineStep`
+- []() – `#/definitions/InternalSourceBlockConstant_PipelineStep`
 
 #### Requirement 2
 
@@ -435,7 +448,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalSourceBlockTableCells_PipelineStep`
+- []() – `#/definitions/InternalSourceBlockTableColumns_PipelineStep`
 
 #### Requirement 2
 
@@ -447,7 +460,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/InternalSourceBlockTableCell_PipelineStep`
+- []() – `#/definitions/InternalSourceBlockTableCells_PipelineStep`
 
 #### Requirement 2
 
@@ -459,7 +472,7 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/ExternalSystemSourceBlock_PipelineStep`
+- []() – `#/definitions/InternalSourceBlockTableCell_PipelineStep`
 
 #### Requirement 2
 
@@ -471,13 +484,25 @@ All items must be of the type:
 
 #### Requirement 1
 
-- []() – `#/definitions/SubFormPipeline_PipelineStep`
+- []() – `#/definitions/ExternalSystemSourceBlock_PipelineStep`
 
 #### Requirement 2
 
 - []() – `#/definitions/SkipUnlessPipelineValues`
 
 #### Option 8
+
+**All** of the following _requirements_ need to be fulfilled.
+
+#### Requirement 1
+
+- []() – `#/definitions/SubFormPipeline_PipelineStep`
+
+#### Requirement 2
+
+- []() – `#/definitions/SkipUnlessPipelineValues`
+
+#### Option 9
 
 **All** of the following _requirements_ need to be fulfilled.
 
