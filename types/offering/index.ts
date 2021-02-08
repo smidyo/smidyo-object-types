@@ -7,8 +7,15 @@ export interface OfferingBody {
   orderResultFormPipelineSlug?: string;
   yieldPipelineToOrderResultFormPipelineConnections: Record<string, string>;
   subRows: Array<OfferingSubRow>;
-  setQuoteMinimumBasePrice?: { title: string; minimumBasePrice: number };
-  addToShippingPriceFromPipelineValue?: { pipelineValue: string; minimumBasePrice: number };
+  quoteMinimumBasePrice?: {
+    type: 'ADD' | 'MINIMUM';
+    from:
+      | { type: 'STATIC'; value: number }
+      | { type: 'PIPELINE_VALUE'; pipelineValue: string };
+  };
+  addToShippingPrice?:
+    | { type: 'STATIC'; value: number }
+    | { type: 'PIPELINE_VALUE'; pipelineValue: string };
   titleFromPipelineValue?: string;
 }
 
@@ -37,10 +44,11 @@ export interface OfferingResult {
   type: 'OFFERING_RESULT';
   title: string;
   totalPrice: number;
-  setQuoteMinimumBasePrice?: {
-    name: string;
-    value: { type: OfferingSubRowValueType; value: number };
+  quoteMinimumBasePrice?: {
+    type: 'ADD' | 'MINIMUM';
+    value: number;
   };
+  addToShippingPrice?: number;
   subRows?: Array<{
     title: string;
     value?: { type: OfferingSubRowValueType; value: number };

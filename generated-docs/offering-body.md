@@ -223,12 +223,12 @@ The value of this property **must** be equal to one of the [known values below](
 
 | Property                                                                                                | Type      | Required     | Nullable | Defined by                                 |
 | ------------------------------------------------------------------------------------------------------- | --------- | ------------ | -------- | ------------------------------------------ |
-| [addToShippingPriceFromPipelineValue](#addtoshippingpricefrompipelinevalue)                             | `object`  | Optional     | No       | (this schema)                              |
+| [addToShippingPrice](#addtoshippingprice)                                                               | complex   | Optional     | No       | (this schema)                              |
 | [orderResultFormPipelineSlug](#orderresultformpipelineslug)                                             | `string`  | Optional     | No       | (this schema)                              |
 | [payloadFormPipelineSlug](#payloadformpipelineslug)                                                     | `string`  | Optional     | No       | (this schema)                              |
 | [payloadFormPipelineToYieldPipelineConnections](#payloadformpipelinetoyieldpipelineconnections)         | reference | **Required** | No       | (this schema)                              |
+| [quoteMinimumBasePrice](#quoteminimumbaseprice)                                                         | `object`  | Optional     | No       | (this schema)                              |
 | [quoteResultFormPipelineSlug](#quoteresultformpipelineslug)                                             | `string`  | Optional     | No       | (this schema)                              |
-| [setQuoteMinimumBasePrice](#setquoteminimumbaseprice)                                                   | `object`  | Optional     | No       | (this schema)                              |
 | [subRows](#subrows)                                                                                     | reference | **Required** | No       | (this schema)                              |
 | [titleFromPipelineValue](#titlefrompipelinevalue)                                                       | `string`  | Optional     | No       | (this schema)                              |
 | [yieldPipelineSlug](#yieldpipelineslug)                                                                 | `string`  | **Required** | No       | (this schema)                              |
@@ -236,33 +236,61 @@ The value of this property **must** be equal to one of the [known values below](
 | [yieldPipelineToQuoteResultFormPipelineConnections](#yieldpipelinetoquoteresultformpipelineconnections) | reference | **Required** | No       | (this schema)                              |
 | `*`                                                                                                     | any       | Additional   | Yes      | this schema _allows_ additional properties |
 
-## addToShippingPriceFromPipelineValue
+## addToShippingPrice
 
-`addToShippingPriceFromPipelineValue`
+`addToShippingPrice`
 
 - is optional
-- type: `object`
+- type: complex
 - defined in this schema
 
-### addToShippingPriceFromPipelineValue Type
+### addToShippingPrice Type
+
+**Any** following _options_ needs to be fulfilled.
+
+#### Option 1
 
 `object` with following properties:
 
-| Property           | Type   | Required     |
-| ------------------ | ------ | ------------ |
-| `minimumBasePrice` | number | **Required** |
-| `pipelineValue`    | string | **Required** |
+| Property | Type   | Required     |
+| -------- | ------ | ------------ |
+| `type`   | string | **Required** |
+| `value`  | number | **Required** |
 
-#### minimumBasePrice
+#### type
 
-`minimumBasePrice`
+`type`
+
+- is **required**
+- type: `enum`
+
+The value of this property **must** be equal to one of the [known values below](#-known-values).
+
+##### type Known Values
+
+| Value    | Description |
+| -------- | ----------- |
+| `STATIC` |             |
+
+#### value
+
+`value`
 
 - is **required**
 - type: `number`
 
-##### minimumBasePrice Type
+##### value Type
 
 `number`
+
+#### Option 2
+
+`object` with following properties:
+
+| Property        | Type   | Required     |
+| --------------- | ------ | ------------ |
+| `pipelineValue` | string | **Required** |
+| `type`          | string | **Required** |
 
 #### pipelineValue
 
@@ -274,6 +302,21 @@ The value of this property **must** be equal to one of the [known values below](
 ##### pipelineValue Type
 
 `string`
+
+#### type
+
+`type`
+
+- is **required**
+- type: `enum`
+
+The value of this property **must** be equal to one of the [known values below](#-known-values).
+
+##### type Known Values
+
+| Value            | Description |
+| ---------------- | ----------- |
+| `PIPELINE_VALUE` |             |
 
 ## orderResultFormPipelineSlug
 
@@ -311,6 +354,120 @@ The value of this property **must** be equal to one of the [known values below](
 
 - []() – `#/definitions/Record&lt;string,string&gt;`
 
+## quoteMinimumBasePrice
+
+`quoteMinimumBasePrice`
+
+- is optional
+- type: `object`
+- defined in this schema
+
+### quoteMinimumBasePrice Type
+
+`object` with following properties:
+
+| Property | Type   | Required     |
+| -------- | ------ | ------------ |
+| `from`   |        | **Required** |
+| `type`   | string | **Required** |
+
+#### from
+
+`from`
+
+- is **required**
+- type: complex
+
+##### from Type
+
+**Any** following _options_ needs to be fulfilled.
+
+#### Option 1
+
+`object` with following properties:
+
+| Property | Type   | Required     |
+| -------- | ------ | ------------ |
+| `type`   | string | **Required** |
+| `value`  | number | **Required** |
+
+#### type
+
+`type`
+
+- is **required**
+- type: `enum`
+
+The value of this property **must** be equal to one of the [known values below](#-known-values).
+
+##### type Known Values
+
+| Value    | Description |
+| -------- | ----------- |
+| `STATIC` |             |
+
+#### value
+
+`value`
+
+- is **required**
+- type: `number`
+
+##### value Type
+
+`number`
+
+#### Option 2
+
+`object` with following properties:
+
+| Property        | Type   | Required     |
+| --------------- | ------ | ------------ |
+| `pipelineValue` | string | **Required** |
+| `type`          | string | **Required** |
+
+#### pipelineValue
+
+`pipelineValue`
+
+- is **required**
+- type: `string`
+
+##### pipelineValue Type
+
+`string`
+
+#### type
+
+`type`
+
+- is **required**
+- type: `enum`
+
+The value of this property **must** be equal to one of the [known values below](#-known-values).
+
+##### type Known Values
+
+| Value            | Description |
+| ---------------- | ----------- |
+| `PIPELINE_VALUE` |             |
+
+#### type
+
+`type`
+
+- is **required**
+- type: `enum`
+
+The value of this property **must** be equal to one of the [known values below](#quoteminimumbaseprice-known-values).
+
+##### type Known Values
+
+| Value     | Description |
+| --------- | ----------- |
+| `ADD`     |             |
+| `MINIMUM` |             |
+
 ## quoteResultFormPipelineSlug
 
 `quoteResultFormPipelineSlug`
@@ -320,45 +477,6 @@ The value of this property **must** be equal to one of the [known values below](
 - defined in this schema
 
 ### quoteResultFormPipelineSlug Type
-
-`string`
-
-## setQuoteMinimumBasePrice
-
-`setQuoteMinimumBasePrice`
-
-- is optional
-- type: `object`
-- defined in this schema
-
-### setQuoteMinimumBasePrice Type
-
-`object` with following properties:
-
-| Property           | Type   | Required     |
-| ------------------ | ------ | ------------ |
-| `minimumBasePrice` | number | **Required** |
-| `title`            | string | **Required** |
-
-#### minimumBasePrice
-
-`minimumBasePrice`
-
-- is **required**
-- type: `number`
-
-##### minimumBasePrice Type
-
-`number`
-
-#### title
-
-`title`
-
-- is **required**
-- type: `string`
-
-##### title Type
 
 `string`
 

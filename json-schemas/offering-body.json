@@ -121,20 +121,45 @@
         }
     },
     "properties": {
-        "addToShippingPriceFromPipelineValue": {
-            "properties": {
-                "minimumBasePrice": {
-                    "type": "number"
+        "addToShippingPrice": {
+            "anyOf": [
+                {
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "STATIC"
+                            ],
+                            "type": "string"
+                        },
+                        "value": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "value"
+                    ],
+                    "type": "object"
                 },
-                "pipelineValue": {
-                    "type": "string"
+                {
+                    "properties": {
+                        "pipelineValue": {
+                            "type": "string"
+                        },
+                        "type": {
+                            "enum": [
+                                "PIPELINE_VALUE"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "pipelineValue",
+                        "type"
+                    ],
+                    "type": "object"
                 }
-            },
-            "required": [
-                "minimumBasePrice",
-                "pipelineValue"
-            ],
-            "type": "object"
+            ]
         },
         "orderResultFormPipelineSlug": {
             "type": "string"
@@ -145,23 +170,64 @@
         "payloadFormPipelineToYieldPipelineConnections": {
             "$ref": "#/definitions/Record<string,string>"
         },
-        "quoteResultFormPipelineSlug": {
-            "type": "string"
-        },
-        "setQuoteMinimumBasePrice": {
+        "quoteMinimumBasePrice": {
             "properties": {
-                "minimumBasePrice": {
-                    "type": "number"
+                "from": {
+                    "anyOf": [
+                        {
+                            "properties": {
+                                "type": {
+                                    "enum": [
+                                        "STATIC"
+                                    ],
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "type",
+                                "value"
+                            ],
+                            "type": "object"
+                        },
+                        {
+                            "properties": {
+                                "pipelineValue": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "enum": [
+                                        "PIPELINE_VALUE"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "pipelineValue",
+                                "type"
+                            ],
+                            "type": "object"
+                        }
+                    ]
                 },
-                "title": {
+                "type": {
+                    "enum": [
+                        "ADD",
+                        "MINIMUM"
+                    ],
                     "type": "string"
                 }
             },
             "required": [
-                "minimumBasePrice",
-                "title"
+                "from",
+                "type"
             ],
             "type": "object"
+        },
+        "quoteResultFormPipelineSlug": {
+            "type": "string"
         },
         "subRows": {
             "items": {
