@@ -121,6 +121,21 @@
         }
     },
     "properties": {
+        "addToShippingPriceFromPipelineValue": {
+            "properties": {
+                "minimumBasePrice": {
+                    "type": "number"
+                },
+                "pipelineValue": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "minimumBasePrice",
+                "pipelineValue"
+            ],
+            "type": "object"
+        },
         "orderResultFormPipelineSlug": {
             "type": "string"
         },
@@ -132,6 +147,21 @@
         },
         "quoteResultFormPipelineSlug": {
             "type": "string"
+        },
+        "setQuoteMinimumBasePrice": {
+            "properties": {
+                "minimumBasePrice": {
+                    "type": "number"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "minimumBasePrice",
+                "title"
+            ],
+            "type": "object"
         },
         "subRows": {
             "items": {

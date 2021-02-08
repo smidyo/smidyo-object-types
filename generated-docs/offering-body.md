@@ -223,16 +223,57 @@ The value of this property **must** be equal to one of the [known values below](
 
 | Property                                                                                                | Type      | Required     | Nullable | Defined by                                 |
 | ------------------------------------------------------------------------------------------------------- | --------- | ------------ | -------- | ------------------------------------------ |
+| [addToShippingPriceFromPipelineValue](#addtoshippingpricefrompipelinevalue)                             | `object`  | Optional     | No       | (this schema)                              |
 | [orderResultFormPipelineSlug](#orderresultformpipelineslug)                                             | `string`  | Optional     | No       | (this schema)                              |
 | [payloadFormPipelineSlug](#payloadformpipelineslug)                                                     | `string`  | Optional     | No       | (this schema)                              |
 | [payloadFormPipelineToYieldPipelineConnections](#payloadformpipelinetoyieldpipelineconnections)         | reference | **Required** | No       | (this schema)                              |
 | [quoteResultFormPipelineSlug](#quoteresultformpipelineslug)                                             | `string`  | Optional     | No       | (this schema)                              |
+| [setQuoteMinimumBasePrice](#setquoteminimumbaseprice)                                                   | `object`  | Optional     | No       | (this schema)                              |
 | [subRows](#subrows)                                                                                     | reference | **Required** | No       | (this schema)                              |
 | [titleFromPipelineValue](#titlefrompipelinevalue)                                                       | `string`  | Optional     | No       | (this schema)                              |
 | [yieldPipelineSlug](#yieldpipelineslug)                                                                 | `string`  | **Required** | No       | (this schema)                              |
 | [yieldPipelineToOrderResultFormPipelineConnections](#yieldpipelinetoorderresultformpipelineconnections) | reference | **Required** | No       | (this schema)                              |
 | [yieldPipelineToQuoteResultFormPipelineConnections](#yieldpipelinetoquoteresultformpipelineconnections) | reference | **Required** | No       | (this schema)                              |
 | `*`                                                                                                     | any       | Additional   | Yes      | this schema _allows_ additional properties |
+
+## addToShippingPriceFromPipelineValue
+
+`addToShippingPriceFromPipelineValue`
+
+- is optional
+- type: `object`
+- defined in this schema
+
+### addToShippingPriceFromPipelineValue Type
+
+`object` with following properties:
+
+| Property           | Type   | Required     |
+| ------------------ | ------ | ------------ |
+| `minimumBasePrice` | number | **Required** |
+| `pipelineValue`    | string | **Required** |
+
+#### minimumBasePrice
+
+`minimumBasePrice`
+
+- is **required**
+- type: `number`
+
+##### minimumBasePrice Type
+
+`number`
+
+#### pipelineValue
+
+`pipelineValue`
+
+- is **required**
+- type: `string`
+
+##### pipelineValue Type
+
+`string`
 
 ## orderResultFormPipelineSlug
 
@@ -279,6 +320,45 @@ The value of this property **must** be equal to one of the [known values below](
 - defined in this schema
 
 ### quoteResultFormPipelineSlug Type
+
+`string`
+
+## setQuoteMinimumBasePrice
+
+`setQuoteMinimumBasePrice`
+
+- is optional
+- type: `object`
+- defined in this schema
+
+### setQuoteMinimumBasePrice Type
+
+`object` with following properties:
+
+| Property           | Type   | Required     |
+| ------------------ | ------ | ------------ |
+| `minimumBasePrice` | number | **Required** |
+| `title`            | string | **Required** |
+
+#### minimumBasePrice
+
+`minimumBasePrice`
+
+- is **required**
+- type: `number`
+
+##### minimumBasePrice Type
+
+`number`
+
+#### title
+
+`title`
+
+- is **required**
+- type: `string`
+
+##### title Type
 
 `string`
 
