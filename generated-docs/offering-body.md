@@ -224,6 +224,7 @@ The value of this property **must** be equal to one of the [known values below](
 | Property                                                                                                | Type      | Required     | Nullable | Defined by                                 |
 | ------------------------------------------------------------------------------------------------------- | --------- | ------------ | -------- | ------------------------------------------ |
 | [addToShippingPrice](#addtoshippingprice)                                                               | complex   | Optional     | No       | (this schema)                              |
+| [hideSubRows](#hidesubrows)                                                                             | `boolean` | Optional     | No       | (this schema)                              |
 | [orderResultFormPipelineSlug](#orderresultformpipelineslug)                                             | `string`  | Optional     | No       | (this schema)                              |
 | [payloadFormPipelineSlug](#payloadformpipelineslug)                                                     | `string`  | Optional     | No       | (this schema)                              |
 | [payloadFormPipelineToYieldPipelineConnections](#payloadformpipelinetoyieldpipelineconnections)         | reference | **Required** | No       | (this schema)                              |
@@ -317,6 +318,18 @@ The value of this property **must** be equal to one of the [known values below](
 | Value            | Description |
 | ---------------- | ----------- |
 | `PIPELINE_VALUE` |             |
+
+## hideSubRows
+
+`hideSubRows`
+
+- is optional
+- type: `boolean`
+- defined in this schema
+
+### hideSubRows Type
+
+`boolean`
 
 ## orderResultFormPipelineSlug
 

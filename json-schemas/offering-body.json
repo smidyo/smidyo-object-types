@@ -161,6 +161,9 @@
                 }
             ]
         },
+        "hideSubRows": {
+            "type": "boolean"
+        },
         "orderResultFormPipelineSlug": {
             "type": "string"
         },
