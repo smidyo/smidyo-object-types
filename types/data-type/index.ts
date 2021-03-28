@@ -4,6 +4,8 @@ export type NumberDataType = number;
 
 export type TextDataType = string;
 
+export type RichTextDataType = string;
+
 export type FileAnyDataType = {
   file: string;
   originalFilename?: string;
