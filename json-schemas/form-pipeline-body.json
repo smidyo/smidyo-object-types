@@ -4,6 +4,9 @@
         "ElementBlock_PipelineStep": {
             "description": "An element block rendered for the user. You can provide a label to describe what\nthe element block step is for.",
             "properties": {
+                "description": {
+                    "type": "string"
+                },
                 "elementBlockSlug": {
                     "type": "string"
                 },

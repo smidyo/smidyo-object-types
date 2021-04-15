@@ -72,6 +72,7 @@ export interface ElementBlock_PipelineStep extends BasePipelineStep {
   type: 'ELEMENT_BLOCK';
   elementBlockSlug: string;
   label?: string;
+  description?: string;
   in: ElementBlock_PipelineStep_In[];
   out: ElementBlock_PipelineStep_Out[];
 }
